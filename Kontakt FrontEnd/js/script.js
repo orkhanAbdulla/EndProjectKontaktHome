@@ -1,124 +1,228 @@
-// Main Slider Start
-let leftBtn=document.querySelector("#main-slider .left")
-let rightBtn=document.querySelector("#main-slider .right")
 
-setInterval(function(){ 
-    let active=document.querySelector("#main-slider .active")
-    if (active.nextElementSibling!=null) {
-     active.nextElementSibling.classList.add("active")
-    }
-    else{
-     active.parentNode.firstElementChild.classList.add("active")
-    }
-    active.classList.remove("active")
- }, 3000);
-leftBtn.addEventListener("click",function(){
-    let active=document.querySelector("#main-slider .active")
-    if (active.previousElementSibling!=null) {
-        active.previousElementSibling.classList.add("active")
-       }
-       else{
-        active.parentNode.lastElementChild.classList.add("active")
-       }
-       active.classList.remove("active")
+// KontaktTV Start
+let openedModal = document.querySelectorAll(".openedModal")
+let fadeModal = document.querySelector(".fadeModal")
+let closedBtn = document.querySelector(".closeBtn")
+let modalBody = document.querySelectorAll(".modal-body")
+
+let arr = ['<iframe width="700" height="400" src="https://www.youtube.com/embed/zbL5feqnIDY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>'
+,'<iframe width="700" height="400" src="https://www.youtube.com/embed/BeeoU5vd5Jg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>'
+,'<iframe width="700" height="400" src="https://www.youtube.com/embed/9DV8rYEwB94" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>'
+,'<iframe width="700" height="400" src="https://www.youtube.com/embed/-KxYqdXWgIw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>'
+,'<iframe width="700" height="400" src="https://www.youtube.com/embed/-KxYqdXWgIw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>'
+]
+
+openedModal.forEach((modall, ind) => {
+    modall.addEventListener("click", (e) => {
+        document.querySelector(`.${modall.classList[0]} .modal-body`).innerHTML = ` ${arr[ind]}`
+        
+    })
 })
-rightBtn.addEventListener("click",function(){
-    let active=document.querySelector("#main-slider .active")
-   if (active.nextElementSibling!=null) {
-    active.nextElementSibling.classList.add("active")
-   }
-   else{
-    active.parentNode.firstElementChild.classList.add("active")
-   }
-   active.classList.remove("active")
-})
+//closeBtn
+if (closedBtn) {
+    closedBtn.addEventListener("click", () => {
+        
+        modalBody.forEach((elem, ind) => {
+            elem.innerHTML = ''
+        })
+    })
+}
+//Swiper
+let carouselVideo=document.querySelector('.carousel-video')
+if (carouselVideo) {
+    new Swiper('.carousel-video',{
+
+        autoplay: {
+            delay: 3000,
+            stopOnLastSlide: true,
+            disableOnInteraction: false,
+        },
+        watchOverflow: true,
+        slidesPerView: 4,
+        loop: true,
+        
+    })
+}
+// KontaktTV End
+
+// Main Slider Start
+
+let mainSlider=document.querySelector('.main-slider')
+if (mainSlider) {
+    const swiper = new Swiper('.main-slider', {
+        // Navigation click
+
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev'
+        },
+
+        // Avtoplay intervar
+        autoplay: {
+            delay: 2000,
+            stopOnLastSlide: true,
+            disableOnInteraction: false,
+        },
+        speed: 500,
+        loop: true,
+
+    }); 
+}
 // Main Slider End
 
 //Right Daily Slider Swiper Start
+let dragCard = document.querySelector('.slider-price-drag-card')
+if (dragCard) {
+    const swiper = new Swiper('.slider-price-drag-card', {
+        //navigation click
 
-const swiper =new Swiper('.slider-price-drag-card',{
-    //navigation click
-    
 
-    navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev'
-    },
-    //pagination
-    pagination:{
-        el: '.swiper-pagination',
-        clickable:true,
-        dynamicBullets:true,
-    },
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev'
+        },
+        //pagination
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+            dynamicBullets: true,
+        },
 
-    //Avtoplay intervar
-    autoplay: {
-        delay:3000,
-        stopOnLastSlide:true,
-        disableOnInteraction:false,
-    },
-    speed: 800,
-    loop:true,
+        //Avtoplay intervar
+        autoplay: {
+            delay: 2000,
+            stopOnLastSlide: true,
+            disableOnInteraction: false,
+        },
+        speed: 500,
+        loop: true,
 
-});
+    });
+}
 //Right Daily Slider Swiper End
 
+
 //Carousel Products Start
-new Swiper('.carouseldiv',{
-    // pagination:{
-    //     el: '.swiper-pagination',
-    //     clickable:true,
-    // },
-    
-    watchOverflow:true,
-    
-    autoplay: {
-        delay:1000,
-        stopOnLastSlide:true,
-        disableOnInteraction:false,
-    },
-    loop:true,
-    speed: 800,
-    breakpoints:{
-        480:{
-            slidesPerView:2.3,
+let carouseldiv = document.querySelector('.carouseldiv')
+if (carouseldiv) {
+    new Swiper('.carouseldiv', {
+        // pagination:{
+        //     el: '.swiper-pagination',
+        //     clickable:true,
+        // },
+
+        watchOverflow: true,
+
+        autoplay: {
+            delay: 1000,
+            stopOnLastSlide: true,
+            disableOnInteraction: false,
         },
-        992:{
-            slidesPerView:3.5,
-        },
-        1200:{
-            slidesPerView: 4.5,
+        loop: true,
+        speed: 800,
+        breakpoints: {
+            480: {
+                slidesPerView: 2.3,
+            },
+            992: {
+                slidesPerView: 3.5,
+            },
+            1200: {
+                slidesPerView: 4.5,
+            }
         }
-    }
-});
+    });
+}
+
 //Carousel Products End
 
 // Carousel Partners  Start
-new Swiper('.partners-main',{
-    navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev'
-    },
-    watchOverflow:true,
-    autoplay: {
-        delay:5000,
-        stopOnLastSlide:true,
-        disableOnInteraction:false,
-    },
-    loop:true,
-    speed: 300,
-    breakpoints:{
-        480:{
-            slidesPerView:3,
+let partnersmain = document.querySelector('.partners-main')
+if (partnersmain) {
+    new Swiper('.partners-main', {
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev'
         },
-        992:{
-            slidesPerView:4,
+        watchOverflow: true,
+        autoplay: {
+            delay: 5000,
+            stopOnLastSlide: true,
+            disableOnInteraction: false,
         },
-        1200:{
-            slidesPerView: 8,
+        loop: true,
+        speed: 300,
+        breakpoints: {
+            480: {
+                slidesPerView: 3,
+            },
+            992: {
+                slidesPerView: 4,
+            },
+            1200: {
+                slidesPerView: 8,
+            }
         }
-    }
-  
-});
 
+    });
+}
+//Sidebars Hover
+// let sidebarsHover=document.querySelector('#sidebars .product-menu')
+// if (sidebarsHover) {
+//     sidebarsHover.addEventListener('mouseover',function () {
+//         document.body.classList.toggle('menu-open')
+//     })
+// }
+// Menu Burger Start
+let menuIcon = document.querySelector('.section-menu .menu-icon')
+if (menuIcon) {
+    let sidebarSection = document.querySelector('.sidebar-section')
+    menuIcon.addEventListener("click", function () {
 
+        document.body.classList.toggle('menu-open')
+        sidebarSection.classList.toggle('active')
+        menuIcon.classList.toggle('active')
+
+    })
+}
+//Accordion Start
+
+let li=document.querySelectorAll('.accordion-menu li')
+li.forEach(s=>{
+    s.addEventListener('click',function() {
+        this.classList.toggle('active')
+        
+        if (this.nextElementSibling.classList.contains('active')) {
+            this.nextElementSibling.classList.remove('active')
+        }
+        else{
+            this.nextElementSibling.classList.add('active')
+        }
+        
+        
+        
+    })
+})
+
+//local storage
+// let addCartBtns=document.querySelectorAll('.btn-add-to-cart')
+
+// if (addCartBtns) {
+//     addCartBtns.forEach(btn=>{
+//         btn.addEventListener('click', function(){
+//           let id=this.getAttribute('data-id')
+//         })
+//     })
+// }
+
+// Selections page button
+let btnFeature=document.querySelector('#selections .btn-feature')
+
+if (btnFeature) {
+    let content=document.querySelector('#selections .content')
+    btnFeature.addEventListener('click',function() {
+        btnFeature.classList.toggle('active')
+        content.classList.toggle('d-none')
+
+    })
+}
