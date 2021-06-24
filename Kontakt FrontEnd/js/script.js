@@ -4,6 +4,7 @@ let openedModal = document.querySelectorAll(".openedModal")
 let fadeModal = document.querySelector(".fadeModal")
 let closedBtn = document.querySelector(".closeBtn")
 let modalBody = document.querySelectorAll(".modal-body")
+let myButton=document.querySelector('.myButton')
 
 let arr = ['<iframe width="700" height="400" src="https://www.youtube.com/embed/zbL5feqnIDY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>'
 ,'<iframe width="700" height="400" src="https://www.youtube.com/embed/BeeoU5vd5Jg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>'
@@ -27,11 +28,11 @@ if (closedBtn) {
         })
     })
 }
+
 //Swiper
 let carouselVideo=document.querySelector('.carousel-video')
 if (carouselVideo) {
     new Swiper('.carousel-video',{
-
         autoplay: {
             delay: 3000,
             stopOnLastSlide: true,
@@ -47,11 +48,12 @@ if (carouselVideo) {
 
 // Main Slider Start
 
+
 let mainSlider=document.querySelector('.main-slider')
 if (mainSlider) {
     const swiper = new Swiper('.main-slider', {
         // Navigation click
-
+        
         navigation: {
             nextEl: '.swiper-button-next',
             prevEl: '.swiper-button-prev'
@@ -68,6 +70,7 @@ if (mainSlider) {
 
     }); 
 }
+
 // Main Slider End
 
 //Right Daily Slider Swiper Start
@@ -224,5 +227,20 @@ if (btnFeature) {
         btnFeature.classList.toggle('active')
         content.classList.toggle('d-none')
 
+    })
+}
+
+//Products page collapse
+let collapsebtn=document.querySelector('.a-collapse')
+let pageText=document.querySelector('#product-search .page-text')
+let coxazspan=document.querySelector('#product-search .azspan')
+let icon=document.querySelector('#product-search .fa-chevron-up')
+if (collapsebtn) {
+    collapsebtn.addEventListener('click',function () {
+        pageText.classList.toggle('collapse-az')
+        icon.classList.remove('d-none')
+        coxazspan.classList.remove('d-none')
+        coxazspan.previousElementSibling.classList.add('d-none')
+        icon.previousElementSibling.classList.add('d-none')
     })
 }
