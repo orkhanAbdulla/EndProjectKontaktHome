@@ -238,9 +238,81 @@ let icon=document.querySelector('#product-search .fa-chevron-up')
 if (collapsebtn) {
     collapsebtn.addEventListener('click',function () {
         pageText.classList.toggle('collapse-az')
-        icon.classList.remove('d-none')
-        coxazspan.classList.remove('d-none')
-        coxazspan.previousElementSibling.classList.add('d-none')
-        icon.previousElementSibling.classList.add('d-none')
+        if (icon.classList.contains('d-none')) {
+            icon.classList.remove('d-none')
+            icon.previousElementSibling.classList.add('d-none')
+            coxazspan.classList.remove('d-none')
+            coxazspan.previousElementSibling.classList.add('d-none')
+        }
+        else{
+            icon.classList.add('d-none')
+            icon.previousElementSibling.classList.remove('d-none')
+            coxazspan.classList.add('d-none')
+            coxazspan.previousElementSibling.classList.remove('d-none')
+        }
+              
+    })
+}
+
+
+//Products
+let active=document.querySelector('.first-menu li')
+if (active) {
+    active.addEventListener('click',function () {
+        if (active.classList.contains('active')) {
+            active.classList.remove('active')
+        }
+        else{
+            active.classList.add('active')
+        }
+        
+    })
+}
+let activeBtn=document.querySelectorAll('.btn-feature')
+
+
+if (activeBtn) {
+    activeBtn.forEach(a=>{
+        a.addEventListener('click', function () {
+            if (a.classList.contains('active')) {
+                a.classList.remove('active')
+                a.nextElementSibling.classList.add('d-none')
+            }
+            else{
+                a.classList.add('active')
+                a.nextElementSibling.classList.remove('d-none')
+                
+            }
+            
+        })
+    })
+}
+
+
+let clickView=document.querySelectorAll('#product-list .click-view')
+if (clickView) {
+    clickView.forEach(a=>{
+        a.addEventListener('click',function () {
+          if (a.firstElementChild.firstElementChild.classList.contains('sgvup')) {
+            a.firstElementChild.firstElementChild.classList.remove('sgvup')
+          }
+          else{
+            a.firstElementChild.firstElementChild.classList.add('sgvup')
+          }
+        })
+    })
+}
+
+let clickNum=document.querySelectorAll('#product-list .click-num li')
+if (clickNum) {
+    clickNum.forEach(c=>{
+        c.addEventListener('click',function () {
+              if (c.firstElementChild.classList.contains('active')) {
+                c.firstElementChild.classList.remove('active')
+              }
+              else{
+                c.firstElementChild.classList.add('active')
+              }
+        })
     })
 }
