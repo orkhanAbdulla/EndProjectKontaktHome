@@ -1,0 +1,382 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+<main>
+    <section id="shops">
+        <div class="container">
+            <div style="float:right;margin-top: -70px;font-size:13px">
+                İş saatları:<br>
+                Hər gün: 10:00-21:00
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <!-- Map -->
+                    <iframe src="https://www.google.com/maps/d/embed?mid=1cxTjeW-siIpcPDauYYgsXHL6J5e1nrSc"
+                            allowfullscreen="" frameborder="0" style="width:100%;border:0;height:500px"></iframe>
+                    <div id="map-canvas" class="map section text-center" style="display:none">
+                    </div>
+                </div>
+                <section>
+                    <div class="col-lg-12">
+                        <!-- Location -->
+                        <section>
+                            <div class="col-lg-12 pl-0">
+                                <br>
+                                <h2 class="nm-t font-w-normal">Bakı şəhəri</h2>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <address class="branch">
+                                        <strong class="strong red-title" 01-kontakt-home-xalqlar-dostlugu="">
+                                            Kontakt
+                                            HOME "Xalqlar Dostluğu"
+                                        </strong>
+                                        <p class="adrs nm">
+                                            Qara Qarayev pr., 125B (“Xalqlar Dostluğu” m/st
+                                            yaxınlığında)
+                                        </p>
+                                    </address>
+                                </div>
+                                <div class="col-lg-6">
+                                    <address class="branch">
+                                        <strong class="strong red-title" 03-kontakt-home-inqilab="">
+                                            Kontakt HOME
+                                            "İnqilab"
+                                        </strong>
+                                        <p class="adrs nm">Cəlil Məmmədquluzadə k., 120A</p>
+                                    </address>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <address class="branch">
+                                        <strong class="strong red-title" 04-kontakt-home-20-yanvar="">
+                                            Kontakt HOME
+                                            "20 yanvar"
+                                        </strong>
+                                        <p class="adrs nm">Moskva pr., 52 (“20 Yanvar” m/st yaxınlığında)</p>
+                                    </address>
+                                </div>
+                                <div class="col-lg-6">
+                                    <address class="branch">
+                                        <strong class="strong red-title" 05-kontakt-home-insaatcilar="">
+                                            Kontakt HOME
+                                            "İnşaatçılar"
+                                        </strong>
+                                        <p class="adrs nm">
+                                            Abbas Mirzə Şərifzadə k., ev 174 (“İnşaatçılar” m/st
+                                            yaxınlığında)
+                                        </p>
+                                    </address>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <address class="branch">
+                                        <strong class="strong red-title" 06-kontakt-home-28-may="">
+                                            Kontakt HOME "28
+                                            may"
+                                        </strong>
+                                        <p class="adrs nm">Füzuli k., 47-55 (“28 may” m/st yaxınlığında)</p>
+                                    </address>
+                                </div>
+                                <div class="col-lg-6">
+                                    <address class="branch">
+                                        <strong class="strong red-title" 07-kontakt-home-sahil="">
+                                            Kontakt HOME
+                                            "Sahil"
+                                        </strong>
+                                        <p class="adrs nm">
+                                            Üzeyir Hacıbeyov k. və Bülbül k., məhəllə 207 (“Sahil”
+                                            m/st yaxınlığında)
+                                        </p>
+                                    </address>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <address class="branch">
+                                        <strong class="strong red-title" 08-kontakt-home-g%c9%99nclik="">
+                                            Kontakt
+                                            HOME "Gənclik"
+                                        </strong>
+                                        <p class="adrs nm">
+                                            Fətəli Xan Xoyski k., 86 (5 №-li xəstəxana ilə üzbəüz)
+                                        </p>
+                                    </address>
+                                </div>
+                                <div class="col-lg-6">
+                                    <address class="branch">
+                                        <strong class="strong red-title" 09-kontakt-home-a-sultanova="">
+                                            Kontakt HOME
+                                            "A.Sultanova"
+                                        </strong>
+                                        <p class="adrs nm">Atatürk pr., 65B (Ayna Sultanova heykəlinin arxası)</p>
+                                    </address>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <address class="branch">
+                                        <strong class="strong red-title" 10-kontakt-home-bakixanov-2="">
+                                            Kontakt HOME
+                                            "Bakıxanov-Stansiya"
+                                        </strong>
+                                        <p class="adrs nm">Bakıxanov qəsəbəsi, Səməd bəy Mehmandarov pr., 1A</p>
+                                    </address>
+                                </div>
+                                <div class="col-lg-6">
+                                    <address class="branch">
+                                        <strong class="strong red-title" kontakt-home-%c9%99hm%c9%99dli="">
+                                            Kontakt
+                                            HOME "Əhmədli"
+                                        </strong>
+                                        <p class="adrs nm">Əhmədli qəsəbəsi, Məzahir Rüstəmov k., 34C</p>
+                                    </address>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <address class="branch">
+                                        <strong class="strong red-title" kontakt-home-3-cu-mkr="">
+                                            Kontakt HOME "3-cü
+                                            mkr"
+                                        </strong>
+                                        <p class="adrs nm">3-cü mkr., Alı Mustafayev k., 8A</p>
+                                    </address>
+                                </div>
+                                <div class="col-lg-6">
+                                    <address class="branch">
+                                        <strong class="strong red-title" kontakt-home-8-ci-km="">
+                                            Kontakt HOME "8-ci
+                                            km"
+                                        </strong>
+                                        <p class="adrs nm">
+                                            Qara Qarayev pr., 81
+                                        </p>
+                                    </address>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <address class="branch">
+                                        <strong class="strong red-title" kontakt-home-azadliq-metrosu="">
+                                            Kontakt
+                                            HOME "Azadlıq Metrosu"
+                                        </strong>
+                                        <p class="adrs nm">
+                                            Binəqədi r, Süleyman Sani Axundov küç, Azadlıq m/s yanı
+                                        </p>
+                                    </address>
+                                </div>
+                                <div class="col-lg-6">
+                                    <address class="branch">
+                                        <strong class="strong red-title" kontakt-home-azadliq-prospekti="">
+                                            Kontakt
+                                            HOME "Azadlıq Prospekti"
+                                        </strong>
+                                        <p class="adrs nm">Nərimanov rayonu, Azadlıq pr. 143A</p>
+                                    </address>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <address class="branch">
+                                        <strong class="strong red-title" kontakt-home-bakixanov-3="">
+                                            Kontakt HOME
+                                            "Bakıxanov-3"
+                                        </strong>
+                                        <p class="adrs nm">Bakıxanov qəsəbəsi, Sakit Qocayev k., 69</p>
+                                    </address>
+                                </div>
+                                <div class="col-lg-6">
+                                    <address class="branch">
+                                        <strong class="strong red-title" kontakt-home-n%c9%99simi="">
+                                            Kontakt HOME
+                                            "Nəsimi"
+                                        </strong>
+                                        <p class="adrs nm">
+                                            Svetlana Məmmədova k., 107 (“Nəsimi” m/st yaxınlığında)
+                                        </p>
+                                    </address>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <address class="branch">
+                                        <strong class="strong red-title"
+                                                kontakt-home-smart-neftcil%c9%99r="">
+                                            Kontakt HOME Smart
+                                            "Neftçilər"
+                                        </strong>
+                                        <p class="adrs nm">Qara Qarayev pr., 62</p>
+                                    </address>
+                                </div>
+                                <div class="col-lg-6">
+                                    <address class="branch">
+                                        <strong class="strong red-title"
+                                                kontakt-home-ukrayna-dair%c9%99si="">
+                                            Kontakt HOME "Ukrayna
+                                            dairəsi"
+                                        </strong>
+                                        <p class="adrs nm">Xətai r-nu, Məhəmməd Hadi ev.2372</p>
+                                    </address>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <h2 class="nm-t font-w-normal">Regionlar</h2>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <address class="branch">
+                                        <strong class="red-title strong" 14-kontakt-home-sumqayit-region="">
+                                            Kontakt
+                                            HOME Smart "Sumqayıt"
+                                        </strong>
+                                        <p class="adrs nm">Sumqayıt şəhəri, Sülh k. (Ticarət cərgəsi)</p>
+                                    </address>
+                                </div>
+                                <div class="col-lg-6">
+                                    <address class="branch">
+                                        <strong class="red-title strong"
+                                                14-kontakt-home-sumqayit-sulh-region="">
+                                            Kontakt HOME "Sumqayıt-Sülh
+                                            Plaza"
+                                        </strong>
+                                        <p class="adrs nm">Sumqayıt şəhəri, Bakı k., 60 (Sülh Plaza)</p>
+                                    </address>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <address class="branch">
+                                        <strong class="red-title strong"
+                                                15-kontakt-home-g%c9%99nc%c9%99-region="">Kontakt HOME "Gəncə"</strong>
+                                        <p class="adrs nm">Gəncə şəhəri, Nizami k., 35 (Bayraq meydanı)</p>
+                                    </address>
+                                </div>
+                                <div class="col-lg-6">
+                                    <address class="branch">
+                                        <strong class="red-title strong"
+                                                kontakt-home-b%c9%99rd%c9%99-region="">Kontakt HOME "Bərdə"</strong>
+                                        Bərdə rayonu , Bərdə şəhəri Koroğlu küçəsi.
+                                    </address>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <address class="branch">
+                                        <strong class="red-title strong"
+                                                kontakt-home-g%c9%99nc%c9%99-mall-region="">
+                                            Kontakt HOME "Gəncə
+                                            Mall"
+                                        </strong>
+                                        <p class="adrs nm">
+                                            Gəncə şəhəri, Heydər Əliyev pr., 433 (Gəncə Mall, -1-ci
+                                            mərtəbə)
+                                        </p>
+                                    </address>
+                                </div>
+                                <div class="col-lg-6">
+                                    <address class="branch">
+                                        <strong class="red-title strong" kontakt-home-goycay-region="">
+                                            Kontakt HOME
+                                            "Göyçay"
+                                        </strong>
+                                        Göyçay şəhəri, Mehdi Hüseynzadə küç. 31 (Təzə Bazarın yanı)
+                                    </address>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <address class="branch">
+                                        <strong class="red-title strong" kontakt-home-goycay-region-2="">
+                                            Kontakt
+                                            HOME "Lənkəran"
+                                        </strong>
+                                        Lənkəran şəhəri, Səmədzadə ev.50 ( Access bank və “Böyük bazarın” yanı)
+                                    </address>
+                                </div>
+                                <div class="col-lg-6">
+                                    <address class="branch">
+                                        <strong class="red-title strong" kontakt-home-masalli-region="">
+                                            Kontakt HOME
+                                            "Masallı"
+                                        </strong>
+                                        <p class="adrs nm">
+                                            H. Əliyev prospekti, Dövlət Sosial Müdafiə Fondunun
+                                            yaxınlığı
+                                        </p>
+                                    </address>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <address class="branch">
+                                        <strong class="red-title strong"
+                                                kontakt-home-ming%c9%99cevir-region="">
+                                            Kontakt HOME
+                                            "Mingəcevir"
+                                        </strong>
+                                        <p class="adrs nm">
+                                            Mingəçevir şəhəri ,Nəriman Nərimanov 15&nbsp; Dostluq
+                                            Parkının Yanı
+                                        </p>
+                                    </address>
+                                </div>
+                                <div class="col-lg-6">
+                                    <address class="branch">
+                                        <strong class="red-title strong"
+                                                kontakt-home-q%c9%99b%c9%99l%c9%99-region="">
+                                            Kontakt HOME
+                                            "Qəbələ"
+                                        </strong>
+                                        <p class="adrs nm">
+                                            Heydər Əliyev pr. 118B,İcra hakimiyyətinin yaxınlığında
+                                        </p>
+                                    </address>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <address class="branch">
+                                        <strong class="red-title strong" kontakt-home-quba-region="">
+                                            Kontakt HOME
+                                            "Quba"
+                                        </strong>
+                                        <p class="adrs nm">
+                                            Heydər Əliyev prospekti 129 (Köhnə Şahdağ ticarət
+                                            mərkəzi)
+                                        </p>
+                                    </address>
+                                </div>
+                                <div class="col-lg-6">
+                                    <address class="branch">
+                                        <strong class="red-title strong" kontakt-home-sumqayit-3-region="">
+                                            Kontakt
+                                            HOME "Sumqayıt 10-cu mikrorayon"
+                                        </strong>
+                                        <p class="adrs nm">Sumqayıt şəhəri, 10 MKR</p>
+                                    </address>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <address class="branch">
+                                        <strong class="red-title strong" kontakt-home-xirdalan-region="">
+                                            Kontakt
+                                            HOME "Xırdalan"
+                                        </strong>
+                                        <p class="adrs nm">Xırdalan şəhəri, Heydər Əliyev pr., 240</p>
+                                    </address>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </section>
+</main>
+
