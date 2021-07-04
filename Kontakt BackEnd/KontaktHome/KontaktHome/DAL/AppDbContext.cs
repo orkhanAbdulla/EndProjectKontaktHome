@@ -12,5 +12,15 @@ namespace KontaktHome.DAL
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
         public DbSet<Slider> Sliders { get; set; }
         public DbSet<Bio> Bio { get; set; }
+        public DbSet<Category> Categories { get; set;}
+        public DbSet<Brand> Brands { get; set; }
+        public DbSet<CategoryBrand> CategoryBrands { get; set; }
+        public DbSet<Product> Products { get; set; }
+        public DbSet<ProductDetail> ProductDetail { get; set; }
+        public DbSet<ProductImage> ProductImage { get; set; }
+        public DbSet<Features> Features { get; set; }
+        public DbSet<ProductFeatures> ProductFeatures { get; set; }
+        public DbSet<FeaturesDetail> FeaturesDetails { get; set; }
+
     }
 }

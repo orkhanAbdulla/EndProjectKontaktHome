@@ -316,3 +316,13 @@ if (clickNum) {
         })
     })
 }
+//product-detail image carousel
+
+let imageItems = document.querySelectorAll(".detail-img");
+let baseImage = document.querySelector("#main-detail-image");
+
+imageItems.forEach((elem) => {
+    elem.addEventListener("click", function () {
+        baseImage.src = this.src
+    });
+});
