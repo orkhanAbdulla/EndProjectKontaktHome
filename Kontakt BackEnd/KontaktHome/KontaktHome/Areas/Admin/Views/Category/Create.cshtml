@@ -1,0 +1,74 @@
+﻿@model Category
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div class="content">
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-header header-elements-inline">
+                <h5 class="card-title">Kategoriya yaratmaq</h5>
+                <div class="header-elements">
+                    <div class="list-icons">
+                        <a class="list-icons-item" data-action="collapse"></a>
+                        <a class="list-icons-item" data-action="reload"></a>
+                        <a class="list-icons-item" data-action="remove"></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-body">
+                <form action="/" method="post">
+                    <div class="form-group form-group-float">
+                        <input asp-for="@Model.Name" class="form-control" placeholder="Kategoriyanın Adı">
+                        <span class="text-danger" asp-validation-for="@Model.Name"></span>
+                    </div>
+                    <div class="form-group form-group-float">
+                        <label asp-for="@Model.Title" class="form-group-float-label">Təsviri</label>
+                        <textarea rows="5" cols="5" class="form-control" placeholder="Təsviri"></textarea>
+                    </div>
+                    <div class="form-group mb-3 mb-md-2">
+                        <div class="form-check form-check-inline">
+                            <label asp-for="@Model.IsMain" class="form-check-label">
+                                <input asp-for="@Model.IsMain" class="form-check-input-styled" data-fouc>
+                                Əsas:
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group row d-none" id="photo">
+                        <div class="col-lg-10">
+                            <input asp-for="Photo" class="file-input-custom" data-show-caption="true" data-show-upload="true" accept="image/*" data-fouc>
+                        </div>
+                        <span class="text-danger" asp-validation-for="@Model.Photo"></span>
+                    </div>
+                    <div class="mb-3 my-5" id="mainCategory">
+                        <p class="mb-2">
+                            <select data-placeholder="Əsas Kategoriya Seç" name="MainCtgId" class="form-control select-access-value select2-hidden-accessible" data-fouc="" tabindex="-1" aria-hidden="true">
+                                <option></option>
+                                @foreach (Category mainCtg in ViewBag.MainCtg)
+                                {
+                                    <option value="@mainCtg.Id">@mainCtg.Name</option>
+                                }
+
+                            </select>
+                        </p>
+                    </div>
+                    <button type="submit" class="btn btn-light">Cancel</button>
+                    <button type="submit" class="btn bg-blue ml-3">Submit <i class="icon-paperplane ml-2"></i></button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).on("change", "#IsMain", function () {
+        if ($(this).prop("checked")){
+            $("#photo").removeClass("d-none");
+            $("#mainCategory").addClass("d-none");
+        }
+        else {
+            $("#photo").addClass("d-none");
+            $("#mainCategory").removeClass("d-none");
+        }
+    });
+</script>

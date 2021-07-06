@@ -19,6 +19,7 @@ namespace KontaktHome.Controllers
         }
         public IActionResult Index(int? categoryId,int? brandId)
         {
+           
 
             CategoryProductVM categoryProductVM = new CategoryProductVM();
             categoryProductVM.Products = new List<Product>();
