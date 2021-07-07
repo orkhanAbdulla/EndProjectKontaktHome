@@ -10,14 +10,14 @@
                     {
                         <h1 class="page-header">@Model.Category.Name</h1>
                         <div class="page-text">
-                            @Model.Category.Title
+                            @Html.Raw(Model.Category.Title);
                         </div>
                     }
                     else 
                     {
                         <h1 class="page-header">@Model.Brand.Name</h1>
                         <div class="page-text">
-                            @Model.Brand.Title
+                            @Html.Raw(Model.Brand.Title);
                         </div>
                     }
 

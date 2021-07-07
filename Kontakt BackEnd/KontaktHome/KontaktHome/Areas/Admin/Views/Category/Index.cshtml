@@ -1,4 +1,4 @@
-﻿@model CategoryVM
+﻿@model List<Category>
 @{
     ViewData["Title"] = "Index";
 }
@@ -6,9 +6,10 @@
 <div class="content">
 
     <!-- Basic initialization -->
+
     <div class="card">
         <div class="card-header header-elements-inline">
-            @if (Model.mainCategory != null)
+            @if (ViewBag.IsMain == true)
             {
                 <h5 class="card-title">Əsas Kateqoriyalar</h5>
             }
@@ -18,154 +19,187 @@
             }
 
         </div>
-        <div class="btn-create ml-3" style="color:white">
-            <a class="btn btn-success" asp-action="Create">Yarat</a>
-        </div>
-        <table class="table datatable-row-basic">
-            @if (Model.mainCategory != null)
-            {
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Şəkil</th>
-                        <th>Ad</th>
-                        <th>Təsviri</th>
-                        <th>Status</th>
-                        <th class="text-center">Settings</th>
-                    </tr>
-                </thead>
-                @foreach (Category mainCg in Model.mainCategory)
+            <div class="btn-create ml-3" style="color:white">
+                <a class="btn btn-success" asp-action="Create">Yarat</a>
+            </div>
+            <table class="table datatable-row-basic">
+                @if (ViewBag.IsMain == true)
                 {
-                    <tbody>
+                    <thead>
                         <tr>
-                            <td>1</td>
-                            <td><img src="/img/Categories/@mainCg.Image" /></td>
-                            <td>@mainCg.Name</td>
-                            <td>
-                                <!-- Button trigger modal -->
-                                <button type="button" class="btn" data-toggle="modal" data-target="#categories-@mainCg.Id">
-                                    @((mainCg.Title.Length<30)? mainCg.Title: mainCg.Title.Substring(0,50))...
-                                </button>
-
-                                <!-- Modal -->
-                                <div class="modal fade" id="categories-@mainCg.Id" tabindex="-1" role="dialog" aria-labelledby="categories-@mainCg.Id" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                @mainCg.Title
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </td>
-                            @if (mainCg.IsDeleted)
-                            {
-                                <td><span class="badge badge-secondary">Inactive</span></td>
-                            }
-                            else
-                            {
-                                <td><span class="badge badge-success">Active</span></td>
-                            }
-                            <td class="text-center">
-                                <div class="list-icons">
-                                    <div class="dropdown">
-                                        <a href="#" class="list-icons-item" data-toggle="dropdown">
-                                            <i class="icon-menu9"></i>
-                                        </a>
-
-                                        <div class="dropdown-menu dropdown-menu-right">
-                                            <a href="#" class="dropdown-item"><i class="icon-file-pdf"></i> Export to .pdf</a>
-                                            <a href="#" class="dropdown-item"><i class="icon-file-excel"></i> Export to .csv</a>
-                                            <a href="#" class="dropdown-item"><i class="icon-file-word"></i> Export to .doc</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </td>
+                            <th>#</th>
+                            <th>Şəkil</th>
+                            <th>Adı</th>
+                            <th>Təsviri</th>
+                            <th>Status</th>
+                            <th class="text-center">Settings</th>
                         </tr>
-                    </tbody>
+                    </thead>
+                    @foreach (Category mainCtg in Model)
+                    {
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td><img src="/img/Categories/@mainCtg.Image" /></td>
+                                <td>@mainCtg.Name</td>
+                                <td>
+                                    <!-- Button trigger modal -->
+                                    <button type="button" class="btn" data-toggle="modal" data-target="#categories-@mainCtg.Id">
+                                        @if (mainCtg.Title != null)
+                                        {
+                                            @((mainCtg.Title.Length<30)? mainCtg.Title: mainCtg.Title.Substring(0,50))
+                                        }
+                                        <p>Təsviri mövcud deyil</p>
+                                    </button>
+
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="categories-@mainCtg.Id" tabindex="-1" role="dialog" aria-labelledby="categories-@mainCtg.Id" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    @mainCtg.Title
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                @if (mainCtg.IsDeleted)
+                                {
+                                    <td><span class="badge badge-secondary">Deactive</span></td>
+                                }
+                                else
+                                {
+                                    <td><span class="badge badge-success">Active</span></td>
+                                }
+
+                                <td class="text-center">
+                                    <div class="list-icons">
+                                        <div class="dropdown">
+                                            <a href="#" class="list-icons-item" data-toggle="dropdown">
+                                                <i class="icon-menu9"></i>
+                                            </a>
+
+                                            <div class="dropdown-menu dropdown-menu-right text-center">
+                                                @if (mainCtg.IsDeleted)
+                                                {
+                                                    <h5><a asp-action="Delete" asp-route-id="@mainCtg.Id" class="dropdown-item d-block p-0">Aktiv Et</a></h5>
+                                                }
+                                                else
+                                                {
+                                                    <h5><a asp-action="Delete" asp-route-id="@mainCtg.Id" class="dropdown-item d-block p-0">Deaktiv Et</a></h5>
+                                                }
+                                                <h5><a asp-action="Update" asp-route-id="@mainCtg.Id" class="dropdown-item d-block p-0">Düzəliş Et</a></h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    }
                 }
-            }
-            @if (Model.subCategory != null)
-            {
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Ad</th>
-                        <th>Təsviri</th>
-                        <th>Status</th>
-                        <th class="text-center">Settings</th>
-                    </tr>
-                </thead>
-                @foreach (Category subCg in Model.subCategory)
+                else
                 {
-                    <tbody>
+                    <thead>
                         <tr>
-                            <td>1</td>
-                            <td>@subCg.Name</td>
-                            <td>
-                                <!-- Button trigger modal -->
-                                <button type="button" class="btn" data-toggle="modal" data-target="#categories-@subCg.Id">
-                                    @((subCg.Title.Length<30)? subCg.Title:subCg.Title.Substring(0,50))...
-                                </button>
-
-                                <!-- Modal -->
-                                <div class="modal fade" id="categories-@subCg.Id" tabindex="-1" role="dialog" aria-labelledby="categories-@subCg.Id" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                @subCg.Title
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </td>
-                            @if (subCg.IsDeleted)
-                            {
-                                <td><span class="badge badge-secondary">Inactive</span></td>
-                            }
-                            else
-                            {
-                                <td><span class="badge badge-success">Active</span></td>
-                            }
-                            <td class="text-center">
-                                <div class="list-icons">
-                                    <div class="dropdown">
-                                        <a href="#" class="list-icons-item" data-toggle="dropdown">
-                                            <i class="icon-menu9"></i>
-                                        </a>
-
-                                        <div class="dropdown-menu dropdown-menu-right">
-                                            <a href="#" class="dropdown-item"><i class="icon-file-pdf"></i> Export to .pdf</a>
-                                            <a href="#" class="dropdown-item"><i class="icon-file-excel"></i> Export to .csv</a>
-                                            <a href="#" class="dropdown-item"><i class="icon-file-word"></i> Export to .doc</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </td>
+                            <th>#</th>
+                            <th>Adı</th>
+                            <th>Əsas Kateqoriyasi</th>
+                            <th>Təsviri</th>
+                            <th>Status</th>
+                            <th class="text-center">Settings</th>
                         </tr>
-                    </tbody>
-                }
-            }
+                    </thead>
+                    @foreach (Category subCtg in Model)
+                    {
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>@subCtg.Name</td>
+                                <td>@subCtg.Parent.Name</td>
+                                <td>
+                                    <!-- Button trigger modal -->
+                                    <button type="button" class="btn" data-toggle="modal" data-target="#categories-@subCtg.Id">
+                                        @if (subCtg.Title != null)
+                                        {
+                                            @((subCtg.Title.Length<30)? subCtg.Title: subCtg.Title.Substring(0,50))
+                                        }
+                                        else
+                                        {
+                                            <p>Təsviri mövcud deyil</p>
+                                        }
+                                    </button>
 
-        </table>
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="categories-@subCtg.Id" tabindex="-1" role="dialog" aria-labelledby="categories-@subCtg.Id" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    @subCtg.Title
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                @if (subCtg.IsDeleted)
+                                {
+                                    <td><span class="badge badge-secondary">Deactive</span></td>
+                                }
+                                else
+                                {
+                                    <td><span class="badge badge-success">Active</span></td>
+                                }
+                                <td class="text-center">
+                                    <div class="list-icons">
+                                        <div class="dropdown">
+                                            <a href="#" class="list-icons-item" data-toggle="dropdown">
+                                                <i class="icon-menu9"></i>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right text-center">
+                                                @if (subCtg.IsDeleted)
+                                                {
+                                                    if (subCtg.Parent.IsDeleted == true)
+                                                    {
+                                                        <h5><a asp-action="Delete" asp-route-id="@subCtg.Id" class="dropdown-item d-block p-0 disabled">Aktiv Et</a></h5>
+                                                    }
+                                                    else
+                                                    {
+                                                        <h5><a asp-action="Delete" asp-route-id="@subCtg.Id" class="dropdown-item d-block p-0">Aktiv Et</a></h5>
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    <h5><a asp-action="Delete" asp-route-id="@subCtg.Id" class="dropdown-item d-block p-0">Deaktiv Et</a></h5>
+                                                }
+                                                <h5><a asp-action="Update" asp-route-id="@subCtg.Id" class="dropdown-item d-block p-0">Düzəliş Et</a></h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    }
+
+                }
+
+            </table>
     </div>
 
     <!-- /basic initialization -->

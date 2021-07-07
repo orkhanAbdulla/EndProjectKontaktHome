@@ -18,7 +18,7 @@ namespace KontaktHome.ViewComponents
         }
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            List<Category> model = _context.Categories.Where(c=>c.IsMain==true).Include(c => c.Children).ThenInclude(cc => cc.CategoryBrands).ThenInclude(cb => cb.Brand).ToList();
+            List<Category> model = _context.Categories.Where(c=>c.IsMain==true && c.IsDeleted==false).Include(c => c.Children).ThenInclude(cc => cc.CategoryBrands).ThenInclude(cb => cb.Brand).ToList();
             return View(await Task.FromResult(model));
         }
     }

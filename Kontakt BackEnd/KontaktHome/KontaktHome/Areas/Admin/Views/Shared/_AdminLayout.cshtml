@@ -20,7 +20,6 @@
     <script src="~/global_assets/js/plugins/loaders/blockui.min.js"></script>
     <!-- /core JS files -->
     <!-- Theme JS files -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="~/global_assets/js/plugins/visualization/d3/d3.min.js"></script>
     <script src="~/global_assets/js/plugins/visualization/d3/d3_tooltip.js"></script>
     <script src="~/global_assets/js/plugins/forms/styling/switchery.min.js"></script>
@@ -44,6 +43,7 @@
     <script src="~/global_assets/js/demo_pages/form_select2.js"></script>
     <script src="~/global_assets/js/demo_pages/uploader_bootstrap.js"></script>
     <script src="~/global_assets/js/demo_pages/form_checkboxes_radios.js"></script>
+    @RenderSection("Script", false)
     <!-- /theme JS files -->
 
 </head>
@@ -424,8 +424,8 @@
                             <a href="#" class="nav-link"><i class="icon-copy"></i> <span>Kateqoriyalar</span></a>
 
                             <ul class="nav nav-group-sub" data-submenu-title="Layouts">
-                                <li class="nav-item"><a asp-controller="Category" asp-action="Index"  asp-route-MainCtg=1 class="nav-link active">Əsas Kateqoriyalar</a></li>
-                                <li class="nav-item"><a asp-controller="Category" asp-action="Index" asp-route-SubCtg=2 class="nav-link">Alt Kategpriyalar</a></li>
+                                <li class="nav-item"><a asp-controller="Category" asp-action="Index"  asp-route-isMain=true class="nav-link active">Əsas Kateqoriyalar</a></li>
+                                <li class="nav-item"><a asp-controller="Category" asp-action="Index" asp-route-isMain=false class="nav-link">Alt Kategpriyalar</a></li>
                             </ul>
                         </li>
                         <li class="nav-item nav-item-submenu">

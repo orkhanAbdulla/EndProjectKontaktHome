@@ -1,6 +1,6 @@
 ﻿@model Category
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Update";
 }
 
 <div class="content">
@@ -14,22 +14,22 @@
                 <div class="text-danger" asp-validation-summary="ModelOnly"></div>
                 <form method="post" enctype="multipart/form-data">
                     <div class="form-group form-group-float">
-                        <input asp-for="@Model.Name" class="form-control" placeholder="Kategoriyanın Adı">
-                        <span class="text-danger" asp-validation-for="@Model.Name"></span>
+                        <input asp-for="Name" class="form-control" placeholder="Kategoriyanın Adı">
+                        <span class="text-danger" asp-validation-for="Name"></span>
                     </div>
                     <div class="form-group">
-                        <textarea asp-for="@Model.Title"rows="4" cols="4" class="form-control" placeholder="Kateqoriyanin təsvirini daxil edin"></textarea>
+                        <textarea asp-for="Title" rows="4" cols="4" class="form-control" placeholder="Kateqoriyanin təsvirini daxil edin"></textarea>
                     </div>
                     <div class="form-group">
-                        <label asp-for="@Model.IsMain" class="mb-0">Əsas:</label>
-                        <input asp-for="@Model.IsMain">
-                        <span class="text-danger" asp-validation-for="@Model.IsMain"></span>
+                        <label asp-for="IsMain" class="mb-0">Əsas:</label>
+                        <input asp-for="IsMain">
+                        <span class="text-danger" asp-validation-for="IsMain"></span>
                     </div>
                     <div class="form-group row d-none" id="photo">
                         <div class="col-lg-6">
-                            <input asp-for="@Model.Photo" class="file-input-custom" data-show-caption="true" data-show-upload="true" accept="image/*" data-fouc>
+                            <input asp-for="Photo" class="file-input-custom" data-show-caption="true" data-show-upload="true" accept="image/*" data-fouc>
                         </div>
-                        <span class="text-danger" asp-validation-for="@Model.Photo"></span>
+                        <span class="text-danger" asp-validation-for="Photo"></span>
                     </div>
                     <div class="mb-3 my-3" id="mainCategory">
                         <p class="mb-2">
@@ -43,18 +43,31 @@
                             </select>
                         </p>
                     </div>
-                   
+
                     <button type="submit" class="btn bg-blue">Submit <i class="icon-paperplane ml-2"></i></button>
                 </form>
             </div>
         </div>
     </div>
 </div>
-@section Script{ 
-        <partial name="_ValidationPartial"/>
-        <script>
-            $(document).on("change", "#IsMain", function () {  
-                if ($(this).prop("checked")) {
+@section Script{
+    <partial name="_ValidationPartial" />
+    <script>
+        $(document).on("change", "#IsMain", function () {
+            if ($(this).prop("checked")) {
+                $("#photo").removeClass("d-none");
+                $("#mainCategory").addClass("d-none");
+            }
+            else {
+                $("#photo").addClass("d-none");
+                $("#mainCategory").removeClass("d-none");
+            }
+        });
+
+        $(document).ready(function () {
+            //console.log($("#IsMain"))
+            if ($("#IsMain").attr("checked") == "checked") {
+                if ($("#IsMain").prop("checked")) {
                     $("#photo").removeClass("d-none");
                     $("#mainCategory").addClass("d-none");
                 }
@@ -62,21 +75,8 @@
                     $("#photo").addClass("d-none");
                     $("#mainCategory").removeClass("d-none");
                 }
-            });
-
-            $(document).ready(function () {
-                //console.log($("#IsMain"))
-                if ($("#IsMain").attr("checked") == "checked") {
-                    if ($("#IsMain").prop("checked")) {
-                        $("#photo").removeClass("d-none");
-                        $("#mainCategory").addClass("d-none");
-                    }
-                    else {
-                        $("#photo").addClass("d-none");
-                        $("#mainCategory").removeClass("d-none");
-                    }
-                }
-            })
-        </script>
+            }
+        })
+    </script>
 }
 
