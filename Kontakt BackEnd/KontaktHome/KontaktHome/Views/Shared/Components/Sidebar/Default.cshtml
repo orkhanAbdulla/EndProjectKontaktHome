@@ -30,16 +30,19 @@
                                 <ul>
                                     @foreach (CategoryBrand childCtBrend in childCt.CategoryBrands)
                                     {
-                                        <li>
-                                            <a asp-controller="Products" asp-action="Index" asp-route-brandId="@childCtBrend.BrandId" >
-                                                <div class="photo">
-                                                    <img src="~/img/sidebar/@childCtBrend.Brand.image">
-                                                </div>
-                                                <p>
-                                                    @childCtBrend.Brand.Name
-                                                </p>
-                                            </a>
-                                        </li>
+                                        if (childCtBrend.Brand.IsDeleted==false)
+                                        {
+                                            <li>
+                                                <a asp-controller="Products" asp-action="Index" asp-route-brandId="@childCtBrend.BrandId">
+                                                    <div class="photo">
+                                                        <img src="~/img/sidebar/@childCtBrend.Brand.image">
+                                                    </div>
+                                                    <p>
+                                                        @childCtBrend.Brand.Name
+                                                    </p>
+                                                </a>
+                                            </li>
+                                        }
                                     }
                                 </ul>
                             </div>

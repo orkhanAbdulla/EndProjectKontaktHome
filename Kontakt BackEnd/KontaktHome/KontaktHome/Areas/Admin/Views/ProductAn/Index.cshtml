@@ -1,0 +1,87 @@
+﻿@model List<Product>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="content">
+
+    <!-- Basic initialization -->
+
+    <div class="card">
+        <div class="card-header header-elements-inline">
+            <h5 class="card-title">Məhsullar</h5>
+        </div>
+        <div class="btn-create ml-3" style="color:white">
+            <a class="btn btn-success" asp-action="Create">Yarat</a>
+        </div>
+        <table class="table datatable-row-basic">
+            <thead>
+                <tr>
+                    <th>Say</th>
+                    <th>Şəkil</th>
+                    <th>Model</th>
+                    <th>Kod</th>
+                    <th>Qiymeti</th>
+                    <th>Brend</th>
+                    <th>Kateqoriya</th>
+                    <th>Status</th>
+                    <th class="text-center">Settings</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var product in Model)
+                {
+                <tr>
+                    <td>@product.Count</td>
+                    <td><img src="/img/products/@product.Images.ElementAt(0).Image" style="height:60px;width:60px; object-fit:cover" /></td>
+                    <td>@product.Name</td>
+                    <td>@product.Code</td>
+                    <th>@product.Price</th>
+                    <th>@product.Brand.Name</th>
+                    @foreach (CategoryBrand cb in @product.Brand.CategoryBrands)
+                    {
+                        if (cb.Category.IsMain == false)
+                        {
+                            <td>@cb.Category.Name</td>
+                        }
+
+                    }
+                    @if (product.IsDeleted)
+                    {
+                        <td><span class="badge badge-secondary">Deactive</span></td>
+                    }
+                    else
+                    {
+                        <td><span class="badge badge-success">Active</span></td>
+                    }
+
+                    <td class="text-center">
+                        <div class="list-icons">
+                            <div class="dropdown">
+                                <a href="#" class="list-icons-item" data-toggle="dropdown">
+                                    <i class="icon-menu9"></i>
+                                </a>
+
+                                <div class="dropdown-menu dropdown-menu-right text-center">
+                                    @if (product.IsDeleted)
+                                    {
+                                        <h5><a asp-action="Delete" asp-route-id="@product.Id" class="dropdown-item d-block p-0">Aktiv Et</a></h5>
+                                    }
+                                    else
+                                    {
+                                        <h5><a asp-action="Delete" asp-route-id="@product.Id" class="dropdown-item d-block p-0">Deaktiv Et</a></h5>
+                                    }
+                                    <h5><a asp-action="Update" asp-route-id="@product.Id" class="dropdown-item d-block p-0">Düzəliş Et</a></h5>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <!-- /basic initialization -->
+</div>
+

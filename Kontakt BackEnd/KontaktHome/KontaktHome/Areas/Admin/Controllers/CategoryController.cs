@@ -69,7 +69,10 @@ namespace KontaktHome.Areas.Admin.Controllers
                 string fileName = await category.Photo.SavaFileAsync(_env.WebRootPath, folder);
                 category.Image = fileName;
                 category.IsDeleted = false;
-                
+                await _context.Categories.AddAsync(category);
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Index", "Category", new { isMain = true });
+
             }
             else
             {
@@ -87,10 +90,11 @@ namespace KontaktHome.Areas.Admin.Controllers
                     return View();
                 }
                 category.Parent = mainCategory;
+                await _context.Categories.AddAsync(category);
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Index", "Category", new { isMain = false });
             }
-            await _context.Categories.AddAsync(category);
-            await _context.SaveChangesAsync();
-            return RedirectToAction("Index", "Category", true);
+            
         }
         public async Task<IActionResult> Delete(int? id)
         {
@@ -110,6 +114,7 @@ namespace KontaktHome.Areas.Admin.Controllers
                         ctgChild.IsDeleted = true;
                     }
                 }
+               
             }
             else
             {
@@ -122,9 +127,18 @@ namespace KontaktHome.Areas.Admin.Controllers
                         ctgChild.IsDeleted = false;
                     }
                 }
+          
             }
             await _context.SaveChangesAsync();
-            return RedirectToAction("Index", "Category");
+            if (category.IsMain)
+            {
+                return RedirectToAction("Index", "Category", new { isMain = true });
+            }
+            else
+            {
+                return RedirectToAction("Index", "Category", new { isMain = false });
+            }
+
 
         }
         public IActionResult Update(int? id)
@@ -198,5 +212,6 @@ namespace KontaktHome.Areas.Admin.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction("Index", "Category", true);
         }
+        
     }
 }

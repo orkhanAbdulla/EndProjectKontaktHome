@@ -1,4 +1,4 @@
-@charset "UTF-8";
+﻿@charset "UTF-8";
 /* ------------------------------------------------------------------------------
  *
  *  # Core layout
@@ -1101,3 +1101,8 @@ body {
     margin-left: 1.25rem; }
   .breadcrumb-line > .content-boxed > *:last-child {
     margin-right: 1.25rem; } }
+.kv-file-content{
+    display:flex!important ;
+    justify-content:center !important;
+    align-items:center !important;
+}

@@ -1,0 +1,119 @@
+﻿@model List<Brand>
+@{
+    ViewData["Title"] = "Index";
+}
+<!-- Content area -->
+<div class="content">
+
+    <!-- Basic initialization -->
+
+    <div class="card">
+        <div class="card-header header-elements-inline">
+            <h5 class="card-title">Brendlər</h5>
+        </div>
+        <div class="btn-create ml-3" style="color:white">
+            <a class="btn btn-success" asp-action="Create">Yarat</a>
+        </div>
+        <table class="table datatable-row-basic">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Şəkil</th>
+                        <th>Adı</th>
+                        <th>Təsviri</th>
+                        <th>Alt Kateqoriya</th>
+                        <th>Əsas Kateqoriya</th>
+                        <th>Status</th>
+                        <th class="text-center">Settings</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var brand in Model)
+                    {
+                    <tr>
+                        <td>1</td>
+                        <td><img src="/img/sidebar/@brand.image" style="height:100px;width:100px" /></td>
+                        <td>@brand.Name</td>
+                        <td>
+                            <button type="button" class="btn" data-toggle="modal" data-target="#categories-@brand.Id">
+                                @if (brand.Title != null)
+                                {
+                                    @((brand.Title.Length<30)? brand.Title: brand.Title.Substring(0,50))
+                                }
+                                else
+                                {
+                                    <p>Təsviri mövcud deyil</p>
+                                }
+                            </button>
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="categories-@brand.Id" tabindex="-1" role="dialog" aria-labelledby="categories-@brand.Id" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            @brand.Title
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        @foreach (CategoryBrand cb in @brand.CategoryBrands)
+                        {
+                            if (cb.Category.IsMain == true)
+                            {
+                                <td>@cb.Category.Name</td>
+                            }
+                            if (cb.Category.IsMain == false)
+                            {
+                                <td>@cb.Category.Name</td>
+                            }
+
+                        }
+                        @if (brand.IsDeleted)
+                        {
+                            <td><span class="badge badge-secondary">Deactive</span></td>
+                        }
+                        else
+                        {
+                            <td><span class="badge badge-success">Active</span></td>
+                        }
+
+                        <td class="text-center">
+                            <div class="list-icons">
+                                <div class="dropdown">
+                                    <a href="#" class="list-icons-item" data-toggle="dropdown">
+                                        <i class="icon-menu9"></i>
+                                    </a>
+
+                                    <div class="dropdown-menu dropdown-menu-right text-center">
+                                        @if (brand.IsDeleted)
+                                        {
+                                            <h5><a asp-action="Delete" asp-route-id="@brand.Id" class="dropdown-item d-block p-0">Aktiv Et</a></h5>
+                                        }
+                                        else
+                                        {
+                                            <h5><a asp-action="Delete" asp-route-id="@brand.Id" class="dropdown-item d-block p-0">Deaktiv Et</a></h5>
+                                        }
+                                        <h5><a asp-action="Update" asp-route-id="@brand.Id" class="dropdown-item d-block p-0">Düzəliş Et</a></h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+        </table>
+    </div>
+
+    <!-- /basic initialization -->
+</div>
+

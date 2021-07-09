@@ -49,7 +49,10 @@
                                         {
                                             @((mainCtg.Title.Length<30)? mainCtg.Title: mainCtg.Title.Substring(0,50))
                                         }
-                                        <p>Təsviri mövcud deyil</p>
+                                        else
+                                        {
+                                            <p>Təsviri mövcud deyil</p>
+                                        }
                                     </button>
 
                                     <!-- Modal -->
