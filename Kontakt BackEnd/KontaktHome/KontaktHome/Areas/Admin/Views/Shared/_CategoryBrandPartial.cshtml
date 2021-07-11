@@ -1,0 +1,6 @@
+﻿@model List<CategoryBrand>
+@foreach (CategoryBrand cb in Model)
+{
+    <option value="@cb.Brand.Id">@cb.Brand.Name</option>
+
+}

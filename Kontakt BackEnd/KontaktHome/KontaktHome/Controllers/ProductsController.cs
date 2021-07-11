@@ -57,8 +57,8 @@ namespace KontaktHome.Controllers
         public IActionResult Detail(int? Id)
         {
             if (Id == null) return NotFound();
-            Product products = _context.Products.Include(p => p.Images).Include(p => p.ProductDetail).
-                Include(p=>p.ProductFeatures).ThenInclude(p=>p.Features).ThenInclude(p=>p.FeaturesDetail).FirstOrDefault(p => p.Id == Id);
+            Product products = _context.Products.Include(p => p.Images).
+                Include(p => p.ProductFeatures).ThenInclude(p => p.FeaturesDetail).ThenInclude(fd=>fd.Features).FirstOrDefault(p => p.Id == Id);
             if (products == null) return NotFound();
             return View(products);
         }

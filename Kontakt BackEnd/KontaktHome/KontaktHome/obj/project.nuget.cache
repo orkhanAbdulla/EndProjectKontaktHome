@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "XE9fEKA18tO7HOGYbF7JkI+Iimio6G+b1LIsHzPTrLru4scQwOAPEYtZ0chcm2XmBzsMRo0LnaX/oeZTtGC4fA==",
+  "dgSpecHash": "C6dgBWgVyNQQJTnPpR0/Cjg4otrOuFQ3fXx/yyqHw6odCXPlU/TTMSK9A+bjzss3FI8QET8jAqLctdSzmakYMg==",
   "success": true,
   "projectFilePath": "C:\\Users\\hp\\Desktop\\EndProjectKontaktHome\\Kontakt BackEnd\\KontaktHome\\KontaktHome\\KontaktHome.csproj",
   "expectedPackageFiles": [
@@ -162,8 +162,7 @@
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.xml.readerwriter\\4.3.0\\system.xml.readerwriter.4.3.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.xml.xmldocument\\4.3.0\\system.xml.xmldocument.4.3.0.nupkg.sha512",
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512",
-    "C:\\Users\\hp\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\3.1.13\\microsoft.netcore.app.host.win-x64.3.1.13.nupkg.sha512"
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512"
   ],
   "logs": []
 }

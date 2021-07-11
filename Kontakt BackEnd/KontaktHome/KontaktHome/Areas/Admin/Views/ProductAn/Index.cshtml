@@ -9,10 +9,10 @@
 
     <div class="card">
         <div class="card-header header-elements-inline">
-            <h5 class="card-title">Məhsullar</h5>
+            <h5 class="card-title">@ViewBag.CategoryName</h5>
         </div>
         <div class="btn-create ml-3" style="color:white">
-            <a class="btn btn-success" asp-action="Create">Yarat</a>
+            <a class="btn btn-success" asp-action="Create" asp-route-categoryId="@ViewBag.CategoryId">Yarat</a>
         </div>
         <table class="table datatable-row-basic">
             <thead>
@@ -23,7 +23,6 @@
                     <th>Kod</th>
                     <th>Qiymeti</th>
                     <th>Brend</th>
-                    <th>Kateqoriya</th>
                     <th>Status</th>
                     <th class="text-center">Settings</th>
                 </tr>
@@ -38,14 +37,7 @@
                     <td>@product.Code</td>
                     <th>@product.Price</th>
                     <th>@product.Brand.Name</th>
-                    @foreach (CategoryBrand cb in @product.Brand.CategoryBrands)
-                    {
-                        if (cb.Category.IsMain == false)
-                        {
-                            <td>@cb.Category.Name</td>
-                        }
-
-                    }
+                   
                     @if (product.IsDeleted)
                     {
                         <td><span class="badge badge-secondary">Deactive</span></td>

@@ -16,11 +16,11 @@ namespace KontaktHome.DAL
         public DbSet<Brand> Brands { get; set; }
         public DbSet<CategoryBrand> CategoryBrands { get; set; }
         public DbSet<Product> Products { get; set; }
-        public DbSet<ProductDetail> ProductDetail { get; set; }
         public DbSet<ProductImage> ProductImage { get; set; }
         public DbSet<Features> Features { get; set; }
         public DbSet<ProductFeatures> ProductFeatures { get; set; }
         public DbSet<FeaturesDetail> FeaturesDetails { get; set; }
+        public DbSet<CategoryFeatures> categoryFeatures { get; set; }
 
     }
 }

@@ -22,5 +22,7 @@ namespace KontaktHome.Models
         public Category Parent { get; set;}
         public List<Category> Children { get; set; }
         public List<CategoryBrand> CategoryBrands { get; set; }
+        public List<CategoryFeatures> CategoryFeatures { get; set; }
+        
     }
 }

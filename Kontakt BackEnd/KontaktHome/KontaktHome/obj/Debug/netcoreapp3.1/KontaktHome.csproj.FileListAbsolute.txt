@@ -8,7 +8,6 @@ C:\Users\hp\Desktop\EndProjectKontaktHome\Kontakt BackEnd\KontaktHome\KontaktHom
 C:\Users\hp\Desktop\EndProjectKontaktHome\Kontakt BackEnd\KontaktHome\KontaktHome\bin\Debug\netcoreapp3.1\KontaktHome.pdb
 C:\Users\hp\Desktop\EndProjectKontaktHome\Kontakt BackEnd\KontaktHome\KontaktHome\bin\Debug\netcoreapp3.1\KontaktHome.Views.dll
 C:\Users\hp\Desktop\EndProjectKontaktHome\Kontakt BackEnd\KontaktHome\KontaktHome\bin\Debug\netcoreapp3.1\KontaktHome.Views.pdb
-C:\Users\hp\Desktop\EndProjectKontaktHome\Kontakt BackEnd\KontaktHome\KontaktHome\obj\Debug\netcoreapp3.1\KontaktHome.csprojAssemblyReference.cache
 C:\Users\hp\Desktop\EndProjectKontaktHome\Kontakt BackEnd\KontaktHome\KontaktHome\obj\Debug\netcoreapp3.1\KontaktHome.AssemblyInfoInputs.cache
 C:\Users\hp\Desktop\EndProjectKontaktHome\Kontakt BackEnd\KontaktHome\KontaktHome\obj\Debug\netcoreapp3.1\KontaktHome.AssemblyInfo.cs
 C:\Users\hp\Desktop\EndProjectKontaktHome\Kontakt BackEnd\KontaktHome\KontaktHome\obj\Debug\netcoreapp3.1\KontaktHome.csproj.CoreCompileInputs.cache
@@ -169,3 +168,7 @@ C:\Users\hp\Desktop\EndProjectKontaktHome\Kontakt BackEnd\KontaktHome\KontaktHom
 C:\Users\hp\Desktop\EndProjectKontaktHome\Kontakt BackEnd\KontaktHome\KontaktHome\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Shared\_CategoryPartial.cshtml.g.cs
 C:\Users\hp\Desktop\EndProjectKontaktHome\Kontakt BackEnd\KontaktHome\KontaktHome\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Brand\Update.cshtml.g.cs
 C:\Users\hp\Desktop\EndProjectKontaktHome\Kontakt BackEnd\KontaktHome\KontaktHome\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\ProductAn\Index.cshtml.g.cs
+C:\Users\hp\Desktop\EndProjectKontaktHome\Kontakt BackEnd\KontaktHome\KontaktHome\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\ProductAn\Create.cshtml.g.cs
+C:\Users\hp\Desktop\EndProjectKontaktHome\Kontakt BackEnd\KontaktHome\KontaktHome\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Shared\_CategoryBrandPartial.cshtml.g.cs
+C:\Users\hp\Desktop\EndProjectKontaktHome\Kontakt BackEnd\KontaktHome\KontaktHome\obj\Debug\netcoreapp3.1\KontaktHome.csproj.AssemblyReference.cache
+C:\Users\hp\Desktop\EndProjectKontaktHome\Kontakt BackEnd\KontaktHome\KontaktHome\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Shared\Components\Layout\Default.cshtml.g.cs

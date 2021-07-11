@@ -1,0 +1,27 @@
+﻿@model List<Category>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<li class="nav-item nav-item-submenu ">
+    <a href="#" class="nav-link"><i class="icon-indent-decrease2"></i> <span>Məhsullar</span></a>
+    @foreach (Category ctgMain in Model)
+    {
+        <ul class="nav nav-group-sub" data-submenu-title="Sidebars" style="display: none;">
+            <li class="nav-item nav-item-submenu">
+
+                <a href="#" class="nav-link">@ctgMain.Name</a>
+                <ul class="nav nav-group-sub" style="display: none;">
+                    @foreach (Category ctgChild in ctgMain.Children)
+                    {
+                        <li class="nav-item"><a asp-area="Admin" asp-controller="ProductAn" asp-action="Index" asp-route-categoryId="@ctgChild.Id" class="nav-link">@ctgChild.Name</a></li>
+                    }
+
+                </ul>
+            </li>
+        </ul>
+    }
+
+</li>

@@ -46,7 +46,9 @@ namespace KontaktHome.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
 
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
@@ -115,6 +117,28 @@ namespace KontaktHome.Migrations
                     b.ToTable("CategoryBrands");
                 });
 
+            modelBuilder.Entity("KontaktHome.Models.CategoryFeatures", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("FeaturesId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
+
+                    b.HasIndex("FeaturesId");
+
+                    b.ToTable("CategoryFeatures");
+                });
+
             modelBuilder.Entity("KontaktHome.Models.Features", b =>
                 {
                     b.Property<int>("Id")
@@ -145,8 +169,7 @@ namespace KontaktHome.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("FeaturesId")
-                        .IsUnique();
+                    b.HasIndex("FeaturesId");
 
                     b.ToTable("FeaturesDetails");
                 });
@@ -165,10 +188,6 @@ namespace KontaktHome.Migrations
                         .HasColumnType("float");
 
                     b.Property<string>("Code")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Color")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Count")
@@ -180,9 +199,6 @@ namespace KontaktHome.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<string>("Memory")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
@@ -190,32 +206,11 @@ namespace KontaktHome.Migrations
                         .IsRequired()
                         .HasColumnType("float");
 
-                    b.Property<int?>("SaleCount")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("BrandId");
 
                     b.ToTable("Products");
-                });
-
-            modelBuilder.Entity("KontaktHome.Models.ProductDetail", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProductId")
-                        .IsUnique();
-
-                    b.ToTable("ProductDetail");
                 });
 
             modelBuilder.Entity("KontaktHome.Models.ProductFeatures", b =>
@@ -225,7 +220,7 @@ namespace KontaktHome.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("FeaturesId")
+                    b.Property<int>("FeaturesDetailId")
                         .HasColumnType("int");
 
                     b.Property<int>("ProductId")
@@ -233,7 +228,7 @@ namespace KontaktHome.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("FeaturesId");
+                    b.HasIndex("FeaturesDetailId");
 
                     b.HasIndex("ProductId");
 
@@ -299,11 +294,26 @@ namespace KontaktHome.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("KontaktHome.Models.CategoryFeatures", b =>
+                {
+                    b.HasOne("KontaktHome.Models.Category", "Category")
+                        .WithMany("CategoryFeatures")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("KontaktHome.Models.Features", "Features")
+                        .WithMany("CategoryFeatures")
+                        .HasForeignKey("FeaturesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("KontaktHome.Models.FeaturesDetail", b =>
                 {
                     b.HasOne("KontaktHome.Models.Features", "Features")
-                        .WithOne("FeaturesDetail")
-                        .HasForeignKey("KontaktHome.Models.FeaturesDetail", "FeaturesId")
+                        .WithMany("ProductDetails")
+                        .HasForeignKey("FeaturesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -317,20 +327,11 @@ namespace KontaktHome.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("KontaktHome.Models.ProductDetail", b =>
-                {
-                    b.HasOne("KontaktHome.Models.Product", "Product")
-                        .WithOne("ProductDetail")
-                        .HasForeignKey("KontaktHome.Models.ProductDetail", "ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("KontaktHome.Models.ProductFeatures", b =>
                 {
-                    b.HasOne("KontaktHome.Models.Features", "Features")
+                    b.HasOne("KontaktHome.Models.FeaturesDetail", "FeaturesDetail")
                         .WithMany("ProductFeatures")
-                        .HasForeignKey("FeaturesId")
+                        .HasForeignKey("FeaturesDetailId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

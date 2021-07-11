@@ -1,10 +1,13 @@
 ﻿using KontaktHome.DAL;
+using KontaktHome.Extensions;
 using KontaktHome.Models;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -20,11 +23,84 @@ namespace KontaktHome.Areas.Admin.Controllers
             _context = context;
             _env = env;
         }
-        public IActionResult Index()
+        public IActionResult Index(int? categoryId)
         {
-            List<Product> product = _context.Products.Include(p => p.Images).Include(p => p.ProductDetail)
-                .Include(p=>p.Brand).ThenInclude(b=>b.CategoryBrands).ThenInclude(b=>b.Category).ToList();
-            return View(product);
+            List<Product> products = new List<Product>();
+            IQueryable<CategoryBrand> categoryBrands = _context.CategoryBrands.Where(c => c.CategoryId == categoryId).Include(x => x.Brand).ThenInclude(x => x.Products).ThenInclude(x => x.Images);
+            foreach (CategoryBrand ctB in categoryBrands)
+            {
+                products.AddRange(ctB.Brand.Products);
+
+            }
+            Category category = _context.Categories.FirstOrDefault(c => c.Id == categoryId);
+            ViewBag.CategoryName = category.Name;
+            ViewBag.CategoryId = category.Id;
+            //List<Product> product = _context.Products.Include(p => p.Images)
+            //    .Include(p=>p.Brand).ThenInclude(b=>b.CategoryBrands).ThenInclude(b=>b.Category).ToList();
+            return View(products);
         }
+        public IActionResult Create(int? categoryId)
+        {
+            ViewBag.MainCtg = _context.Categories.Where(c => c.IsDeleted == false && c.IsMain == true).ToList();
+            List<CategoryFeatures> categoryFeatures = _context.categoryFeatures.Where(cf => cf.CategoryId == categoryId).ToList();
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create( Product product, int? BrandId)
+        {
+            ViewBag.MainCtg = _context.Categories.Where(c => c.IsDeleted == false && c.IsMain == true).ToList();
+            if (!ModelState.IsValid) return View();
+            if (BrandId == null)
+            {
+                ModelState.AddModelError("", "Lütfən brend seçin");
+                return View();
+            }
+            if (product.Photos == null)
+            {
+                ModelState.AddModelError("", "Lütfən şəkil seçin");
+                return View();
+            }
+            List<ProductImage> images = new List<ProductImage>();
+            foreach (IFormFile photo in product.Photos)
+            {
+                if (!photo.IsValidType("image/"))
+                {
+                    ModelState.AddModelError("", "Yalnız şəkil yükləyə bilərsiniz");
+                    return View();
+                }
+                if (!photo.IsValidSize(200))
+                {
+                    ModelState.AddModelError("", "Şəkilin ölçüsü 200kb çox ola bilməz");
+                    return View();
+                }
+                string folder = Path.Combine("img", "products");
+                string fileName = await photo.SavaFileAsync(_env.WebRootPath, folder);
+                ProductImage image = new ProductImage { Image = fileName,ProductId=product.Id };
+                images.Add(image);
+            }
+            product.Images = images;
+
+            if (product.Discount==null)
+            {
+                product.Discount = 0;
+            }
+            product.BrandId = (int)BrandId;
+            await _context.Products.AddAsync(product);
+            await _context.SaveChangesAsync();
+            product.Code = "A8B1C4" + product.Id;
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+        public IActionResult LoadBrand(int? ChildCtgId)
+        {
+
+            if (ChildCtgId == null) return NotFound();
+            List<CategoryBrand> CategoryBrands = _context.CategoryBrands.Where(cb=>cb.CategoryId== ChildCtgId).Include(cb=>cb.Brand).ToList();
+            return PartialView("_CategoryBrandPartial", CategoryBrands);
+        }
+       
+    
+
     }
 }

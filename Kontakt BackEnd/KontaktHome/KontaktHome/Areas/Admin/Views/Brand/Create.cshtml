@@ -64,7 +64,6 @@
                     url: "/admin/brand/LoadChildCategory?MainCtgId=" + mainCtgId,
                     type: "Get",
                     success: function (res) {
-                        console.log(res)
                         $("#ChildCtgId").empty();
                         $("#ChildCtgId").append(res);
                     }

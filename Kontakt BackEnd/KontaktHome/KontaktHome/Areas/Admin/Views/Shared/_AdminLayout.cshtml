@@ -350,14 +350,15 @@
                         <li class="nav-item">
                             <a asp-controller="Brand" asp-action="Index" class="nav-link"><i class="icon-sphere"></i> <span>Brendlər</span></a>
                         </li>
-                        <li class="nav-item nav-item-submenu">
-                            <a href="#" class="nav-link"><i class="icon-grid"></i> <span>Məhsullar</span></a>
-                            <ul class="nav nav-group-sub" data-submenu-title="Basic components" style="display: none;">
-                                <li class="nav-item"><a asp-controller="ProductAn" asp-action="Index" class="nav-link">Bütün məhsullar</a></li>
-                                <li class="nav-item"><a href="components_dropdowns.html" class="nav-link">Xüsusiyyətləri</a></li>
-                            </ul>
-                        </li>
-                        <!-- /page kits -->
+                        @*<li class="nav-item nav-item-submenu">
+            <a href="#" class="nav-link"><i class="icon-grid"></i> <span>Məhsullar</span></a>
+            <ul class="nav nav-group-sub" data-submenu-title="Basic components" style="display: none;">
+                <li class="nav-item"><a asp-controller="ProductAn" asp-action="Index" class="nav-link">Bütün məhsullar</a></li>
+                <li class="nav-item"><a href="components_dropdowns.html" class="nav-link">Xüsusiyyətləri</a></li>
+            </ul>
+        </li>*@
+                        @await Component.InvokeAsync("Layout")
+                  
 
                     </ul>
                 </div>

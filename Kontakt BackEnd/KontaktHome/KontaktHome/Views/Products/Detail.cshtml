@@ -127,7 +127,7 @@
                                 @foreach (ProductFeatures pf in Model.ProductFeatures)
                                 {
                                     <li>
-                                        @pf.Features.Name
+                                        @pf.FeaturesDetail.Features.Name
                                     </li>
                                 }
                                 @*<li class="gray-line">
@@ -141,7 +141,7 @@
                                 @foreach (ProductFeatures pf in Model.ProductFeatures)
                                 {
                                 <li class="gray-line">
-                                    @pf.Features.FeaturesDetail.Description
+                                    @pf.FeaturesDetail.Description
                                 </li>
 
                                 }

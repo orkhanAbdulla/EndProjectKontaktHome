@@ -10,7 +10,7 @@ namespace KontaktHome.Models
         public int Id { get; set; }
         public int ProductId { get; set; }
         public Product Product { get; set; }
-        public int FeaturesId { get; set; }
-        public Features Features { get; set; }
+        public int FeaturesDetailId { get; set; }
+        public FeaturesDetail FeaturesDetail { get; set; }
     }
 }
