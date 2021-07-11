@@ -1,0 +1,33 @@
+﻿@model Features
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div class="content text-center">
+    <div class="col-lg-6 ">
+        <div class="card">
+            <div class="card-header header-elements-inline">
+                <h5 class="card-title">Məhsul yarat</h5>
+                <a asp-action="Index" asp-route-categoryId="@ViewBag.CategoryId"class="btn btn-light">
+                    Ləğv et
+                </a>
+            </div>
+            <div class="card-body">
+                <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+                <form method="post" >
+                    <div class="form-group form-group-float">
+                        <input asp-for="@Model.Name" class="form-control" placeholder="Adı">
+                        <span class="text-danger" asp-validation-for="@Model.Name"></span>
+                    </div>
+                   
+
+                    <button type="submit" class="btn bg-blue">Göndər<i class="icon-paperplane ml-2"></i></button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@section Script{
+    <partial name="_ValidationPartial" />
+}
+

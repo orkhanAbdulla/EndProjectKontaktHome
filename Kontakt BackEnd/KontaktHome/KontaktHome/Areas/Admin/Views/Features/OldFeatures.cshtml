@@ -1,0 +1,39 @@
+﻿
+@{
+    ViewData["Title"] = "OldFeatures";
+}
+
+<div class="content text-center">
+    <div class="col-lg-6 ">
+        <div class="card">
+            <div class="card-header header-elements-inline">
+                <h5 class="card-title">Xüsusiyyət yarat</h5>
+                <a asp-action="Index" asp-route-categoryId="@ViewBag.CategoryId" class="btn btn-light">
+                    Ləğv et
+                </a>
+            </div>
+            <div class="card-body">
+                <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+                <form method="post" enctype="multipart/form-data">
+                    <div class="mb-3 my-3" >
+                        <p class="mb-2">
+                            <select data-placeholder="Brend Seç" multiple name="featuresIds" id="BrandId" class="form-control select-access-value select2-hidden-accessible" data-fouc="" tabindex="-1" aria-hidden="true">
+                                <option></option>
+                                @foreach (Features features in ViewBag.Features)
+                                {
+                                    <option value="@features.Id">@features.Name</option>
+                                }
+                            </select>
+                        </p>
+                    </div>
+                    <button type="submit" class="btn bg-blue">Göndər<i class="icon-paperplane ml-2"></i></button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@section Script{
+    <partial name="_ValidationPartial" />
+}
+
+

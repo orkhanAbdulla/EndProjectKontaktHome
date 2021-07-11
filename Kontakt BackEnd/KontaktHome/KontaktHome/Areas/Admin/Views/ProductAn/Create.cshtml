@@ -8,7 +8,7 @@
         <div class="card">
             <div class="card-header header-elements-inline">
                 <h5 class="card-title">Məhsul yarat</h5>
-                <a asp-action="Index" class="btn btn-light">
+                <a asp-action="Index" asp-route-categoryId="@ViewBag.CategoryId" class="btn btn-light">
                     Ləğv et
                 </a>
             </div>
@@ -42,26 +42,15 @@
                         <span  class="text-danger" asp-validation-for="@Model.CashPrice"></span>
                     </div>
 
-                    <div class="mb-3 my-3" id="mainCategory">
-                        <p class="mb-2">
-                            <select data-placeholder="Əsas Kategoriya Seç" name="MainCtgId" id="MainCtgId" class="form-control select-access-value select2-hidden-accessible" data-fouc="" tabindex="-1" aria-hidden="true">
-                                <option></option>
-                                @foreach (Category mainCtg in ViewBag.MainCtg)
-                                {
-                                    <option value="@mainCtg.Id">@mainCtg.Name</option>
-                                }
-                            </select>
-                        </p>
-                    </div>
-                    <div class="mb-3 my-3" id="ChildCategory">
-                        <p class="mb-2">
-                            <select data-placeholder="Alt Kategoriya Seç" name="ChildCtgId" id="ChildCtgId" class="form-control select-access-value select2-hidden-accessible" data-fouc="" tabindex="-1" aria-hidden="true">
-                            </select>
-                        </p>
-                    </div>
+                    
                     <div class="mb-3 my-3" id="Brand">
                         <p class="mb-2">
                             <select data-placeholder="Brend Seç" name="BrandId" id="BrandId" class="form-control select-access-value select2-hidden-accessible" data-fouc="" tabindex="-1" aria-hidden="true">
+                                <option></option>
+                                @foreach (Brand brand in ViewBag.Brands)
+                                {
+                                    <option value="@brand.Id">@brand.Name</option>
+                                }
                             </select>
                         </p>
                     </div>
@@ -74,36 +63,5 @@
 </div>
 @section Script{
     <partial name="_ValidationPartial" />
-    <script>
-        $(document).ready(function () {
-            $(document).on("change", "#MainCtgId", function () {
-                /*$("#BrandId").empty();*/
-                let mainCtgId = $(this).val();
-                $.ajax({
-                    url: "/admin/brand/LoadChildCategory?MainCtgId=" + mainCtgId,
-                    type: "Get",
-                    success: function (res) {
-                        $("#ChildCtgId").empty();
-                        $("#ChildCtgId").append(res);
-                    }
-                })
-            })
-            $(document).on("change", "#ChildCtgId",  function () {
-                let childCtgId = $((this)).val();
-                console.log(childCtgId)
-                $("#BrandId").empty();
-                $.ajax({
-                    url: "/admin/ProductAn/LoadBrand?ChildCtgId=" + childCtgId,
-                    type: "Get",
-                    success: function (res) {
-                        console.log(res)
-                       
-                        $("#BrandId").append(res);
-                    }
-                })
-            })
-
-        })
-    </script> 
 }
 

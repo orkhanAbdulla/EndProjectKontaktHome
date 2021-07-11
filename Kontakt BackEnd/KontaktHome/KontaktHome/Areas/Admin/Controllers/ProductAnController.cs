@@ -41,15 +41,22 @@ namespace KontaktHome.Areas.Admin.Controllers
         }
         public IActionResult Create(int? categoryId)
         {
-            ViewBag.MainCtg = _context.Categories.Where(c => c.IsDeleted == false && c.IsMain == true).ToList();
+            List<Brand> brands = new List<Brand>();
+            var categoryBrands = _context.CategoryBrands.Where(c => c.CategoryId == categoryId).Include(b=>b.Brand);
+            foreach (CategoryBrand cB in categoryBrands){ brands.Add(cB.Brand); }
+            ViewBag.Brands = brands;
             List<CategoryFeatures> categoryFeatures = _context.categoryFeatures.Where(cf => cf.CategoryId == categoryId).ToList();
+            ViewBag.CategoryId = categoryId;
             return View();
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create( Product product, int? BrandId)
+        public async Task<IActionResult> Create(int? categoryId, Product product, int? BrandId)
         {
-            ViewBag.MainCtg = _context.Categories.Where(c => c.IsDeleted == false && c.IsMain == true).ToList();
+            List<Brand> brands = new List<Brand>();
+            var categoryBrands = _context.CategoryBrands.Where(c => c.CategoryId == categoryId).Include(b => b.Brand);
+            foreach (CategoryBrand cB in categoryBrands) { brands.Add(cB.Brand); }
+            ViewBag.Brands = brands;
             if (!ModelState.IsValid) return View();
             if (BrandId == null)
             {
@@ -90,7 +97,7 @@ namespace KontaktHome.Areas.Admin.Controllers
             await _context.SaveChangesAsync();
             product.Code = "A8B1C4" + product.Id;
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Index), new {categoryId});
         }
         public IActionResult LoadBrand(int? ChildCtgId)
         {

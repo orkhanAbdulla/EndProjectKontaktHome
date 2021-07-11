@@ -1,0 +1,43 @@
+﻿@model RegisterVM
+@{
+    ViewData["Title"] = "Register";
+}
+
+<main>
+    <div class="login-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">Giriş</h1>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-5">
+                    <div class="login text-center">
+                        <div class="login-form-container">
+                            <div class="login-text ">
+                                <h2>Qeydiyyat</h2>
+                                <span class="text-muted">Zəhmət olmasa aşağıdakı hesab detallarını qeyd edərək qeydiyyatdan keçin</span>
+                            </div>
+                            <div class="login-form">
+                                <form method="post">
+                                    <input type="text" name="user-name" placeholder="İstifadəçi adı">
+                                    <input type="email" name="user-password" placeholder="Elektron poçt ünvanı">
+                                    <input type="password" name="user-password" placeholder="Şifrə">
+                                    <input type="password" name="user-password" placeholder="Şifrənizi təsdiq edin">
+                                    <div class="button-box">
+                                        <div class="userpro-clear">
+                                            <button type="submit" class="default-btn">Qeydiyyat</button>
+                                            <a href="login.html" class="btn btn-light register">Daxil ol</a>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+

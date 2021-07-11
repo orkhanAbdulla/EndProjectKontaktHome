@@ -1,7 +1,9 @@
 using KontaktHome.DAL;
+using KontaktHome.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -27,6 +29,22 @@ namespace KontaktHome
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddIdentity<AppUser, IdentityRole>(identityOption =>
+            {
+                identityOption.Password.RequiredLength = 8;
+                identityOption.Password.RequireDigit = true;
+                identityOption.Password.RequireLowercase = true;
+                identityOption.Password.RequireUppercase = true;
+                identityOption.Password.RequireNonAlphanumeric = true;
+
+                identityOption.User.RequireUniqueEmail = true;
+
+                identityOption.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+                identityOption.Lockout.MaxFailedAccessAttempts = 3;
+                identityOption.Lockout.AllowedForNewUsers = true;
+
+            }).AddDefaultTokenProviders().AddEntityFrameworkStores<AppDbContext>();
+
             services.AddDbContext<AppDbContext>(options =>
             {
                 options.UseSqlServer(_config["ConnectionStrings:Default"]);
@@ -48,9 +66,8 @@ namespace KontaktHome
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
