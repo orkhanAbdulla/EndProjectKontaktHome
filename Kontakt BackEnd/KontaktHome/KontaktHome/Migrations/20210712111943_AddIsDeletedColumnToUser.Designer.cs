@@ -4,14 +4,16 @@ using KontaktHome.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace KontaktHome.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210712111943_AddIsDeletedColumnToUser")]
+    partial class AddIsDeletedColumnToUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -204,7 +206,7 @@ namespace KontaktHome.Migrations
 
                     b.HasIndex("FeaturesId");
 
-                    b.ToTable("CategoryFeatures");
+                    b.ToTable("categoryFeatures");
                 });
 
             modelBuilder.Entity("KontaktHome.Models.Features", b =>

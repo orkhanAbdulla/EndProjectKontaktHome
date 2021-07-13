@@ -19,16 +19,29 @@
                                 <h2>Qeydiyyat</h2>
                                 <span class="text-muted">Zəhmət olmasa aşağıdakı hesab detallarını qeyd edərək qeydiyyatdan keçin</span>
                             </div>
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                             <div class="login-form">
                                 <form method="post">
-                                    <input type="text" name="user-name" placeholder="İstifadəçi adı">
-                                    <input type="email" name="user-password" placeholder="Elektron poçt ünvanı">
-                                    <input type="password" name="user-password" placeholder="Şifrə">
-                                    <input type="password" name="user-password" placeholder="Şifrənizi təsdiq edin">
+                                    <div class="form-group">
+                                        <input asp-for="UserName" placeholder="İstifadəçi adı">
+                                        <span asp-validation-for="UserName" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <input asp-for="Email" placeholder="Elektron poçt ünvanı">
+                                        <span asp-validation-for="Email" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <input asp-for="Password" placeholder="Şifrə">
+                                        <span asp-validation-for="Password" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <input asp-for="CheckPassword" placeholder="Şifrənizi təsdiq edin">
+                                        <span asp-validation-for="CheckPassword" class="text-danger"></span>
+                                    </div>
                                     <div class="button-box">
                                         <div class="userpro-clear">
                                             <button type="submit" class="default-btn">Qeydiyyat</button>
-                                            <a href="login.html" class="btn btn-light register">Daxil ol</a>
+                                            <a asp-action="Login" class="btn btn-light register">Daxil ol</a>
                                         </div>
                                     </div>
                                 </form>
@@ -40,4 +53,5 @@
         </div>
     </div>
 </main>
-
+<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>

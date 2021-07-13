@@ -9,6 +9,7 @@ namespace KontaktHome.ViewModels
     public class AdminProductVM
     {
         public Product Product { get; set; }
+        public List<string> Features = new List<string>();
 
     }
 }

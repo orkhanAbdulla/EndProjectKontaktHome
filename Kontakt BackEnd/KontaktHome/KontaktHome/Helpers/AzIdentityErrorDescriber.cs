@@ -13,8 +13,25 @@ namespace KontaktHome.Helpers
             return new IdentityError
             {
                 Code=nameof(PasswordRequiresLower),
-                Description="kiçik hərif istifadə olunmalıdır!"
+                Description="Kiçik hərif istifadə olunmalıdır!"
             };
         }
+        public override IdentityError PasswordRequiresUpper()
+        {
+            return new IdentityError
+            {
+                Code = nameof(PasswordRequiresUpper),
+                Description = "Böyük hərif istifadə olunmalıdır!"
+            };
+        }
+        public override IdentityError PasswordRequiresNonAlphanumeric()
+        {
+            return new IdentityError
+            {
+                Code = nameof(PasswordRequiresNonAlphanumeric),
+                Description = "Parolların ən azı bir alfasayısal olmayan xarakteri olmalıdır.!"
+            };
+        }
+       
     }
 }

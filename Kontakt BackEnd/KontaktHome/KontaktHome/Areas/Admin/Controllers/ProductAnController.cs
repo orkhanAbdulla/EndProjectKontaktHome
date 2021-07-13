@@ -1,6 +1,7 @@
 ﻿using KontaktHome.DAL;
 using KontaktHome.Extensions;
 using KontaktHome.Models;
+using KontaktHome.ViewModels;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -33,43 +34,48 @@ namespace KontaktHome.Areas.Admin.Controllers
 
             }
             Category category = _context.Categories.FirstOrDefault(c => c.Id == categoryId);
+
             ViewBag.CategoryName = category.Name;
             ViewBag.CategoryId = category.Id;
             //List<Product> product = _context.Products.Include(p => p.Images)
             //    .Include(p=>p.Brand).ThenInclude(b=>b.CategoryBrands).ThenInclude(b=>b.Category).ToList();
+
             return View(products);
         }
         public IActionResult Create(int? categoryId)
         {
-            List<Brand> brands = new List<Brand>();
-            var categoryBrands = _context.CategoryBrands.Where(c => c.CategoryId == categoryId).Include(b=>b.Brand);
-            foreach (CategoryBrand cB in categoryBrands){ brands.Add(cB.Brand); }
-            ViewBag.Brands = brands;
-            List<CategoryFeatures> categoryFeatures = _context.categoryFeatures.Where(cf => cf.CategoryId == categoryId).ToList();
+
+            ViewBag.Brands = GetAllBrandswithCatId((int)categoryId);
+
+            Category category = _context.Categories.Include(x => x.CategoryFeatures).ThenInclude(x => x.Features).FirstOrDefault(c => c.Id == categoryId);
             ViewBag.CategoryId = categoryId;
-            return View();
+            AdminProductVM productVM = new AdminProductVM();
+            foreach (CategoryFeatures cf in category.CategoryFeatures)
+            {
+                productVM.Features.Add(cf.Features.Name);
+            }
+
+            return View(productVM);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(int? categoryId, Product product, int? BrandId)
+        public async Task<IActionResult> Create(int? categoryId, AdminProductVM productVM, int? BrandId, string[] features)
         {
-            List<Brand> brands = new List<Brand>();
-            var categoryBrands = _context.CategoryBrands.Where(c => c.CategoryId == categoryId).Include(b => b.Brand);
-            foreach (CategoryBrand cB in categoryBrands) { brands.Add(cB.Brand); }
-            ViewBag.Brands = brands;
+
+            ViewBag.Brands = GetAllBrandswithCatId((int)categoryId);
             if (!ModelState.IsValid) return View();
             if (BrandId == null)
             {
                 ModelState.AddModelError("", "Lütfən brend seçin");
                 return View();
             }
-            if (product.Photos == null)
+            if (productVM.Product.Photos == null)
             {
                 ModelState.AddModelError("", "Lütfən şəkil seçin");
                 return View();
             }
             List<ProductImage> images = new List<ProductImage>();
-            foreach (IFormFile photo in product.Photos)
+            foreach (IFormFile photo in productVM.Product.Photos)
             {
                 if (!photo.IsValidType("image/"))
                 {
@@ -83,31 +89,61 @@ namespace KontaktHome.Areas.Admin.Controllers
                 }
                 string folder = Path.Combine("img", "products");
                 string fileName = await photo.SavaFileAsync(_env.WebRootPath, folder);
-                ProductImage image = new ProductImage { Image = fileName,ProductId=product.Id };
+                ProductImage image = new ProductImage { Image = fileName, ProductId = productVM.Product.Id };
                 images.Add(image);
             }
-            product.Images = images;
-
-            if (product.Discount==null)
+            if (productVM.Product.Discount == null)
             {
-                product.Discount = 0;
+                productVM.Product.Discount = 0;
             }
-            product.BrandId = (int)BrandId;
-            await _context.Products.AddAsync(product);
+            productVM.Product.Images = images;
+
+
+            Category category = _context.Categories.Include(x => x.CategoryFeatures).ThenInclude(x => x.Features).FirstOrDefault(c => c.Id == categoryId);
+            ViewBag.CategoryId = categoryId;
+
+            int count = 0;
+            List<ProductFeatures> productFeatures = new List<ProductFeatures>();
+            foreach (string feature in features)
+            {
+                FeaturesDetail featuresDetail = new FeaturesDetail();
+                featuresDetail.Description = feature;
+
+                featuresDetail.FeaturesId=category.CategoryFeatures[count].FeaturesId;
+                count++;
+                ProductFeatures productFeature = new ProductFeatures();
+                productFeature.FeaturesDetail = featuresDetail;
+                productFeature.Product = productVM.Product;
+                productFeatures.Add(productFeature);
+            }
+            
+           
+            
+
+
+            productVM.Product.BrandId = (int)BrandId;
+
+            await _context.ProductFeatures.AddRangeAsync(productFeatures);
             await _context.SaveChangesAsync();
-            product.Code = "A8B1C4" + product.Id;
+            productVM.Product.Code = "A8B1C4" + productVM.Product.Id;
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index), new {categoryId});
+            return RedirectToAction(nameof(Index), new { categoryId });
         }
         public IActionResult LoadBrand(int? ChildCtgId)
         {
 
             if (ChildCtgId == null) return NotFound();
-            List<CategoryBrand> CategoryBrands = _context.CategoryBrands.Where(cb=>cb.CategoryId== ChildCtgId).Include(cb=>cb.Brand).ToList();
+            List<CategoryBrand> CategoryBrands = _context.CategoryBrands.Where(cb => cb.CategoryId == ChildCtgId).Include(cb => cb.Brand).ToList();
             return PartialView("_CategoryBrandPartial", CategoryBrands);
         }
-       
-    
 
+
+        public List<Brand> GetAllBrandswithCatId(int categoryId)
+        {
+            List<Brand> brands = new List<Brand>();
+            var categoryBrands = _context.CategoryBrands.Where(c => c.CategoryId == categoryId).Include(b => b.Brand);
+            foreach (CategoryBrand cB in categoryBrands) { brands.Add(cB.Brand); }
+            return brands;
+        }
     }
 }

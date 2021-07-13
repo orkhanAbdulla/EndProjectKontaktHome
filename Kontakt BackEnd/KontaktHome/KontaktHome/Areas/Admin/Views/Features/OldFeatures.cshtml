@@ -7,7 +7,7 @@
     <div class="col-lg-6 ">
         <div class="card">
             <div class="card-header header-elements-inline">
-                <h5 class="card-title">Xüsusiyyət yarat</h5>
+                <h5 class="card-title">Xüsusiyyət Seç</h5>
                 <a asp-action="Index" asp-route-categoryId="@ViewBag.CategoryId" class="btn btn-light">
                     Ləğv et
                 </a>
@@ -17,7 +17,7 @@
                 <form method="post" enctype="multipart/form-data">
                     <div class="mb-3 my-3" >
                         <p class="mb-2">
-                            <select data-placeholder="Brend Seç" multiple name="featuresIds" id="BrandId" class="form-control select-access-value select2-hidden-accessible" data-fouc="" tabindex="-1" aria-hidden="true">
+                            <select data-placeholder="Xüsusiyyət Seç" multiple name="featuresIds" id="BrandId" class="form-control select-access-value select2-hidden-accessible" data-fouc="" tabindex="-1" aria-hidden="true">
                                 <option></option>
                                 @foreach (Features features in ViewBag.Features)
                                 {

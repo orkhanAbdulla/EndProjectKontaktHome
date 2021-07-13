@@ -41,9 +41,10 @@ namespace KontaktHome.Helpers
     }
 
     public enum Roles
-    {
+    {   
         Admin,
         Member,
-        Moderator
+        Seller,
+        Operator
     }
 }

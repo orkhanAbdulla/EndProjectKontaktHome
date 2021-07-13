@@ -1,4 +1,5 @@
 using KontaktHome.DAL;
+using KontaktHome.Helpers;
 using KontaktHome.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -43,7 +44,7 @@ namespace KontaktHome
                 identityOption.Lockout.MaxFailedAccessAttempts = 3;
                 identityOption.Lockout.AllowedForNewUsers = true;
 
-            }).AddDefaultTokenProviders().AddEntityFrameworkStores<AppDbContext>();
+            }).AddDefaultTokenProviders().AddEntityFrameworkStores<AppDbContext>().AddErrorDescriber<AzIdentityErrorDescriber>();
 
             services.AddDbContext<AppDbContext>(options =>
             {

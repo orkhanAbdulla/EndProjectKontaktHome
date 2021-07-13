@@ -1,0 +1,23 @@
+﻿@model Features
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<div class="content text-center">
+    <div class="col-lg-6 ">
+        <div class="card">
+            <div class="card-header header-elements-inline">
+                <a asp-action="Index" asp-route-categoryId="@ViewBag.CategoryId" class="btn btn-light">
+                    Ləğv et
+                </a>
+            </div>
+            <div class="card-body">
+                <h6>@Model.Name</h6>
+                <form method="post">
+                    <button type="submit" class="btn bg-danger">Sil<i class="icon-paperplane ml-2"></i></button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

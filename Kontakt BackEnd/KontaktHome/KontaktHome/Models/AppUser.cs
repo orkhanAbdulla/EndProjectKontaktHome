@@ -8,5 +8,6 @@ namespace KontaktHome.Models
 {
     public class AppUser:IdentityUser
     {
+        public bool IsDeleted { get; set; }
     }
 }

@@ -53,9 +53,33 @@ namespace KontaktHome.Areas.Admin.Controllers
                 CategoryId = (int)categoryId,
                 FeaturesId = features.Id
             };
-            await _context.categoryFeatures.AddAsync(categoryFeatures);
+            await _context.CategoryFeatures.AddAsync(categoryFeatures);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index), new { categoryId });
+        }
+        public IActionResult Delete(int? id)
+        {
+            if (id == null) return NotFound();
+            Features features = _context.Features.FirstOrDefault(f => f.Id == id);
+            if (features == null) return NotFound();
+            return View(features);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Delete(int? id,int? categoryId)
+        {
+            if (categoryId == null) return NotFound();
+            Category category = _context.Categories.FirstOrDefault(c => c.Id == categoryId);
+            if (category == null) return NotFound();
+            if (id == null) return NotFound();
+            Features features = _context.Features.FirstOrDefault(f => f.Id == id);
+            if (features == null) return NotFound();
+            _context.Features.Remove(features);
+
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index), new { categoryId });
+
         }
         public IActionResult OldFeatures(int? categoryId)
         {
@@ -90,7 +114,7 @@ namespace KontaktHome.Areas.Admin.Controllers
                     FeaturesId = fId,
                     CategoryId = (int)categoryId,
                 };
-                await _context.categoryFeatures.AddAsync(categoryFeatures);
+                await _context.CategoryFeatures.AddAsync(categoryFeatures);
                 await _context.SaveChangesAsync();
             }
 
@@ -100,7 +124,7 @@ namespace KontaktHome.Areas.Admin.Controllers
         public List<Features> GetAllFeaturesForCategoryId(int categoryId)
         {
             List<Features> features = new List<Features>();
-            var categoryFeatures =  _context.categoryFeatures.Where(c => c.CategoryId == categoryId).Include(b => b.Features);
+            var categoryFeatures =  _context.CategoryFeatures.Where(c => c.CategoryId == categoryId).Include(b => b.Features);
             foreach (CategoryFeatures cB in categoryFeatures) { features.Add(cB.Features); }
             return features;
         }

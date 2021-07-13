@@ -148,14 +148,22 @@
                     <div class="col-xl-3 col-lg-2 col-md-2 login-cart pr-0">
                         <ul class="mb-0">
                             <li>
-                                <a href="login.html" id="id_sign_up">
-                                    <img src="https://kontakt.az/wp-content/uploads/2020/04/Enter.png" alt=""
-                                         class="access">
-                                    <span>Daxil ol</span>
-                                </a>
-                                <a id="id_my_profile" href="">
-                                    <i class="fa fa-user" style="color: white;padding: 10px 5px 15px 5px;font-size: 31px;"></i><span>Hesabım</span>
-                                </a>
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                    
+                                    <a id="id_my_profile" href="">
+                                        <i class="fa fa-user" style="color: white;padding: 10px 5px 15px 5px;font-size: 31px;"></i><span>@User.Identity.Name</span>
+                                    </a>
+                                }
+                                else
+                                {
+                                    <a asp-controller="Account" asp-action="Login" id="id_sign_up">
+                                        <img src="https://kontakt.az/wp-content/uploads/2020/04/Enter.png" alt=""
+                                             class="access">
+                                        <span>Daxil ol</span>
+                                    </a>
+                                }
+
                             </li>
                             <li>
                                 <a href="basket.html">
@@ -225,11 +233,22 @@
                     <div class="col-xl-3 col-lg-2 col-md-2 login-cart pr-0">
                         <ul class="mb-0">
                             <li>
-                                <a href="#" id="id_sign_up">
-                                    <img src="https://kontakt.az/wp-content/uploads/2020/04/Enter.png" alt=""
-                                         class="access">
-                                    <span>Daxil ol</span>
-                                </a>
+                                @if (User.Identity.IsAuthenticated)
+                                {
+
+                                    <a id="id_my_profile" href="">
+                                        <i class="fa fa-user" style="color: white;padding: 10px 5px 15px 5px;font-size: 31px;display:block;"></i><span>@User.Identity.Name</span>
+                                    </a>
+                                }
+                                else
+                                {
+                                    <a asp-controller="Account" asp-action="Login" id="id_sign_up">
+                                        <img src="https://kontakt.az/wp-content/uploads/2020/04/Enter.png" alt=""
+                                             class="access">
+                                        <span>Daxil ol</span>
+                                    </a>
+                                }
+
                             </li>
                             <li>
                                 <a href="#">
