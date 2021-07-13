@@ -847,10 +847,9 @@
                                                 <p>
                                                     <span class="nprice" id="price-692028">@pro.Price</span> <small class=" ‎azn_span">₼</small>
                                                 </p>
-                                                <button class="btn-add-to-cart" data-id="692028" data-mid="00627244"
-                                                        data-price="2099.99">
+                                                <a asp-controller="Products" asp-action="AddBasket" asp-route-id="@pro.Id" class="btn-add-to-cart">
                                                     Səbətə at
-                                                </button>
+                                                </a>
                                             </div>
                                         </div>
                                         <div class="cart-add">

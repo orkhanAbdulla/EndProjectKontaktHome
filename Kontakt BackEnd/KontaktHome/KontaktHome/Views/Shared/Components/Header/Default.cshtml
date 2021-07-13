@@ -150,8 +150,7 @@
                             <li>
                                 @if (User.Identity.IsAuthenticated)
                                 {
-                                    
-                                    <a id="id_my_profile" href="">
+                                    <a asp-controller="Account" asp-action="Logout" id="id_my_profile">
                                         <i class="fa fa-user" style="color: white;padding: 10px 5px 15px 5px;font-size: 31px;"></i><span>@User.Identity.Name</span>
                                     </a>
                                 }

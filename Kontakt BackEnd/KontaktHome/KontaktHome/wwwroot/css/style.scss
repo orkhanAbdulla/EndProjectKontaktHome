@@ -303,7 +303,6 @@ letter-spacing: normal
                  
                 }
                 #id_my_profile{
-                    display: flex !important;
                     align-items: center;
                     i{
                         color: white;
@@ -2578,38 +2577,44 @@ letter-spacing: normal
 }
 
 //Product-search
-#product-search{
+#product-search {
     padding: 30px 0;
-    .page-text{
+
+    .page-text {
         max-height: 95px;
         overflow: hidden;
     }
-    .collapse-az{
+
+    .collapse-az {
         max-height: 100%;
         overflow: visible;
-     
     }
-    .dahacoxgoster{
-        a{
+
+    .dahacoxgoster {
+        a {
             text-decoration: none;
-            .fa{
+
+            .fa {
                 font-size: 11px;
             }
         }
     }
     //Search Menu
-    #search-menu{
-        .menu{
+    #search-menu {
+        .menu {
             margin-top: 20px;
             padding-bottom: 20px;
             border: 2px solid rgba(0,0,0,.08);
-            .first-menu{
+
+            .first-menu {
                 padding: 15px 30px;
                 margin-bottom: 0;
                 list-style: none;
-                li{
+
+                li {
                     border-bottom: 2px solid rgba(0,0,0,.08);
-                    .title{
+
+                    .title {
                         display: flex;
                         align-items: center;
                         flex-wrap: wrap;
@@ -2618,11 +2623,13 @@ letter-spacing: normal
                         padding: 10px;
                         letter-spacing: -.48px;
                         position: relative;
-                        p{
+
+                        p {
                             padding: 0;
                             margin: 0;
                         }
-                        .icon{
+
+                        .icon {
                             width: 8px;
                             height: 15px;
                             transform: rotate(180deg);
@@ -2631,36 +2638,44 @@ letter-spacing: normal
                             position: absolute;
                             right: 0;
                             top: 15px;
-                            svg{
+
+                            svg {
                                 height: 100%;
                             }
                         }
                     }
-                    .search-options{
+
+                    .search-options {
                         transition: 0.5s;
                         padding: 0 30px 10px;
                         display: none;
-                        ul{
+
+                        ul {
                             list-style: none;
                             padding: 0;
-                            li{
-                            border-bottom: none;
-                            position: relative;
-                                a{
+
+                            li {
+                                border-bottom: none;
+                                position: relative;
+
+                                a {
                                     font-size: 16px;
                                     color: #545353;
                                     line-height: 1.55;
                                     transition: .5s;
                                     letter-spacing: -.5px;
                                     text-decoration: none;
-                                    span{
+
+                                    span {
                                         color: #939393;
                                     }
-                                    &:hover{
+
+                                    &:hover {
                                         color: #ff003c;
                                     }
                                 }
-                                &::before{
+
+                                &::before {
                                     content: "\2022";
                                     position: absolute;
                                     color: #e3e3e3;
@@ -2669,7 +2684,8 @@ letter-spacing: normal
                                     margin-left: -15px;
                                     margin-top: -3px;
                                 }
-                                &::after{
+
+                                &::after {
                                     content: "";
                                     position: absolute;
                                     left: -12px;
@@ -2678,23 +2694,25 @@ letter-spacing: normal
                                     height: 60%;
                                     width: 1px;
                                 }
-                              
                             }
                         }
                     }
                 }
-                li.active{
-                    .title{
-                        .icon{
+
+                li.active {
+                    .title {
+                        .icon {
                             transform: rotate(270deg) translate(-5px);
                         }
                     }
-                    .search-options{
+
+                    .search-options {
                         display: block !important;
                     }
                 }
             }
-            .btn-feature{
+
+            .btn-feature {
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
@@ -2707,40 +2725,47 @@ letter-spacing: normal
                 color: #545353;
                 line-height: 1.8;
                 margin: 15px 2% 0;
-                .icon{
+
+                .icon {
                     width: 30px;
                     height: 18px;
                     transform: rotate(180deg);
                     transition: .5s;
-                    svg{
+
+                    svg {
                         height: 100%;
                     }
                 }
-                .tooltip-info{
+
+                .tooltip-info {
                     text-decoration: none;
                     height: 17px;
                     width: 17px;
-                    img{
+
+                    img {
                         height: 100%;
                         width: 100%;
                     }
                 }
             }
-            .btn-feature.active{
-                .icon{
+
+            .btn-feature.active {
+                .icon {
                     transform: rotate(270deg);
                 }
-                
             }
-            .price-range{
+
+            .price-range {
                 padding: 10px;
-                .form-row{
+
+                .form-row {
                     display: flex;
                     flex-wrap: wrap;
                     margin-right: -5px;
                     margin-left: -5px;
-                    .col{
-                        .form-control{
+
+                    .col {
+                        .form-control {
                             border: 2px solid rgba(0,0,0,.08);
                             display: block;
                             width: 100%;
@@ -2755,18 +2780,20 @@ letter-spacing: normal
                             border: 1px solid #ced4da;
                             border-radius: .25rem;
                             transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
-                            &:focus{
+
+                            &:focus {
                                 outline: none;
                                 box-shadow: none;
                                 border: 1px solid #253444;
                             }
-                        
                         }
                     }
-                    .price-from{
+
+                    .price-from {
                         padding-right: 25px;
                         position: relative;
-                        &::after{
+
+                        &::after {
                             content: "";
                             position: absolute;
                             top: 50%;
@@ -2776,24 +2803,27 @@ letter-spacing: normal
                             background-color: rgba(0,0,0,.08);
                             transform: translateY(-50%);
                         }
-                       }
+                    }
                 }
             }
-            .producer{
-                .multi-choice{
+
+            .producer {
+                .multi-choice {
                     padding: 15px 25px 0;
                     margin: 0;
                     list-style: none;
-                    li{
+
+                    li {
                         display: flex;
                         text-align: center;
                         padding: 5px 0;
-                        input{
+
+                        input {
                             height: 20px;
                             width: 20px;
-                            
                         }
-                        label{
+
+                        label {
                             margin-bottom: 0;
                             font-size: 14px;
                             color: #545353;
@@ -2802,8 +2832,9 @@ letter-spacing: normal
                     }
                 }
             }
-            .form-group{
-                .btn{
+
+            .form-group {
+                .btn {
                     display: inline-block;
                     font-weight: 400;
                     color: #212529;
@@ -2817,16 +2848,17 @@ letter-spacing: normal
                     margin-bottom: 30px;
                     margin-left: 10%;
                     margin-top: 50px;
-                    &:hover{
+
+                    &:hover {
                         background-color: #ff003c;
                     }
                 }
             }
         }
     }
-    #product-list{
-        .product-list-header{
-            .list-view-by{
+    #product-list {
+        .product-list-header {
+            .list-view-by {
                 display: flex;
                 margin-top: 20px;
                 justify-content: space-between;
@@ -2834,14 +2866,16 @@ letter-spacing: normal
                 background-color: #e6e7e8;
                 height: 50px;
                 padding: 0 10px;
-                h4{
+
+                h4 {
                     max-width: 150px;
-                    font-size: 14px!important;
+                    font-size: 14px !important;
                     font-weight: 700;
                     color: #282828;
                     margin-bottom: 0;
                 }
-                .list-view{
+
+                .list-view {
                     display: flex;
                     align-items: center;
                     justify-content: flex-end;
@@ -2849,13 +2883,15 @@ letter-spacing: normal
                     margin-bottom: 0;
                     padding: 0;
                     list-style: none;
-                    li{
+
+                    li {
                         margin-right: 0;
                         font-size: 18px;
                         color: #282828;
                         font-weight: 700;
                         margin-left: 5px !important;
-                        a{
+
+                        a {
                             background-color: transparent;
                             border: none;
                             display: flex;
@@ -2866,39 +2902,47 @@ letter-spacing: normal
                             margin-left: 10px;
                             transition: .5s;
                             text-decoration: none;
-                            svg{
+
+                            svg {
                                 width: 12px;
                                 transform: rotate(90deg);
                                 margin-left: 5px;
                             }
-                            .sgvup{
+
+                            .sgvup {
                                 transform: rotate(270deg);
                             }
-                            &:hover{
+
+                            &:hover {
                                 color: #ff003c;
-                                svg path{
+
+                                svg path {
                                     fill: #ff003c;
                                 }
                             }
                         }
-                        ul{
+
+                        ul {
                             display: flex;
                             justify-content: flex-end;
                             margin-left: 10px;
                             align-items: center;
                             list-style: none;
                             padding: 0;
-                            li{
+
+                            li {
                                 margin-right: 0;
                                 font-size: 18px;
                                 color: #282828;
                                 font-weight: 700;
-                                .view-no{
-                                    &:hover{
+
+                                .view-no {
+                                    &:hover {
                                         color: #ff003c;
                                     }
                                 }
-                                .view-no.active{
+
+                                .view-no.active {
                                     color: #ff003c;
                                 }
                             }
@@ -2907,28 +2951,33 @@ letter-spacing: normal
                 }
             }
         }
-        .product-list-items{
+
+        .product-list-items {
             display: flex;
             width: 100%;
             flex-wrap: wrap;
             margin: 15px 0;
             height: auto;
-            .item{
+
+            .item {
                 width: 25% !important;
                 border: .5px solid rgba(0,0,0,.08);
                 border-right: none;
-                
                 .cart-item {
                     .cart-body-top {
                         .cart-footer {
                             .btn-add-to-cart {
-                                font-size: 14px!important;
+                                font-size: 14px !important;
                                 width: 110px !important;
                                 height: 35px !important;
+                                text-decoration:none !important;
+                                display: flex !important;
+                                align-items: center !important;
+                                justify-content: center !important;
                             }
                         }
                     }
-                }    
+                }
             }
         }
     }

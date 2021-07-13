@@ -1,0 +1,81 @@
+﻿@model List<UsersVM>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="content">
+
+    <!-- Basic initialization -->
+
+    <div class="card">
+        <div class="card-header header-elements-inline">
+            <h5 class="card-title">İstifadəçilər</h5>
+        </div>
+        <div class="btn-create ml-3" style="color:white">
+            <a class="btn btn-success" asp-action="Create">Yarat</a>
+        </div>
+        <table class="table datatable-row-basic">
+            <thead>
+                <tr>
+                    <th>İstifadəçi adı</th>
+                    <th>Email</th>
+                    <th>Rolu</th>
+                    <th>Status</th>
+                    <th class="text-center">Settings</th>
+                </tr>
+            </thead>
+            @foreach (UsersVM user in Model)
+            {
+                <tbody>
+                    <tr>
+                        <td>@user.UserName</td>
+                        <td>@user.Email</td>
+                        <td>@user.Role</td>
+                        @if (user.IsDeleted)
+                        {
+                            <td><span class="badge badge-secondary">Deactive</span></td>
+                        }
+                        else
+                        {
+                            <td><span class="badge badge-success">Active</span></td>
+                        }
+                        <td class="text-center">
+                            <div class="list-icons">
+                                <div class="dropdown">
+                                    <a href="#" class="list-icons-item" data-toggle="dropdown">
+                                        <i class="icon-menu9"></i>
+                                    </a>
+
+                                    @if (user.UserName != User.Identity.Name)
+                                    {
+                                        <div class="dropdown-menu dropdown-menu-right text-center">
+                                            @if (user.IsDeleted)
+                                            {
+
+                                                {
+                                                    <h5><a asp-action="Activity" asp-route-id="@user.id" class="dropdown-item d-block p-0">Aktiv Et</a></h5>
+                                                }
+                                            }
+                                            else
+                                            {
+                                                <h5><a asp-action="Activity" asp-route-id="@user.id" class="dropdown-item d-block p-0">Deaktiv Et</a></h5>
+                                            }
+                                            <h5><a asp-action="Update" asp-route-id="@user.id" class="dropdown-item d-block p-0">Düzəliş Et</a></h5>
+                                        </div>
+                                    }
+
+
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            }
+
+        </table>
+    </div>
+
+    <!-- /basic initialization -->
+</div>
+
+

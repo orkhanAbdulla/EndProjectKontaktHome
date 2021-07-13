@@ -3,6 +3,7 @@ using KontaktHome.Models;
 using KontaktHome.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -61,6 +62,21 @@ namespace KontaktHome.Controllers
                 Include(p => p.ProductFeatures).ThenInclude(p => p.FeaturesDetail).ThenInclude(fd=>fd.Features).FirstOrDefault(p => p.Id == Id);
             if (products == null) return NotFound();
             return View(products);
+        }
+        public async Task<IActionResult> AddBasket(int? id)
+        {
+            if (id == null) return NotFound();
+            Product product = await _context.Products.FindAsync(id);
+            if (product == null) return NotFound();
+            List<BasketVM> basket = new List<BasketVM>();
+            basket.Add(new BasketVM { Id = product.Id, Count = 1 });
+            Response.Cookies.Append("basket", JsonConvert.SerializeObject(basket));
+            return RedirectToAction(nameof(Index));
+        }
+        public IActionResult Basket()
+        {
+            List<BasketVM> basket = JsonConvert.DeserializeObject<List<BasketVM>>(Request.Cookies["basket"]);
+            return Json(basket);
         }
     }
 }

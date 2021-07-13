@@ -22,6 +22,45 @@ namespace KontaktHome.Controllers
             _signInManager = signInManager;
             _roleManager = roleManager;
         }
+        public IActionResult Login()
+        {
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Login(LoginVM Login)
+        {
+            if (!ModelState.IsValid) return View();
+            AppUser user = await _userManager.FindByNameAsync(Login.UserName);
+            if (user==null)
+            {
+                ModelState.AddModelError("", "İstifadəçi adı və ya Şifrə yanlışdır!");
+                return View();
+            }
+            if (user.IsDeleted)
+            {
+                ModelState.AddModelError("", "Sizin hesabınız hazırda aktiv deyil!");
+                return View();
+            }
+            var signInResult= await _signInManager.PasswordSignInAsync(user, Login.Password, Login.RemmemberMe,true);
+            if (signInResult.IsLockedOut)
+            {
+                ModelState.AddModelError("", "Lütfən bir neçə dəqiqədən sonra yenidən cəhd edin!");
+                return View();
+            }
+            if (!signInResult.Succeeded)
+            {
+                ModelState.AddModelError("", "İstifadəçi adı və ya Şifrə yanlışdır!");
+                return View();
+            }
+            if ((await _userManager.GetRolesAsync(user))[0]==Roles.Admin.ToString())
+            {
+                return RedirectToAction("Index", "Dashboard", new { area = "Admin" });
+            }
+
+            return RedirectToAction("Index", "Home");
+        
+        }
         public IActionResult Register()
         {
             return View();
@@ -48,8 +87,7 @@ namespace KontaktHome.Controllers
                 }
                 return View();
             }
-            await _userManager.AddToRoleAsync(newUser, Roles.Member.ToString());
-            await _signInManager.SignInAsync(newUser, false);
+            await _userManager.AddToRoleAsync(newUser, Roles.Admin.ToString());
             return RedirectToAction("Index", "Home");
         }
 

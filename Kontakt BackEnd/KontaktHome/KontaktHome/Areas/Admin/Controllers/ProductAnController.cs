@@ -44,10 +44,11 @@ namespace KontaktHome.Areas.Admin.Controllers
         }
         public IActionResult Create(int? categoryId)
         {
+            if (categoryId == null) return NotFound();
+            Category category = _context.Categories.Include(x => x.CategoryFeatures).ThenInclude(x => x.Features).FirstOrDefault(c => c.Id == categoryId);
+            if (categoryId == null) return NotFound();
 
             ViewBag.Brands = GetAllBrandswithCatId((int)categoryId);
-
-            Category category = _context.Categories.Include(x => x.CategoryFeatures).ThenInclude(x => x.Features).FirstOrDefault(c => c.Id == categoryId);
             ViewBag.CategoryId = categoryId;
             AdminProductVM productVM = new AdminProductVM();
             foreach (CategoryFeatures cf in category.CategoryFeatures)
@@ -61,18 +62,25 @@ namespace KontaktHome.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(int? categoryId, AdminProductVM productVM, int? BrandId, string[] features)
         {
-
+            if (categoryId == null) return NotFound();
+            Category category = _context.Categories.Include(x => x.CategoryFeatures).ThenInclude(x => x.Features).FirstOrDefault(c => c.Id == categoryId);
+            if (categoryId == null) return NotFound();
+            AdminProductVM dbProductVM = new AdminProductVM();
+            foreach (CategoryFeatures cf in category.CategoryFeatures)
+            {
+                productVM.Features.Add(cf.Features.Name);
+            }
             ViewBag.Brands = GetAllBrandswithCatId((int)categoryId);
-            if (!ModelState.IsValid) return View();
+            if (!ModelState.IsValid) return View(dbProductVM);
             if (BrandId == null)
             {
                 ModelState.AddModelError("", "Lütfən brend seçin");
-                return View();
+                return View(dbProductVM);
             }
             if (productVM.Product.Photos == null)
             {
                 ModelState.AddModelError("", "Lütfən şəkil seçin");
-                return View();
+                return View(dbProductVM);
             }
             List<ProductImage> images = new List<ProductImage>();
             foreach (IFormFile photo in productVM.Product.Photos)
@@ -80,12 +88,12 @@ namespace KontaktHome.Areas.Admin.Controllers
                 if (!photo.IsValidType("image/"))
                 {
                     ModelState.AddModelError("", "Yalnız şəkil yükləyə bilərsiniz");
-                    return View();
+                    return View(dbProductVM);
                 }
                 if (!photo.IsValidSize(200))
                 {
                     ModelState.AddModelError("", "Şəkilin ölçüsü 200kb çox ola bilməz");
-                    return View();
+                    return View(dbProductVM);
                 }
                 string folder = Path.Combine("img", "products");
                 string fileName = await photo.SavaFileAsync(_env.WebRootPath, folder);
@@ -97,9 +105,6 @@ namespace KontaktHome.Areas.Admin.Controllers
                 productVM.Product.Discount = 0;
             }
             productVM.Product.Images = images;
-
-
-            Category category = _context.Categories.Include(x => x.CategoryFeatures).ThenInclude(x => x.Features).FirstOrDefault(c => c.Id == categoryId);
             ViewBag.CategoryId = categoryId;
 
             int count = 0;
@@ -116,10 +121,6 @@ namespace KontaktHome.Areas.Admin.Controllers
                 productFeature.Product = productVM.Product;
                 productFeatures.Add(productFeature);
             }
-            
-           
-            
-
 
             productVM.Product.BrandId = (int)BrandId;
 
@@ -137,7 +138,94 @@ namespace KontaktHome.Areas.Admin.Controllers
             return PartialView("_CategoryBrandPartial", CategoryBrands);
         }
 
+        public IActionResult Update(int? id)
+        {
+            if (id == null) return NotFound();
+            Product product = _context.Products.Include(c=>c.Brand).ThenInclude(x=>x.CategoryBrands).Include(x => x.ProductFeatures).ThenInclude(x => x.FeaturesDetail).ThenInclude(x => x.Features).FirstOrDefault(c => c.Id == id);
+            if (id == null) return NotFound();
+            int categoryId = product.Brand.CategoryBrands[0].CategoryId;
+            ViewBag.Brands = GetAllBrandswithCatId(categoryId);
+            ViewBag.Brand = product.Brand.Id;
+            ViewBag.CategoryId = categoryId;
+            AdminProductVM productVM = new AdminProductVM();
+            productVM.Product = product;
+            foreach (ProductFeatures pf in product.ProductFeatures)
+            {
+                productVM.Features.Add(pf.FeaturesDetail.Features.Name);
+               
+            }
 
+            return View(productVM);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Update(int? id, AdminProductVM productVM, int? BrandId, string[] features)
+        {
+            if (id == null) return NotFound();
+            Product product = _context.Products.Include(c => c.Brand).ThenInclude(x => x.CategoryBrands).Include(x => x.ProductFeatures).ThenInclude(x => x.FeaturesDetail).ThenInclude(x => x.Features).FirstOrDefault(c => c.Id == id);
+            if (id == null) return NotFound();
+            int categoryId = product.Brand.CategoryBrands[0].CategoryId;
+            AdminProductVM dbProductVM = new AdminProductVM();
+            productVM.Product = product;
+            foreach (ProductFeatures pf in product.ProductFeatures)
+            {
+                productVM.Features.Add(pf.FeaturesDetail.Features.Name);
+            }
+            ViewBag.Brands = GetAllBrandswithCatId((int)categoryId);
+            if (!ModelState.IsValid) return View(dbProductVM);
+            if (BrandId == null)
+            {
+                ModelState.AddModelError("", "Lütfən brend seçin");
+                return View(dbProductVM);
+            }
+            if (productVM.Product.Photos != null)
+            {
+                List<ProductImage> images = new List<ProductImage>();
+                foreach (IFormFile photo in productVM.Product.Photos)
+                {
+                    if (!photo.IsValidType("image/"))
+                    {
+                        ModelState.AddModelError("", "Yalnız şəkil yükləyə bilərsiniz");
+                        return View(dbProductVM);
+                    }
+                    if (!photo.IsValidSize(200))
+                    {
+                        ModelState.AddModelError("", "Şəkilin ölçüsü 200kb çox ola bilməz");
+                        return View(dbProductVM);
+                    }
+                    string folder = Path.Combine("img", "products");
+                    string fileName = await photo.SavaFileAsync(_env.WebRootPath, folder);
+                    ProductImage image = new ProductImage { Image = fileName, ProductId = productVM.Product.Id };
+                    images.Add(image);
+                }
+                productVM.Product.Images = images;
+            }
+           
+            if (productVM.Product.Discount == null)
+            {
+                productVM.Product.Discount = 0;
+            }
+            
+            ViewBag.CategoryId = categoryId;
+
+            int count = 0;
+            List<ProductFeatures> productFeatures = new List<ProductFeatures>();
+            foreach (string feature in features)
+            {
+                product.ProductFeatures[count].FeaturesDetail.Description = feature;
+                count++;
+            }
+            product.ProductFeatures = productFeatures;
+            productVM.Product.BrandId = (int)BrandId;
+            productVM.Product.Count = product.Count;
+            productVM.Product.Discount = product.Discount;
+            productVM.Product.Price = product.Price;
+            productVM.Product.CashPrice = product.CashPrice;
+            await _context.SaveChangesAsync();
+            productVM.Product.Code = "A8B1C4" + productVM.Product.Id;
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index), new { categoryId });
+        }
         public List<Brand> GetAllBrandswithCatId(int categoryId)
         {
             List<Brand> brands = new List<Brand>();
