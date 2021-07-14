@@ -15,7 +15,7 @@ namespace KontaktHome.Models
         public bool IsDeleted { get; set; }
         public string Name { get; set; }
         [Required]
-        public double? Price { get; set; }
+        public double Price { get; set; }
         public double? CashPrice { get; set; }
         public double? Discount { get; set; }
         public int Count { get; set; }

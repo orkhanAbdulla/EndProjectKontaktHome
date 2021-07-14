@@ -2971,9 +2971,8 @@ letter-spacing: normal
                                 width: 110px !important;
                                 height: 35px !important;
                                 text-decoration:none !important;
-                                display: flex !important;
-                                align-items: center !important;
-                                justify-content: center !important;
+                                text-align:center !important;
+                                line-height:35px !important;
                             }
                         }
                     }

@@ -19,34 +19,7 @@
 <body class="page-header">
     <div class="menu-mask"></div>
     @await Component.InvokeAsync("Header")
-    <section id="toolbar">
-        <ul>
-            <li>
-                <a href="#">
-                    <img class="lazy loaded"
-                         data-src="https://kontakt.az/wp-content/themes/kontakt7/ktn-assets/assets/tb-cart.png" alt=""
-                         src="https://kontakt.az/wp-content/themes/kontakt7/ktn-assets/assets/tb-cart.png"
-                         data-was-processed="true">
-                    <span class="active cart_count">0</span>
-                    <p>Səbət</p>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <img class="lazy loaded" data-src="https://kontakt.az/wp-content/themes/kontakt7/ktn-assets/assets/tb-favorite.png" alt="" src="https://kontakt.az/wp-content/themes/kontakt7/ktn-assets/assets/tb-favorite.png" data-was-processed="true">
-                    <span class="watchlist_count">0</span>
-                    <p>Seçilmişlər</p>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <img style="width:25px" class="lazy loaded" data-src="https://kontakt.az/wp-content/themes/kontakt7/ktn-assets/assets/tb-comparisonnew.png" alt="" src="https://kontakt.az/wp-content/themes/kontakt7/ktn-assets/assets/tb-comparisonnew.png" data-was-processed="true">
-                    <span class="active compare_count">0</span>
-                    <p>Müqayisələrim</p>
-                </a>
-            </li>
-        </ul>
-    </section>
+
 
     <main>
         @RenderBody()
@@ -262,12 +235,11 @@
             </div>
         </div>
     </footer>
-
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://kit.fontawesome.com/b6281e7052.js" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-    <script src="~/js/script.js" asp-append-version="true"></script>
+    <script src="~/js/script.js"></script>
 </body>
 
 </html>

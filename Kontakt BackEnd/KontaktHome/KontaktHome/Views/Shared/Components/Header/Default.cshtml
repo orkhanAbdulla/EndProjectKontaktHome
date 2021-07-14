@@ -165,10 +165,10 @@
 
                             </li>
                             <li>
-                                <a href="basket.html">
+                                <a asp-controller="Products" asp-action="Basket">
                                     <img src="https://kontakt.az/wp-content/uploads/2020/04/sebet.png" alt="">
                                     <span>Səbət</span>
-                                    <span class="count cart_count">0</span>
+                                    <span class="count cart_count">@ViewBag.BasketCount</span>
                                 </a>
                             </li>
                         </ul>
@@ -250,10 +250,10 @@
 
                             </li>
                             <li>
-                                <a href="#">
+                                <a asp-controller="Products" asp-action="Basket">
                                     <img src="https://kontakt.az/wp-content/uploads/2020/04/sebet.png" alt="">
                                     <span>Səbət</span>
-                                    <span class="count cart_count">0</span>
+                                    <span class="count cart_count">@ViewBag.BasketCount</span>
                                 </a>
                             </li>
                         </ul>
@@ -296,5 +296,32 @@
             <div id="header-breadcrumb-after"></div>
         </section>
     }
-
+     <section id="toolbar">
+    <ul>
+        <li>
+            <a asp-controller="Products" asp-action="Basket">
+                <img class="lazy loaded"
+                     data-src="https://kontakt.az/wp-content/themes/kontakt7/ktn-assets/assets/tb-cart.png" alt=""
+                     src="https://kontakt.az/wp-content/themes/kontakt7/ktn-assets/assets/tb-cart.png"
+                     data-was-processed="true">
+                <span class="active cart_count">@ViewBag.BasketCount</span>
+                <p>Səbət</p>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <img class="lazy loaded" data-src="https://kontakt.az/wp-content/themes/kontakt7/ktn-assets/assets/tb-favorite.png" alt="" src="https://kontakt.az/wp-content/themes/kontakt7/ktn-assets/assets/tb-favorite.png" data-was-processed="true">
+                <span class="watchlist_count">0</span>
+                <p>Seçilmişlər</p>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <img style="width:25px" class="lazy loaded" data-src="https://kontakt.az/wp-content/themes/kontakt7/ktn-assets/assets/tb-comparisonnew.png" alt="" src="https://kontakt.az/wp-content/themes/kontakt7/ktn-assets/assets/tb-comparisonnew.png" data-was-processed="true">
+                <span class="active compare_count">0</span>
+                <p>Müqayisələrim</p>
+            </a>
+        </li>
+    </ul>
+</section>
 </header>
