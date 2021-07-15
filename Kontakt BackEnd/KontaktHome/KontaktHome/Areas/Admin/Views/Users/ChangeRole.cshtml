@@ -1,0 +1,47 @@
+﻿@using Microsoft.AspNetCore.Identity
+@model List<IdentityRole>
+
+@{
+    ViewData["Title"] = "ChangeRole";
+}
+
+<div class="content text-center">
+    <div class="col-lg-6 ">
+        <div class="card">
+            <div class="card-header header-elements-inline">
+                <h5 class="card-title">Rol Seç</h5>
+                <a asp-action="Index" class="btn btn-light">
+                    Ləğv et
+                </a>
+            </div>
+            <div class="card-body">
+                <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+                <form method="post">
+                    <div class="mb-3 my-3">
+                        <p class="mb-2">
+                            <select data-placeholder="Xüsusiyyət Seç"  name="newRole" id="newRole" class="form-control select-access-value select2-hidden-accessible" data-fouc="" tabindex="-1" aria-hidden="true">
+                                @foreach (IdentityRole role in Model)
+                                {
+                                    if (role.Name == ViewBag.MyRole)
+                                    {
+                                        <option selected value="@role.Name">@role.Name</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@role.Name">@role.Name</option>
+                                    }
+
+                                }
+                            </select>
+                        </p>
+                    </div>
+                    <button type="submit" class="btn bg-blue">Göndər<i class="icon-paperplane ml-2"></i></button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@section Script{
+    <partial name="_ValidationPartial" />
+}
+

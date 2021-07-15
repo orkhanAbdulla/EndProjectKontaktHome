@@ -1,0 +1,64 @@
+﻿@model List<BasketProductVM>
+    <div class="item-box">
+        <button id="deleteAll" class="delete">
+            <img src="https://kontakt.az/wp-content/themes/kontakt7/ktn-assets/assets/eraser.png" alt="">
+            <p class="cart_remove_selecteds">Hamısını sil</p>
+        </button>
+    </div>
+    @foreach (BasketProductVM pro in Model)
+    {
+        <div class="cart_object">
+            <div id="selected-cart-item">
+                <div class="chosen-cart">
+                    <div class="photo-box">
+                        <div class="imgHolder">
+                            <img src="~/img/products/@pro.ImageUrl">
+                        </div>
+                    </div>
+                    <div class="details">
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="features">
+                                    <p>
+                                        <a href="#">
+                                            @pro.Name
+                                        </a>
+                                    </p>
+                                    <div class="labels">
+                                        <div class="lbl-cash-discount">
+                                            <p>
+                                                -<span class="cash-discount-782962">100 AZN nağd alışa</span>
+                                            </p>
+                                        </div>
+                                        <div class="lbl-percentage">
+                                            <p>18 ay <span>Faizsiz</span></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="second-half">
+                                    <div class="quantity">
+                                        <p>Miqdar</p>
+                                        <input type="number" id="amount_782962" value="@pro.Count" min="0" class="amount cart_amount cart_amount_782962" data-id="782962">
+                                    </div>
+                                    <div class="price">
+                                        <p><span class="nprice" id="price-782962">@pro.Price</span> <small class="azn_span">‎₼</small></p>
+                                    </div>
+                                    <button class="remove cart_remove" id="cart_remove">
+                                        <img src="https://kontakt.az/wp-content/themes/kontakt7/ktn-assets/assets/bin.png" alt="">
+                                    </button>
+                                    <input type="hidden" id="cart_removeId" value="@pro.Id" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="total-price">
+                    <p>
+                        Cəmi: <span>@pro.TotalPrice</span><span class="azn_span">‎ ‎₼</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    }

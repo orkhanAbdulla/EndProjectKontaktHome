@@ -9,10 +9,7 @@
 
     <div class="card">
         <div class="card-header header-elements-inline">
-            <h5 class="card-title">İstifadəçilər</h5>
-        </div>
-        <div class="btn-create ml-3" style="color:white">
-            <a class="btn btn-success" asp-action="Create">Yarat</a>
+            <h4 class="card-title">İstifadəçilər</h4>
         </div>
         <table class="table datatable-row-basic">
             <thead>
@@ -60,7 +57,7 @@
                                             {
                                                 <h5><a asp-action="Activity" asp-route-id="@user.id" class="dropdown-item d-block p-0">Deaktiv Et</a></h5>
                                             }
-                                            <h5><a asp-action="Update" asp-route-id="@user.id" class="dropdown-item d-block p-0">Düzəliş Et</a></h5>
+                                            <h5><a asp-action="ChangeRole" asp-route-id="@user.id" class="dropdown-item d-block p-0">Rolunu Dəyiş</a></h5>
                                         </div>
                                     }
 

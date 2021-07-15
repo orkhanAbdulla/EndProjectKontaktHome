@@ -186,3 +186,6 @@ C:\Users\hp\Desktop\EndProjectKontaktHome\Kontakt BackEnd\KontaktHome\KontaktHom
 C:\Users\hp\Desktop\EndProjectKontaktHome\Kontakt BackEnd\KontaktHome\KontaktHome\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Users\Index.cshtml.g.cs
 C:\Users\hp\Desktop\EndProjectKontaktHome\Kontakt BackEnd\KontaktHome\KontaktHome\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\ProductAn\Update.cshtml.g.cs
 C:\Users\hp\Desktop\EndProjectKontaktHome\Kontakt BackEnd\KontaktHome\KontaktHome\obj\Debug\netcoreapp3.1\Razor\Views\Products\Basket.cshtml.g.cs
+C:\Users\hp\Desktop\EndProjectKontaktHome\Kontakt BackEnd\KontaktHome\KontaktHome\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Users\ChangeRole.cshtml.g.cs
+C:\Users\hp\Desktop\EndProjectKontaktHome\Kontakt BackEnd\KontaktHome\KontaktHome\obj\Debug\netcoreapp3.1\Razor\Views\Account\VerifyEmail.cshtml.g.cs
+C:\Users\hp\Desktop\EndProjectKontaktHome\Kontakt BackEnd\KontaktHome\KontaktHome\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_cartBasketPartial.cshtml.g.cs

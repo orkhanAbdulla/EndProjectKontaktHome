@@ -326,3 +326,5 @@ imageItems.forEach((elem) => {
         baseImage.src = this.src
     });
 });
+
+

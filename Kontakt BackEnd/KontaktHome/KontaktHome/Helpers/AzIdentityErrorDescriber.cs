@@ -32,6 +32,15 @@ namespace KontaktHome.Helpers
                 Description = "Parolların ən azı bir alfasayısal olmayan xarakteri olmalıdır.!"
             };
         }
-       
+        public override IdentityError InvalidUserName(string userName)
+        {
+            return new IdentityError
+            {
+                Code= nameof(InvalidUserName),
+                Description= "İstifadəçi adı etibarsızdır, yalnız hərf və ya rəqəmdən ibarət ola bilər."
+
+            };
+        }
+
     }
 }

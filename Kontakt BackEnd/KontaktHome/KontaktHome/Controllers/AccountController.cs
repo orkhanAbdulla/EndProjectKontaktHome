@@ -24,6 +24,10 @@ namespace KontaktHome.Controllers
         }
         public IActionResult Login()
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             return View();
         }
         [HttpPost]
@@ -37,12 +41,18 @@ namespace KontaktHome.Controllers
                 ModelState.AddModelError("", "İstifadəçi adı və ya Şifrə yanlışdır!");
                 return View();
             }
+            if (!await _userManager.IsEmailConfirmedAsync(user))
+            {
+                ModelState.AddModelError("", "Zəhmət olmasa E-Poçtu təsdiqləyin!");
+                return View(Login);
+            }
+            Microsoft.AspNetCore.Identity.SignInResult signInResult =
+            await _signInManager.PasswordSignInAsync(user, Login.Password, Login.RemmemberMe, true);
             if (user.IsDeleted)
             {
                 ModelState.AddModelError("", "Sizin hesabınız hazırda aktiv deyil!");
                 return View();
             }
-            var signInResult= await _signInManager.PasswordSignInAsync(user, Login.Password, Login.RemmemberMe,true);
             if (signInResult.IsLockedOut)
             {
                 ModelState.AddModelError("", "Lütfən bir neçə dəqiqədən sonra yenidən cəhd edin!");
@@ -63,6 +73,10 @@ namespace KontaktHome.Controllers
         }
         public IActionResult Register()
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Login", "Account");
+            }
             return View();
         }
         [HttpPost]
@@ -79,7 +93,20 @@ namespace KontaktHome.Controllers
             };
 
             IdentityResult identityResult = await _userManager.CreateAsync(newUser, register.Password);
-            if (!identityResult.Succeeded)
+            if (identityResult.Succeeded)
+            {
+                var code = await _userManager.GenerateEmailConfirmationTokenAsync(newUser);
+                var confirmationLink = Url.Action(nameof(ConfirmEmail), "Account", new { userName = newUser.UserName, code }, Request.Scheme);
+                var mailto = newUser.Email;
+                var messageBody = $"<p>Emaili təsdiqləmək üçün <a href=\"{confirmationLink}\"> buraya daxil </a>  olun</p>" +
+                    $"</br><p>Qeydiyatı yalnız bir dəfə təsdiqləyə bilərsiz</p>";
+                var messageSubject = "Email Təsdiqləmə";
+                await Helper.SendMessageAsync(messageSubject, messageBody, newUser.Email);
+                await _userManager.AddToRoleAsync(newUser, Roles.Member.ToString());
+                return RedirectToAction("VerifyEmail", "Account");
+               
+            }
+            else
             {
                 foreach (IdentityError error in identityResult.Errors)
                 {
@@ -87,8 +114,30 @@ namespace KontaktHome.Controllers
                 }
                 return View();
             }
-            await _userManager.AddToRoleAsync(newUser, Roles.Admin.ToString());
-            return RedirectToAction("Index", "Home");
+        }
+        public IActionResult VerifyEmail()
+        {
+            return View();
+        }
+        public async Task<IActionResult> ConfirmEmail(string userName, string code)
+        {
+            if (userName == null || code == null)
+            {
+                return NotFound();
+            }
+            var user = await _userManager.FindByNameAsync(userName);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            var result = await _userManager.ConfirmEmailAsync(user, code);
+            if (result.Succeeded)
+            {
+                TempData["Response"] = "Email has been confirmed";
+                return RedirectToAction("Login", "Account");
+            }
+            else
+                return NotFound();
         }
 
         public async Task<IActionResult> Logout()
