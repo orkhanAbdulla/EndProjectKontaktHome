@@ -903,10 +903,14 @@
 </section>
 @section Script{
     <script>
+     
         $(document).ready(function () {
             $(document).ready(function () {
                 $(document).on("click", "#AddBasket", function () {
                     var productId = $(this).next().val();
+                    alertify.set('notifier', 'delay', 1);
+                    alertify.set('notifier', 'position', 'bottom-center');
+                    alertify.error('İcra edildi!');
                     $.ajax({
                         url: "/Products/AddBasket?id=" + productId,
                         type: "Get",

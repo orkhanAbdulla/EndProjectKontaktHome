@@ -90,6 +90,99 @@ namespace KontaktHome.Controllers
             Response.Cookies.Append("basket", JsonConvert.SerializeObject(basket));
             return Json(basket.Count);
         }
+        public async Task<IActionResult> increaseBasket(int? id)
+        {
+            if (id == null) return NotFound();
+            Product product = await _context.Products.FindAsync(id);
+            if (product == null) return NotFound();
+
+            List<BasketVM> basket;
+            if (Request.Cookies["basket"] != null)
+            {
+                basket = JsonConvert.DeserializeObject<List<BasketVM>>(Request.Cookies["basket"]);
+            }
+            else
+            {
+                basket = new List<BasketVM>();
+            }
+            BasketVM ExistPro = basket.FirstOrDefault(x => x.Id == id);
+            if (ExistPro != null)
+            {
+                ExistPro.Count += 1;
+            }
+            else
+            {
+                basket.Add(new BasketVM { Id = product.Id, Count = 1 });
+            }
+            Response.Cookies.Append("basket", JsonConvert.SerializeObject(basket));
+            List<BasketProductVM> basketProducts = new List<BasketProductVM>();
+            
+                double totalPrice = 0;
+                double itemsTotalPrice = 0;
+                foreach (BasketVM pro in basket)
+                {
+                    Product DbProduct = _context.Products.Include(x => x.Images).FirstOrDefault(p => p.Id == pro.Id);
+                    totalPrice = pro.Count * DbProduct.Price;
+                    itemsTotalPrice += totalPrice;
+                    ViewBag.ItemsTitalPrice = itemsTotalPrice;
+                    basketProducts.Add(new BasketProductVM
+                    {
+                        Id = pro.Id,
+                        Count = pro.Count,
+                        Price = DbProduct.Price,
+                        Name = DbProduct.Name,
+                        ImageUrl = DbProduct.Images[0].Image,
+                        TotalPrice = totalPrice,
+                        ItemsTotalPrice = itemsTotalPrice
+
+                    });
+
+                }
+
+            return PartialView("_cartBasketPartial", basketProducts);
+        }
+        public IActionResult decreaseBasket(int? id)
+        {
+            if (id == null) return NotFound();
+            List<BasketVM> basket = new List<BasketVM>();
+            if (Request.Cookies["basket"] != null)
+            {
+                basket = JsonConvert.DeserializeObject<List<BasketVM>>(Request.Cookies["basket"]);
+                BasketVM ExistBasket = basket.FirstOrDefault(x => x.Id == id);
+                if (ExistBasket.Count>0)
+                {
+                    ExistBasket.Count--;
+                }
+                else
+                {
+                    basket.Remove(ExistBasket);
+                }
+                Response.Cookies.Append("basket", JsonConvert.SerializeObject(basket));
+            }
+            List<BasketProductVM> basketProducts = new List<BasketProductVM>();
+            double totalPrice = 0;
+            double itemsTotalPrice = 0;
+            foreach (BasketVM pro in basket)
+            {
+                Product DbProduct = _context.Products.Include(x => x.Images).FirstOrDefault(p => p.Id == pro.Id);
+                totalPrice = pro.Count * DbProduct.Price;
+                itemsTotalPrice += totalPrice;
+                ViewBag.ItemsTitalPrice = itemsTotalPrice;
+                basketProducts.Add(new BasketProductVM
+                {
+                    Id = pro.Id,
+                    Count = pro.Count,
+                    Price = DbProduct.Price,
+                    Name = DbProduct.Name,
+                    ImageUrl = DbProduct.Images[0].Image,
+                    TotalPrice = totalPrice,
+                    ItemsTotalPrice = itemsTotalPrice
+                });
+            }
+
+            return PartialView("_cartBasketPartial", basketProducts);
+
+        }
         public IActionResult RemoveBasket(int id)
         {
             if (id == null) return NotFound();
@@ -106,10 +199,13 @@ namespace KontaktHome.Controllers
             }
             List<BasketProductVM> basketProducts = new List<BasketProductVM>();
             double totalPrice = 0;
+            double itemsTotalPrice = 0;
             foreach (BasketVM pro in basket)
             {
                 Product DbProduct = _context.Products.Include(x => x.Images).FirstOrDefault(p => p.Id == pro.Id);
                 totalPrice = pro.Count * DbProduct.Price;
+                itemsTotalPrice += totalPrice;
+                ViewBag.ItemsTitalPrice = itemsTotalPrice;
                 basketProducts.Add(new BasketProductVM
                 {
                     Id = pro.Id,
@@ -117,23 +213,45 @@ namespace KontaktHome.Controllers
                     Price = DbProduct.Price,
                     Name = DbProduct.Name,
                     ImageUrl = DbProduct.Images[0].Image,
-                    TotalPrice = totalPrice
+                    TotalPrice = totalPrice,
+                    ItemsTotalPrice = itemsTotalPrice
                 });
             }
-            //basket = JsonConvert.DeserializeObject<List<BasketVM>>(Request.Cookies["basket"]);
-            //Response.Cookies.Append("basket", JsonConvert.SerializeObject(basket));
+          
             return PartialView("_cartBasketPartial", basketProducts);
 
         }
         public IActionResult AllRemoveBasket()
         {
+            List<BasketVM> basket = new List<BasketVM>();
             if (Request.Cookies["basket"] != null)
             {
                 Response.Cookies.Delete("basket");
-
+            }
+            List<BasketProductVM> basketProducts = new List<BasketProductVM>();
+            double totalPrice = 0;
+            double itemsTotalPrice = 0;
+            foreach (BasketVM pro in basket)
+            {
+                Product DbProduct = _context.Products.Include(x => x.Images).FirstOrDefault(p => p.Id == pro.Id);
+                totalPrice = pro.Count * DbProduct.Price;
+                itemsTotalPrice += totalPrice;
+                ViewBag.ItemsTitalPrice = itemsTotalPrice;
+                basketProducts.Add(new BasketProductVM
+                {
+                    Id = pro.Id,
+                    Count = pro.Count,
+                    Price = DbProduct.Price,
+                    Name = DbProduct.Name,
+                    ImageUrl = DbProduct.Images[0].Image,
+                    TotalPrice = totalPrice,
+                    ItemsTotalPrice = itemsTotalPrice
+                });
             }
 
-            return RedirectToAction(nameof(Basket));
+            return PartialView("_cartBasketPartial", basketProducts);
+           
+
         }
         public IActionResult Basket()
         {
@@ -143,10 +261,13 @@ namespace KontaktHome.Controllers
             {
                 List<BasketVM> basket = JsonConvert.DeserializeObject<List<BasketVM>>(Request.Cookies["basket"]);
                 double totalPrice = 0;
+                double itemsTotalPrice = 0;
                 foreach (BasketVM pro in basket)
                 {
                     Product DbProduct = _context.Products.Include(x => x.Images).FirstOrDefault(p => p.Id == pro.Id);
                     totalPrice = pro.Count * DbProduct.Price;
+                    itemsTotalPrice += totalPrice;
+                    ViewBag.ItemsTitalPrice = itemsTotalPrice;
                     basketProducts.Add(new BasketProductVM
                     {
                         Id = pro.Id,
@@ -154,12 +275,17 @@ namespace KontaktHome.Controllers
                         Price = DbProduct.Price,
                         Name = DbProduct.Name,
                         ImageUrl = DbProduct.Images[0].Image,
-                        TotalPrice = totalPrice
+                        TotalPrice = totalPrice,
+                        ItemsTotalPrice= itemsTotalPrice
+
                     });
+
                 }
+
             }
        
             return View(basketProducts);
         }
+
     }
 }

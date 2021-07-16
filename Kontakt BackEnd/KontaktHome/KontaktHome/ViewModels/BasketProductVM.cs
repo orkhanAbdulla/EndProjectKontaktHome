@@ -15,6 +15,8 @@ namespace KontaktHome.ViewModels
         public double? Price { get; set; }
         public double? CashPrice { get; set; }
         public double? TotalPrice { get; set; }
+
+        public double ItemsTotalPrice { get; set; }
         public string ImageUrl { get; set; }
     }
 }

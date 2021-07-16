@@ -1857,37 +1857,43 @@ letter-spacing: normal
 //Footer End
 
 //basket start
-#cart{
+#cart {
     padding: 30px 0;
-    .head-title{
+
+    .head-title {
         margin-bottom: 30px;
-        h1{
+
+        h1 {
             font-size: 30px;
             font-weight: 700;
             color: #282828;
             margin-bottom: 0;
         }
     }
-    .cart_row{
-        .item-box-parent{
-            .item-box{
+
+    .cart_row {
+        .item-box-parent {
+            .item-box {
                 background-color: #f7f7f7;
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
                 padding: 15px;
-                input{
+
+                input {
                     position: absolute;
-                    opacity: 0!important;
+                    opacity: 0 !important;
                 }
-                .form-check-label{
+
+                .form-check-label {
                     color: #282828;
                     font-size: 14px;
                     font-weight: 700;
                     position: relative;
                     padding: 2px 0 0 30px;
                     cursor: pointer;
-                    &::before{
+
+                    &::before {
                         content: "";
                         background-color: #fff;
                         border: 1px solid hsla(0,0%,85.1%,.59);
@@ -1899,7 +1905,8 @@ letter-spacing: normal
                         left: 0;
                         box-shadow: 0px -1px 1px 0px;
                     }
-                    &::after{
+
+                    &::after {
                         content: "\f00c";
                         font-family: FontAwesome;
                         font-size: 20px;
@@ -1916,24 +1923,25 @@ letter-spacing: normal
                         opacity: 0;
                     }
                 }
-                input:checked+label{
-                    &::after{
+
+                input:checked + label {
+                    &::after {
                         opacity: 1;
                     }
-                      
-                    
                 }
 
-           
-                .delete{
+
+                .delete {
                     display: flex;
                     align-items: center;
                     background-color: transparent;
                     border: none;
-                    img{
+
+                    img {
                         margin-right: 10px;
                     }
-                    p{
+
+                    p {
                         font-size: 14px;
                         color: #ff003c;
                         font-weight: 700;
@@ -1941,30 +1949,36 @@ letter-spacing: normal
                     }
                 }
             }
-            .cart_object{
+
+            .cart_object {
                 //main cart
-                #selected-cart-item{
+                #selected-cart-item {
                     padding: 30px 15px;
                     border: 2px solid rgba(0,0,0,.08);
                     border-top: none;
-                    .chosen-cart{
+
+                    .chosen-cart {
                         display: flex;
                         margin-bottom: 15px;
-                        .checkbox{
+
+                        .checkbox {
                             margin-top: 50px;
                             height: 25px;
-                            input{
+
+                            input {
                                 position: absolute;
-                                opacity: 0!important;
+                                opacity: 0 !important;
                             }
-                            .form-check-label{
+
+                            .form-check-label {
                                 color: #282828;
                                 font-size: 14px;
                                 font-weight: 700;
                                 position: relative;
                                 padding: 2px 0 0 30px;
                                 cursor: pointer;
-                                &::before{
+
+                                &::before {
                                     content: "";
                                     background-color: #fff;
                                     box-shadow: 0px -1px 1px 0px;
@@ -1976,7 +1990,8 @@ letter-spacing: normal
                                     top: 3px;
                                     left: 0;
                                 }
-                                &::after{
+
+                                &::after {
                                     content: "\f00c";
                                     font-family: FontAwesome;
                                     font-size: 20px;
@@ -1993,68 +2008,76 @@ letter-spacing: normal
                                     opacity: 0;
                                 }
                             }
-                            input:checked+label{
-                                &::after{
+
+                            input:checked + label {
+                                &::after {
                                     opacity: 1;
                                 }
-                                  
-                                
                             }
                         }
-                        .photo-box{
+
+                        .photo-box {
                             width: 100px;
                             height: 100px;
                             display: flex;
-                            .imgHolder{
+
+                            .imgHolder {
                                 padding-top: 100%;
                                 width: 100%;
                                 position: relative;
-                                img{
+
+                                img {
                                     width: 100%;
                                     height: 100%;
                                     object-fit: contain;
                                     position: absolute;
                                     top: 0;
                                     left: 0;
-                                    
                                 }
                             }
                         }
-                        .details{
+
+                        .details {
                             width: 100%;
                             padding: 0 15px;
-                            .features{
-                                    p{
-                                        margin-bottom: 0;
-                                        a{
-                                            font-size: 17px;
-                                            color: #282828;
-                                            text-decoration: none;
+
+                            .features {
+                                p {
+                                    margin-bottom: 0;
+
+                                    a {
+                                        font-size: 17px;
+                                        color: #282828;
+                                        text-decoration: none;
+                                    }
+                                }
+
+                                .labels {
+                                    display: flex;
+                                    margin-top: 10px;
+
+                                    .lbl-cash-discount {
+                                        position: relative;
+                                        top: 0;
+                                        width: 70px;
+                                        height: 70px;
+                                        background-color: #ff003c;
+                                        border-radius: 5px;
+                                        display: flex;
+                                        align-items: center;
+                                        padding: 5px;
+
+                                        p {
+                                            font-weight: 700;
+                                            font-size: 12px;
+                                            line-height: .94;
+                                            text-align: center;
+                                            color: #fff;
+                                            margin: 0 auto;
                                         }
                                     }
-                                    .labels{
-                                        display: flex;
-                                        margin-top: 10px;
-                                        .lbl-cash-discount{
-                                            position: relative;
-                                            top: 0;
-                                            width: 70px;
-                                            height: 70px;
-                                            background-color: #ff003c;
-                                            border-radius: 5px;
-                                            display: flex;
-                                            align-items: center;
-                                            padding: 5px;
-                                            p{
-                                                font-weight: 700;
-                                                font-size: 12px;
-                                                line-height: .94;
-                                                text-align: center;
-                                                color: #fff;
-                                                margin: 0 auto;
-                                            }
-                                        }
-                                      .lbl-percentage{
+
+                                    .lbl-percentage {
                                         margin-left: 10px;
                                         position: relative;
                                         top: 0;
@@ -2064,60 +2087,74 @@ letter-spacing: normal
                                         background-color: #e3e3e3;
                                         display: flex;
                                         align-items: center;
-                                        p{
+
+                                        p {
                                             font-size: 12px;
                                             font-weight: 700;
                                             line-height: 1.31;
                                             text-align: center;
                                             color: #282828;
                                             margin-bottom: 0;
-                                            span{
+
+                                            span {
                                                 color: #ff003c;
                                             }
                                         }
-                                      }
                                     }
-                                
+                                }
                             }
-                            .second-half{
+
+                            .second-half {
                                 display: flex;
                                 justify-content: space-between;
-                                .quantity{
-                                    p{
+
+                                .quantity {
+                                    p {
                                         font-size: 17px;
                                         text-align: center;
                                         color: rgba(40,40,40,.8);
                                         margin-bottom: 5px;
                                     }
-                                    .amount{
-                                        width: 50px;
-                                        height: 27px;
+
+                                    .amount {
+                                        width: 30px;
+                                        height: 30px;
                                         border-radius: 4.2px;
                                         border: solid 2px rgba(0,0,0,.08);
                                         background-color: #fff;
                                         text-align: center;
+
+                                        input::-webkit-outer-spin-button,
+                                        input::-webkit-inner-spin-button {
+                                            -webkit-appearance: none;
+                                            margin: 0;
+                                        }
                                     }
                                 }
-                                .price{
+
+                                .price {
                                     display: flex;
                                     align-items: center;
-                                    p{
+
+                                    p {
                                         font-size: 17px;
                                         font-weight: 700;
                                         color: #282828;
                                     }
                                 }
-                                .remove{
+
+                                .remove {
                                     background-color: transparent;
                                     border: none;
                                 }
                             }
-                          
                         }
                     }
-                    .total-price{
+
+                    .total-price {
                         padding: 0 15px;
-                        p{
+
+                        p {
                             font-size: 17px;
                             color: #282828;
                             font-weight: 700;
@@ -2127,41 +2164,48 @@ letter-spacing: normal
                 }
             }
         }
-        .wrapper{
+
+        .wrapper {
             border: 2px solid rgba(0,0,0,.08);
             background-color: #fff;
             padding: 25px;
             margin-bottom: 12px;
-            h5{
+
+            h5 {
                 font-size: 17px;
                 color: #282828;
                 font-weight: 700;
             }
-            .about{
+
+            .about {
                 border-top: 1px solid #e3e3e3;
                 border-bottom: 1px solid #e3e3e3;
                 padding: 10px 0;
-                .price{
+
+                .price {
                     display: flex;
                     justify-content: space-between;
-                    p{
+
+                    p {
                         font-size: 15px;
                         color: #282828;
                         margin-bottom: 0;
-                        span{
+
+                        span {
                             font-size: 15px;
                             color: #282828;
                         }
                     }
-                    &:last-child{
-                        span{
+
+                    &:last-child {
+                        span {
                             color: #ff003c;
                         }
                     }
                 }
-                
             }
-            .total{
+
+            .total {
                 font-size: 17px;
                 color: #282828;
                 text-align: right;
@@ -2170,7 +2214,8 @@ letter-spacing: normal
                 display: flex;
                 justify-content: space-between;
             }
-            .cash{
+
+            .cash {
                 width: 100%;
                 border: none;
                 color: #fff;
@@ -2178,9 +2223,7 @@ letter-spacing: normal
                 font-weight: 400;
                 height: 50px;
                 border-radius: 4px;
-                
             }
-            
         }
     }
 }
@@ -3296,7 +3339,20 @@ letter-spacing: normal
     }
 }
 
+.t-neutral .spinner__button {
+    background: #222;
+    color: $#fff;
+}
 
+.t-neutral .spinner__button:hover,
+.t-neutral .spinner__button:focus,
+.t-neutral .spinner__button:active {
+    background: #444;
+}
+
+.t-neutral .spinner__input {
+    background: #eee;
+}
 
 
 
@@ -3414,5 +3470,10 @@ letter-spacing: normal
             }
         }
      
+    }
+    .ajs-message {
+        color: #31708f;
+        background-color: #d9edf7;
+        border-color: #31708f;
     }
 }

@@ -8,14 +8,14 @@
             <div class="head-title">
                 <h1>Səbət</h1>
             </div>
-            <div class="row cart_row">
+            <div class="row cart_row" id="cart_row">
                 <div class="col-lg-8">
                     <div class="item-box-parent" id="item-box-parent">
                         <div class="item-box">
-                            <a asp-controller="Products" asp-action="AllRemoveBasket" id="deleteAll" class="delete">
+                            <button id="deleteAll" class="delete">
                                 <img src="https://kontakt.az/wp-content/themes/kontakt7/ktn-assets/assets/eraser.png" alt="">
                                 <p class="cart_remove_selecteds">Hamısını sil</p>
-                            </a>
+                            </button>
                         </div>
                         @foreach (BasketProductVM pro in Model)
                         {
@@ -52,10 +52,12 @@
                                                     <div class="second-half">
                                                         <div class="quantity">
                                                             <p>Miqdar</p>
-                                                            <input type="number" id="amount_782962" value="@pro.Count" min="0" class="amount cart_amount cart_amount_782962" data-id="782962">
+                                                            <button id="decrease" value="@pro.Id" style=" background-color: transparent; border: none; width: 10px;">-</button>
+                                                            <input type="number" id="cart_amount" value="@pro.Count" min="0" class="amount cart_amount cart_amount_782962">
+                                                            <button id="increase" value="@pro.Id" style="background-color: transparent; color: #ff003c; border: none; width: 10px; ">+</button>
                                                         </div>
                                                         <div class="price">
-                                                            <p><span class="nprice" id="price-782962">@pro.Price</span> <small class="azn_span">‎₼</small></p>
+                                                            <p><span class="nprice" id="pricePro">@pro.Price</span> <small class="azn_span">‎₼</small></p>
                                                         </div>
                                                         <button class="remove cart_remove" id="cart_remove">
                                                             <img src="https://kontakt.az/wp-content/themes/kontakt7/ktn-assets/assets/bin.png" alt="">
@@ -68,7 +70,7 @@
                                     </div>
                                     <div class="total-price">
                                         <p>
-                                            Cəmi: <span>@pro.TotalPrice</span><span class="azn_span">‎ ‎₼</span>
+                                            Cəmi: <span id="total-price">@pro.TotalPrice</span><span class="azn_span">‎ ‎₼</span>
                                         </p>
                                     </div>
                                 </div>
@@ -85,7 +87,7 @@
                         <div class="about">
                             <div class="price">
                                 <p>Məhsullar</p>
-                                <p><span class="pricespan">4099.93</span><span> ‎₼</span></p>
+                                <p><span class="pricespan">@ViewBag.ItemsTitalPrice</span><span> ‎₼</span></p>
                             </div>
                             <div class="price neqdalisaendirim_li">
                                 <p>Nağd alış endirimi</p>
@@ -95,7 +97,7 @@
                             </div>
                         </div>
                         <div class="total">
-                            <span class="pricetotal">3659.93</span><span> ‎₼</span>
+                            <span class="pricetotal">@ViewBag.ItemsTitalPrice</span><span> ‎₼</span>
                         </div>
                     </div>
                     <div class="wrapper">
@@ -115,24 +117,63 @@
                         url: "/Products/RemoveBasket?id=" + cart_removeId,
                         type: "Get",
                         success: function (res) {
-                            $("#item-box-parent").empty();
-                            $("#item-box-parent").append(res);
+                            $("#cart_row").empty();
+                            $("#cart_row").append(res);
                         }
                     });
                 });
             })
-        //$(document).ready(function () {
-        //    $(document).on("click", "#deleteAll", function () {
-        //        $.ajax({
-        //            url: "/Products/AllRemoveBasket",
-        //            type: "Get",
-        //            success: function (res) {
-        //                console.log(res)
-        //                //$("#item-box-parent").empty();
-        //                //$("#item-box-parent").append(res);
-        //            }
-        //        });
-        //    });
-        //})
+        $(document).ready(function () {
+            $(document).on("click", "#deleteAll", function () {
+                $.ajax({
+                    url: "/Products/AllRemoveBasket",
+                    type: "Get",
+                    success: function (res) {
+                        $("#cart_row").empty();
+                        $("#cart_row").append(res);
+                    }
+                });
+            });
+        })
+      
+        $(document).on("click", "#decrease", function () {
+            let input = $(this).next().val(function (i,oldval) {
+                return --oldval;
+            })
+        })
+        $(document).on("click", "#increase", function () {
+            let input = $(this).prev().val(function (i, oldval) {
+                return ++oldval;
+            })
+        })
+        $(document).ready(function () {
+            $(document).ready(function () {
+                $(document).on("click", "#increase", function () {
+                    var productId = $(this).val();
+                    $.ajax({
+                        url: "/Products/increaseBasket?id=" + productId,
+                        type: "Get",
+                        success: function (res) {
+                            $("#cart_row").empty();
+                            $("#cart_row").append(res);
+                        }
+                    });
+                });
+            })
+        })
+        $(document).ready(function () {
+            $(document).on("click", "#decrease", function () {
+                var cart_removeId = $(this).val();
+                $.ajax({
+                    url: "/Products/decreaseBasket?id=" + cart_removeId,
+                    type: "Get",
+                    success: function (res) {
+                        $("#cart_row").empty();
+                        $("#cart_row").append(res);
+                    }
+                });
+            });
+        })
+       
     </script>
 }

@@ -1,64 +1,96 @@
 ﻿@model List<BasketProductVM>
-    <div class="item-box">
-        <button id="deleteAll" class="delete">
-            <img src="https://kontakt.az/wp-content/themes/kontakt7/ktn-assets/assets/eraser.png" alt="">
-            <p class="cart_remove_selecteds">Hamısını sil</p>
-        </button>
-    </div>
-    @foreach (BasketProductVM pro in Model)
-    {
-        <div class="cart_object">
-            <div id="selected-cart-item">
-                <div class="chosen-cart">
-                    <div class="photo-box">
-                        <div class="imgHolder">
-                            <img src="~/img/products/@pro.ImageUrl">
+<div class="col-lg-8">
+    <div class="item-box-parent" id="item-box-parent">
+        <div class="item-box">
+            <button id="deleteAll" class="delete">
+                <img src="https://kontakt.az/wp-content/themes/kontakt7/ktn-assets/assets/eraser.png" alt="">
+                <p class="cart_remove_selecteds">Hamısını sil</p>
+            </button>
+        </div>
+        @foreach (BasketProductVM pro in Model)
+        {
+            <div class="cart_object">
+                <div id="selected-cart-item">
+                    <div class="chosen-cart">
+                        <div class="photo-box">
+                            <div class="imgHolder">
+                                <img src="~/img/products/@pro.ImageUrl">
+                            </div>
                         </div>
-                    </div>
-                    <div class="details">
-                        <div class="row">
-                            <div class="col-6">
-                                <div class="features">
-                                    <p>
-                                        <a href="#">
-                                            @pro.Name
-                                        </a>
-                                    </p>
-                                    <div class="labels">
-                                        <div class="lbl-cash-discount">
-                                            <p>
-                                                -<span class="cash-discount-782962">100 AZN nağd alışa</span>
-                                            </p>
-                                        </div>
-                                        <div class="lbl-percentage">
-                                            <p>18 ay <span>Faizsiz</span></p>
+                        <div class="details">
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="features">
+                                        <p>
+                                            <a href="#">
+                                                @pro.Name
+                                            </a>
+                                        </p>
+                                        <div class="labels">
+                                            <div class="lbl-cash-discount">
+                                                <p>
+                                                    -<span class="cash-discount-782962">100 AZN nağd alışa</span>
+                                                </p>
+                                            </div>
+                                            <div class="lbl-percentage">
+                                                <p>18 ay <span>Faizsiz</span></p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="second-half">
-                                    <div class="quantity">
-                                        <p>Miqdar</p>
-                                        <input type="number" id="amount_782962" value="@pro.Count" min="0" class="amount cart_amount cart_amount_782962" data-id="782962">
+                                <div class="col-6">
+                                    <div class="second-half">
+                                        <div class="quantity">
+                                            <p>Miqdar</p>
+                                            <button id="decrease" value="@pro.Id" style=" background-color: transparent; border: none; width: 10px;">-</button>
+                                            <input type="number" id="cart_amount" value="@pro.Count" min="0" class="amount cart_amount cart_amount_782962">
+                                            <button id="increase" value="@pro.Id" style="background-color: transparent; color: #ff003c; border: none; width: 10px; ">+</button>
+                                        </div>
+                                        <div class="price">
+                                            <p><span class="nprice" id="pricePro">@pro.Price</span> <small class="azn_span">‎₼</small></p>
+                                        </div>
+                                        <button class="remove cart_remove" id="cart_remove">
+                                            <img src="https://kontakt.az/wp-content/themes/kontakt7/ktn-assets/assets/bin.png" alt="">
+                                        </button>
+                                        <input type="hidden" id="cart_removeId" value="@pro.Id" />
                                     </div>
-                                    <div class="price">
-                                        <p><span class="nprice" id="price-782962">@pro.Price</span> <small class="azn_span">‎₼</small></p>
-                                    </div>
-                                    <button class="remove cart_remove" id="cart_remove">
-                                        <img src="https://kontakt.az/wp-content/themes/kontakt7/ktn-assets/assets/bin.png" alt="">
-                                    </button>
-                                    <input type="hidden" id="cart_removeId" value="@pro.Id" />
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="total-price">
-                    <p>
-                        Cəmi: <span>@pro.TotalPrice</span><span class="azn_span">‎ ‎₼</span>
-                    </p>
+                    <div class="total-price">
+                        <p>
+                            Cəmi: <span id="total-price">@pro.TotalPrice</span><span class="azn_span">‎ ‎₼</span>
+                        </p>
+                    </div>
                 </div>
             </div>
+        }
+    </div>
+</div>
+<div class="col-lg-4">
+    <div class="wrapper">
+        <h5>
+            Səbətdəki  ‎₼əhsullar <span>
+            </span>
+        </h5>
+        <div class="about">
+            <div class="price">
+                <p>Məhsullar</p>
+                <p><span class="pricespan">@ViewBag.ItemsTitalPrice</span><span> ‎₼</span></p>
+            </div>
+            <div class="price neqdalisaendirim_li">
+                <p>Nağd alış endirimi</p>
+                <p>
+                    <span class="pricediscount discount">440</span> <span>‎₼</span>
+                </p>
+            </div>
         </div>
-    }
+        <div class="total">
+            <span class="pricetotal">@ViewBag.ItemsTitalPrice</span><span> ‎₼</span>
+        </div>
+    </div>
+    <div class="wrapper">
+        <a type="button" href="#" class="btn btn-success cash">Sifarişi rəsmiləşdir</a>
+    </div>
+</div>

@@ -3972,5 +3972,20 @@ body {
     display: block;
     font-size: 24px;
   }
+
+}
+.t-neutral .spinner__button {
+    background: #222;
+    color: $#fff;
+}
+
+    .t-neutral .spinner__button:hover,
+    .t-neutral .spinner__button:focus,
+    .t-neutral .spinner__button:active {
+        background: #444;
+    }
+
+.t-neutral .spinner__input {
+    background: #eee;
 }
 /*# sourceMappingURL=style.css.map */
