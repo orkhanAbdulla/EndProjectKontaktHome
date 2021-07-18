@@ -210,7 +210,7 @@ namespace KontaktHome.Areas.Admin.Controllers
             }
             //await _context.Categories.(category);
             await _context.SaveChangesAsync();
-            return RedirectToAction("Index", "Category", true);
+            return RedirectToAction("Index", "Category", new { isMain = true });
         }
         
     }

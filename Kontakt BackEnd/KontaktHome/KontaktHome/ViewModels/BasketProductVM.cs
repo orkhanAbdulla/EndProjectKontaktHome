@@ -18,5 +18,6 @@ namespace KontaktHome.ViewModels
 
         public double ItemsTotalPrice { get; set; }
         public string ImageUrl { get; set; }
+        public Balans Balans { get; set; }
     }
 }

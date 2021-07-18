@@ -82,6 +82,7 @@ namespace KontaktHome.Areas.Admin.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+         
         public IActionResult Update(int? id)
         {
             ViewBag.MainCtg = _context.Categories.Where(c => c.IsDeleted == false && c.IsMain == true).ToList();

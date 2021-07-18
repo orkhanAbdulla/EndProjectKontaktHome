@@ -43,8 +43,8 @@ namespace KontaktHome.Helpers
     public enum Roles
     {   
         Admin,
-        Member,
-        Seller,
-        Operator
+        Satıcı,
+        Operator,
+        Müştəri
     }
 }

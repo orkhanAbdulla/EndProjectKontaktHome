@@ -1,6 +1,7 @@
 ﻿using KontaktHome.DAL;
 using KontaktHome.Models;
 using KontaktHome.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
@@ -11,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace KontaktHome.Controllers
 {
+    
     public class ProductsController : Controller
     {
         private readonly AppDbContext _context;
@@ -34,7 +36,6 @@ namespace KontaktHome.Controllers
                 {
                     //Products.AddRange(ctB.Brand.Products) ;
                     categoryProductVM.Products.AddRange(ctB.Brand.Products);
-                  
                 }
                 Category category = _context.Categories.FirstOrDefault(c => c.Id == categoryId);
                 categoryProductVM.Category = category;
@@ -61,6 +62,7 @@ namespace KontaktHome.Controllers
             Product products = _context.Products.Include(p => p.Images).
                 Include(p => p.ProductFeatures).ThenInclude(p => p.FeaturesDetail).ThenInclude(fd=>fd.Features).FirstOrDefault(p => p.Id == Id);
             if (products == null) return NotFound();
+            ViewBag.cod = products.Code;
             return View(products);
         }
         public async Task<IActionResult> AddBasket(int? id)
@@ -90,7 +92,7 @@ namespace KontaktHome.Controllers
             Response.Cookies.Append("basket", JsonConvert.SerializeObject(basket));
             return Json(basket.Count);
         }
-        public async Task<IActionResult> increaseBasket(int? id)
+        public async Task<IActionResult> IncreaseBasket(int? id)
         {
             if (id == null) return NotFound();
             Product product = await _context.Products.FindAsync(id);
@@ -141,7 +143,7 @@ namespace KontaktHome.Controllers
 
             return PartialView("_cartBasketPartial", basketProducts);
         }
-        public IActionResult decreaseBasket(int? id)
+        public IActionResult DecreaseBasket(int? id)
         {
             if (id == null) return NotFound();
             List<BasketVM> basket = new List<BasketVM>();
@@ -183,7 +185,7 @@ namespace KontaktHome.Controllers
             return PartialView("_cartBasketPartial", basketProducts);
 
         }
-        public IActionResult RemoveBasket(int id)
+        public IActionResult RemoveBasket(int? id)
         {
             if (id == null) return NotFound();
             List<BasketVM> basket = new List<BasketVM>();
@@ -286,6 +288,49 @@ namespace KontaktHome.Controllers
        
             return View(basketProducts);
         }
+        [Authorize]
+        public IActionResult Checkout()
+        {
+            List<BasketProductVM> basketProducts = new List<BasketProductVM>();
+            string username = User.Identity.Name;
+            var result = _context.AppUsers.FirstOrDefault(u => u.UserName == username);
+            Balans balans = _context.Balans.FirstOrDefault(u => u.AppUserId == result.Id);
+            ViewBag.Balansim = balans.Amount;
+
+            if (Request.Cookies["basket"] != null)
+            {
+                List<BasketVM> basket = JsonConvert.DeserializeObject<List<BasketVM>>(Request.Cookies["basket"]);
+                double totalPrice = 0;
+                double itemsTotalPrice = 0;
+                foreach (BasketVM pro in basket)
+                {
+                    Product DbProduct = _context.Products.Include(x => x.Images).FirstOrDefault(p => p.Id == pro.Id);
+                    totalPrice = pro.Count * DbProduct.Price;
+                    itemsTotalPrice += totalPrice;
+                    ViewBag.ItemsTitalPrice = itemsTotalPrice;
+                    basketProducts.Add(new BasketProductVM
+                    {
+                        Id = pro.Id,
+                        Count = pro.Count,
+                        Price = DbProduct.Price,
+                        Name = DbProduct.Name,
+                        ImageUrl = DbProduct.Images[0].Image,
+                        TotalPrice = totalPrice,
+                        ItemsTotalPrice = itemsTotalPrice,
+
+                    }) ;
+                    
+                }
+               
+
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            return View(basketProducts);
+        }
+      
 
     }
 }

@@ -1,0 +1,152 @@
+﻿@model List<BasketProductVM>
+@{
+    ViewData["Title"] = "Checkout";
+}
+
+<main>
+    <section id="checkout">
+        <div class="container">
+            <div class="headline-return">
+                <h2>Sifariş</h2>
+            </div>
+            <div class="row checkout-row">
+                <div class="col-lg-9">
+                    <form asp-action="CheckOrder" id="checkout_form">
+                        <div class="checkout-accordion-menu checkout-contact-tab">
+                            <button type="button" class="btn-accordion ">
+                                Əlaqə məlumatları
+                            </button>
+                            <div class="content">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="">Adınız <span>*</span></label>
+                                            <input required="" type="text" class="form-control" placeholder="Adınız" name="first_name" value="">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="">Ata adı <span>*</span></label>
+                                            <input required="" type="text" class="form-control" placeholder="Ata adı" name="paternal_name" value="">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="">Soyadınız <span>*</span></label>
+                                            <input required="" type="text" class="form-control" placeholder="Soyadınız" name="last_name" value="">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="">Telefon nömrəniz <span>*</span></label>
+                                            <div class="mobile">
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <div class="input-group-text">+994</div>
+                                                    </div>
+                                                    <div class="selectHolder">
+                                                        <select required="" name="mobile_number_prefix" class="number_prefix">
+                                                            <option value="">0XX</option>
+                                                            <option value="050">050</option>
+                                                            <option value="051">051</option>
+                                                            <option value="055">055</option>
+                                                            <option value="070">070</option>
+                                                            <option value="077">077</option>
+                                                            <option value="099">099</option>
+                                                        </select>
+                                                    </div>
+                                                    <input required="" type="text" class="form-control mob-mask" inputmode="text" name="mobile_number" value="" placeholder="  ">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-12 col-xs-12">
+                                        <div class="form-group">
+                                            <label for="">Əlavə qeydiniz (varsa) </label>
+                                            <textarea type="text" class="form-control" name="elave_qeyd" rows="2"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="checkout-accordion-menu accordion-delivery">
+                                <button type="button" class="btn-accordion ">
+                                    Çatdırılma ünvanları
+                                </button>
+                                <div class="content" style="display: block;">
+                                    <div class="add-new-address" style="display: block ">
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label for="">Şəhər</label>
+                                                    <input type="text" class="form-control" placeholder="Şəhər" name="different_address_city" required="required">
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label for="">Rayon</label>
+                                                    <input type="text" class="form-control" placeholder="Rayon" name="different_address_district" required="required">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="">Ünvan</label>
+                                            <input type="text" class="form-control" placeholder="Küç., bina, blok, mənzil, mərtəbə" name="different_address_details" required="required">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                          
+                             <button type="submit" class="btn-add-to-cart btn-add-order btn-add-order-buttons">
+                                <i class="fa fa-spinner fa-spin" style="display:none"></i>Sifarişi tamamla
+                             </button>
+                                
+                           
+                    </form>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="products">
+                    <div class="headline-return-resp">
+                        <h2> Məhsullar </h2>
+                    </div>
+                    <div class="content-body">
+                        <div class="content-list-prod" style="display:block">
+                            @foreach (BasketProductVM pro in Model)
+                            {
+                                <div class="row prodrowcheckout">
+                                    <div class="col-4">
+                                        <img style="width:100%" src="~/img/products/@pro.ImageUrl">
+
+                                    </div>
+                                    <div class="col-8">
+                                        <div class="title">
+                                            <p>@pro.Name</p>
+                                        </div>
+                                        <div class="price">
+                                            <h4>@pro.Price<small class="azn_span">₼</small> </h4>
+                                        </div>
+                                    </div>
+                                </div>
+                                <ul class="miqdar">
+                                    <li>
+                                        <p> Miqdar: <span>@pro.Count</span></p>
+                                    </li>
+                                </ul>
+                            }
+
+                        </div>
+                    </div>
+                    <div class="footer">
+                        <h4 style="color:red">Yekun: @ViewBag.ItemsTitalPrice<small class="azn_span"> ₼</small></h4>
+                    </div>
+                    <div class="footer">
+                        <h4>Balansım: @ViewBag.Balansim<small class="azn_span"> ₼</small></h4>
+                    </div>
+                </div>
+                <button type="button" class="btn-add-to-cart btn-order btn-add-order-buttons">
+                    <i class="fa fa-spinner fa-spin" style="display:none"></i>
+                    Sifarişi tamamla
+                </button>
+            </div>
+
+        </div>
+    </section>
+</main>
+

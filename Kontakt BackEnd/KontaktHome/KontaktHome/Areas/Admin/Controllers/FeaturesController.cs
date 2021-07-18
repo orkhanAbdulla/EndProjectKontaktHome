@@ -35,7 +35,7 @@ namespace KontaktHome.Areas.Admin.Controllers
             if (categoryId == null) return NotFound();
             Category category = _context.Categories.FirstOrDefault(c => c.Id == categoryId);
             if (category == null) return NotFound();
-            ViewBag.CategoryId = category.Id;
+            ViewBag.CategoryId = categoryId;
             return View();
         }
         [HttpPost]
@@ -48,11 +48,18 @@ namespace KontaktHome.Areas.Admin.Controllers
 
             await _context.Features.AddAsync(features);
             await _context.SaveChangesAsync();
+            bool isExist = _context.Features.Any(c => c.Name.Trim().ToLower() == features.Name.Trim().ToLower());
+            if (isExist)
+            {
+                ModelState.AddModelError("Name", "Bu adda kateqoiya artıq mövcutdur");
+                return View();
+            }
             CategoryFeatures categoryFeatures = new CategoryFeatures
             {
                 CategoryId = (int)categoryId,
                 FeaturesId = features.Id
             };
+            ViewBag.CategoryId = category.Id;
             await _context.CategoryFeatures.AddAsync(categoryFeatures);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index), new { categoryId });
@@ -67,7 +74,7 @@ namespace KontaktHome.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Delete(int? id,int? categoryId)
+        public async Task<IActionResult> Delete(int? id, int? categoryId)
         {
             if (categoryId == null) return NotFound();
             Category category = _context.Categories.FirstOrDefault(c => c.Id == categoryId);

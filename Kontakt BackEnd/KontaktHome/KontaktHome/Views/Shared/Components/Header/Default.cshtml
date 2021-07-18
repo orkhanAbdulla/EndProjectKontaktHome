@@ -98,15 +98,7 @@
                                 </a>
                             </li>
 
-                            <li class="lang_list_item">
-                                <a href="">
-                                    <img class="lazy loaded"
-                                         data-src="https://kontakt.az/wp-content/themes/kontakt7/ktn-assets/assets/russia-flag-round-icon-256.png"
-                                         alt=""
-                                         src="https://kontakt.az/wp-content/themes/kontakt7/ktn-assets/assets/russia-flag-round-icon-256.png"
-                                         data-was-processed="true">
-                                </a>
-                            </li>
+       
 
                         </ul>
                     </div>
@@ -150,8 +142,9 @@
                             <li>
                                 @if (User.Identity.IsAuthenticated)
                                 {
-                                    <a asp-controller="Account" asp-action="Logout" id="id_my_profile">
-                                        <i class="fa fa-user" style="color: white;padding: 10px 5px 15px 5px;font-size: 31px;"></i><span>@User.Identity.Name</span>
+                                  
+                                    <a asp-controller="Account" asp-action="MyAccount" id="id_my_profile">
+                                        <i class="fa fa-user" style="color: white;padding: 10px 5px 15px 5px;font-size: 31px;"></i><span>Hesabım</span>
                                     </a>
                                 }
                                 else
@@ -237,8 +230,8 @@
                                 @if (User.Identity.IsAuthenticated)
                                 {
 
-                                    <a id="id_my_profile" href="">
-                                        <i class="fa fa-user" style="color: white;padding: 10px 5px 15px 5px;font-size: 31px;display:block;"></i><span>@User.Identity.Name</span>
+                                    <a asp-controller="Account" asp-action="MyAccount" id="id_my_profile">
+                                        <i class="fa fa-user" style="color: white;padding: 10px 5px 15px 5px;font-size: 31px;"></i><span>Hesabım</span>
                                     </a>
                                 }
                                 else

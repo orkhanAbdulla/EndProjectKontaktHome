@@ -101,7 +101,7 @@
                         </div>
                     </div>
                     <div class="wrapper">
-                        <a type="button" href="#" class="btn btn-success cash">Sifarişi rəsmiləşdir</a>
+                        <a asp-action="Checkout" class="btn btn-success cash">Sifarişi rəsmiləşdir</a>
                     </div>
                 </div>
             </div>
@@ -151,7 +151,7 @@
                 $(document).on("click", "#increase", function () {
                     var productId = $(this).val();
                     $.ajax({
-                        url: "/Products/increaseBasket?id=" + productId,
+                        url: "/Products/IncreaseBasket?id=" + productId,
                         type: "Get",
                         success: function (res) {
                             $("#cart_row").empty();
@@ -165,7 +165,7 @@
             $(document).on("click", "#decrease", function () {
                 var cart_removeId = $(this).val();
                 $.ajax({
-                    url: "/Products/decreaseBasket?id=" + cart_removeId,
+                    url: "/Products/DecreaseBasket?id=" + cart_removeId,
                     type: "Get",
                     success: function (res) {
                         $("#cart_row").empty();

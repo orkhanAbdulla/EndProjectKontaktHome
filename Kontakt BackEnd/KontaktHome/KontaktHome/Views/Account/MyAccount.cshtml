@@ -1,0 +1,80 @@
+﻿@model AppUser
+@{
+    ViewData["Title"] = "MyAccount";
+}
+
+<section id="my-account">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3">
+                <div id="my-account-sidebar">
+                    <h1 class="headline-sm">
+                        Şəxsi kabinet
+                    </h1>
+                    <ul>
+                        <button class="btn-feature">
+                            Mənim hesabım <div class="icon">
+                            </div>
+                        </button>
+                        <div class="sub-menu">
+                        <li>
+                            <a href="https://kontakt.az?logout_k=1">Müştəri: <b>@Model.UserName</b></a>
+                        </li>
+                        <li>
+                            <a href="#admin-panel" class="active">Balansım: <b>@Model.Balans.Amount <span> ₼</span></b></a>
+                        </li>
+                        <li>
+                            <a asp-action="Logout">Çıxış</a>
+                        </li>
+</div>
+                </ul>
+            </div>
+        </div>
+        <div class="col-lg-9">
+            <h1 class="headline-sm">
+                Balansı artır
+            </h1>
+            <div id="ecom-header">
+                <img class="logo" src="~/img/muaccount/Logo.svg" alt="pb-logo">
+                <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+                <form method="post">
+                    <div class="input-field">
+                        <label for="cardname">Məbləğ</label>
+                        <input asp-for="Balans.Amount" placeholder="Məbləği qeyd edin">
+                    </div>
+                    <div class="input-field">
+                        <label for="cardname">Ad və Soyad</label>
+                        <input required="" tabindex="1" id="cardname" name="cardname" type="text" maxlength="26" placeholder="Kart üzərindəki ad və soyad">
+                    </div>
+                    <div class="input-field">
+                        <label for="cardnr">Kart nömrəsi</label>
+                        <div class="input-with-icon">
+                            <input required="" tabindex="2" type="text" id="cardnr" name="cardnr" placeholder="1234 1234 1234 1234" inputmode="text">
+                            <img id="card-number-icon" src="~/img/muaccount/cvc.svg" alt="card">
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <div class="input-field">
+                            <label for="expire-date">Kartın bitmə tarixi</label>
+                            <input required="" id="expire-date" type="text" placeholder="ay / il" maxlength="5" inputmode="text">
+                        </div>
+
+                        <div class="input-field">
+                            <label for="cvc2">CVC2 / CVV2</label>
+                            <div class="input-with-icon">
+                                <input required="" id="cvc2" name="cvc2" type="password" placeholder="cvc2 / cvv2" maxlength="3">
+                                <img src="~/img/muaccount/card.svg" alt="card">
+                            </div>
+                        </div>
+                    </div>
+                    <button id="pay-btn" class="btn pay-btn" type="submit">
+                        Balansı artır
+                    </button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+    </div>
+</section>
+

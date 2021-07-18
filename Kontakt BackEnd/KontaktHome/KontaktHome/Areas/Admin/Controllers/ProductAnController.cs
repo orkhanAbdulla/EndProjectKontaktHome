@@ -90,7 +90,7 @@ namespace KontaktHome.Areas.Admin.Controllers
                     ModelState.AddModelError("", "Yalnız şəkil yükləyə bilərsiniz");
                     return View(dbProductVM);
                 }
-                if (!photo.IsValidSize(200))
+                if (!photo.IsValidSize(500))
                 {
                     ModelState.AddModelError("", "Şəkilin ölçüsü 200kb çox ola bilməz");
                     return View(dbProductVM);

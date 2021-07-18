@@ -87,6 +87,28 @@ namespace KontaktHome.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
+            modelBuilder.Entity("KontaktHome.Models.Balans", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("AppUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AppUserId")
+                        .IsUnique()
+                        .HasFilter("[AppUserId] IS NOT NULL");
+
+                    b.ToTable("Balans");
+                });
+
             modelBuilder.Entity("KontaktHome.Models.Bio", b =>
                 {
                     b.Property<int>("Id")
@@ -468,6 +490,13 @@ namespace KontaktHome.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("KontaktHome.Models.Balans", b =>
+                {
+                    b.HasOne("KontaktHome.Models.AppUser", "AppUser")
+                        .WithOne("Balans")
+                        .HasForeignKey("KontaktHome.Models.Balans", "AppUserId");
                 });
 
             modelBuilder.Entity("KontaktHome.Models.Category", b =>

@@ -1,0 +1,106 @@
+﻿@model List<Product>
+@{
+    Layout = null;
+}
+
+<div class="shop-items">
+    <!-- view componentte alanda burdaki ro View Bagla gelmelidi -->
+    <div class="shop-slider row">
+        <div class="carouseldiv swiper-container">
+            <div class="main-carousel swiper-wrapper">
+                @foreach (Product pro in Model)
+                {
+                    <div class="item swiper-slide" style="width: 277px;">
+                        <div class="cart-item xustekcart">
+                            <div class="cart-body-top">
+                                <div class="imgHolder">
+
+                                    <a asp-controller="Products" asp-action="Detail" asp-route-Id="@pro.Id">
+                                        <img src="~/img/products/@pro.Images[0].Image">
+                                    </a>
+
+                                    <div class="lbl-cash-discount lbl-120-per lbl-percentage-grid-2021-360">
+                                        <img src="https://kontakt.az/wp-content/uploads/2021/03/4_az.png">
+                                    </div>
+                                    <div class="lbl-percentage lbl-percentage-grid lbl-percentage-grid-2021-xususi">
+                                        <p>Xüsusi təklif</p>
+                                    </div>
+                                </div>
+                                <div class="name">
+                                    <a asp-controller="Products" asp-action="Detail" asp-route-Id="@pro.Id">
+                                        @pro.Name
+                                    </a>
+                                </div>
+                                <div class="cart-footer">
+                                    @if (pro.Discount > 0)
+                                    {
+                                        <p class="endirimvar" style="color: #ff003c" ;>
+                                            <span style="text-decoration: line-through; font-weight: normal; color: #282828">@pro.Price<small class="azn_span">₼</small></span><br><span class="nprice" id="price-86071">@(pro.Price-((pro.Price * pro.Discount) / 100)) <small class="azn_span">₼</small></span>
+                                        </p>
+                                    }
+                                    else
+                                    {
+                                        <p>
+                                            <span class="nprice" id="price-692028">@pro.Price</span> <small class=" ‎azn_span">₼</small>
+                                        </p>
+                                    }
+
+                                    <button class="btn-add-to-cart" id="AddBasket">Səbətə at</button>
+                                    <input type="hidden" id="ProductId" value="@pro.Id" />
+                                </div>
+                            </div>
+
+                            <div class="cart-add">
+                                <ul>
+
+                                    <li>
+                                        <p>Ekran</p> <span> 6.2" </span>
+                                    </li>
+                                    <li>
+                                        <p>Batareya</p> <span> 4000 (mAh) </span>
+                                    </li>
+                                    <li>
+                                        <p>Zəmanət</p> <span> 1 il </span>
+                                    </li>
+                                    <li>
+                                        <p>Zəmanət</p> <span> 1 il </span>
+                                    </li>
+                                    <li>
+                                        <p>Zəmanət</p> <span> 1 il </span>
+                                    </li>
+                                </ul>
+                                <div class="action">
+                                    <button type="button" class="compare-button" data-id="692028"
+                                            data-mid="00627244" data-price="2099.99">
+                                        <div class="icon">
+                                            <img src="https://kontakt.az/wp-content/themes/kontakt7/ktn-assets/assets/tb-comparisonnew.png">
+                                            <img class="active"
+                                                 src="https://kontakt.az/wp-content/themes/kontakt7/ktn-assets/assets/comparisonnew.png">
+
+                                        </div>
+                                        <span>Müqayisə et</span>
+                                    </button>
+                                    <button type="button" class="select-item" data-id="692028"
+                                            data-mid="00627244" data-price="2099.99">
+                                        <div class="icon">
+                                            <i class="fa fa-heart-o" aria-hidden="true"></i>
+                                        </div>
+                                        <span>Seçilmiş et</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+
+            </div>
+            <!-- <div class="swiper-pagination">
+
+            </div> -->
+        </div>
+        <div class="all-offers">
+            <a class="#" href="#">Bütün təklifləri gör</a>
+        </div>
+    </div>
+</div>

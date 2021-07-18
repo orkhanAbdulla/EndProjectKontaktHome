@@ -3339,6 +3339,250 @@ letter-spacing: normal
     }
 }
 
+
+//checkout
+#checkout {
+    .headline-return {
+        padding: 11px 0;
+    }
+
+    .checkout-row {
+        display: flex;
+        flex-wrap: wrap;
+        margin-right: -15px;
+        margin-left: -15px;
+
+        #checkout_form {
+            .checkout-accordion-menu {
+                margin-bottom: 40px;
+
+                .btn-accordion {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    background-color: #f3f4f5;
+                    border: none;
+                    width: 100%;
+                    font-size: 22px;
+                    font-weight: 700;
+                    color: #282828;
+                    padding: 5px 20px;
+                }
+
+                .content {
+                    padding: 20px 30px;
+                    border: 2px solid rgba(0,0,0,.08);
+                    background-color: #fff;
+
+                    .form-group {
+                        label {
+                            font-size: 16px;
+                            font-weight: 700;
+                            color: #282828;
+                            margin-bottom: 10px;
+
+                            span {
+                                color: #ff003c;
+                            }
+                        }
+
+                        input {
+                            border: 2px solid rgba(0,0,0,.15);
+                        }
+
+                        .form-control {
+                            display: block;
+                            width: 100%;
+                            height: calc(1.5em + .75rem + 2px);
+                            padding: .375rem .75rem;
+                            font-size: 1rem;
+                            font-weight: 400;
+                            line-height: 1.5;
+                            color: #495057;
+                            background-color: #fff;
+                            background-clip: padding-box;
+                            border: 1px solid #ced4da;
+                            border-radius: .25rem;
+                            transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+                        }
+
+                        .mobile {
+                            display: flex;
+                        }
+
+                        .input-group {
+                            position: relative;
+                            display: flex;
+                            flex-wrap: wrap;
+                            align-items: stretch;
+                            width: 100%;
+
+                            .input-group-prepend {
+                                display: flex;
+
+                                .input-group-text {
+                                    display: flex;
+                                    align-items: center;
+                                    padding: .375rem .75rem;
+                                    margin-bottom: 0;
+                                    font-size: 1rem;
+                                    font-weight: 400;
+                                    line-height: 1.5;
+                                    color: #495057;
+                                    text-align: center;
+                                    white-space: nowrap;
+                                    background-color: #e9ecef;
+                                    border: 1px solid #ced4da;
+                                    border-radius: .25rem;
+                                }
+                            }
+
+                            .selectHolder {
+                                position: relative;
+                                border: 0;
+                                float: left;
+
+                                .number_prefix {
+                                    margin-bottom: 0;
+                                    font-size: 17px;
+                                    color: rgba(40, 40, 40, 0.7);
+                                    border: 1px solid #d9d9d9;
+                                    border-right: none;
+                                    border-radius: 0;
+                                    background-color: #fff;
+                                    padding-right: 10px;
+                                    height: 100%;
+                                    width: 100%;
+
+                                    &:focus {
+                                        border: none !important;
+                                    }
+                                }
+                            }
+
+                            .form-control {
+                                position: relative !important;
+                                flex: 1 1 auto !important;
+                                width: 1% !important;
+                                margin-bottom: 0 !important;
+                                display: block;
+                                height: calc(1.5em + .75rem + 2px);
+                                padding: .375rem .75rem;
+                                font-size: 1rem;
+                                font-weight: 400;
+                                line-height: 1.5;
+                                color: #495057;
+                                background-color: #fff;
+                                background-clip: padding-box;
+                                border: 1px solid #ced4da;
+                                border-radius: .25rem;
+                                transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+                            }
+                        }
+
+                        textarea.form-control {
+                            display: block;
+                            width: 100%;
+                            height: auto;
+                            padding: .375rem .75rem;
+                            font-size: 1rem;
+                            font-weight: 400;
+                            line-height: 1.5;
+                            color: #495057;
+                            background-color: #fff;
+                            background-clip: padding-box;
+                            border: 1px solid #ced4da;
+                            border-radius: .25rem;
+                            transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+                        }
+                    }
+
+                    .btn-add-to-cart {
+                        @extend %btn-add-to-cart;
+                        display: block !important;
+                        margin: 20px auto 0 !important;
+                        width: 170px !important;
+                    }
+                }
+            }
+        }
+
+        .products {
+            border: 2px solid rgba(0,0,0,.08);
+            background-color: #fff;
+
+            .headline-return-resp {
+                padding: 11px 20px;
+            }
+
+            .content-body {
+                display: flex;
+                padding: 15px;
+
+                .content-list-prod {
+                    .prodrowcheckout {
+                        margin-bottom: 16px;
+
+                        img {
+                            width: 100%;
+                        }
+
+                        .title {
+                        }
+
+                        .price {
+                            h4 {
+                                font-size: 14px !important;
+                            }
+                        }
+                    }
+
+                    .miqdar {
+                        margin-top: -16px;
+                        margin-bottom: 16px;
+                        margin: 0;
+                        padding: 0;
+
+                        li {
+                            list-style: none;
+
+                            p {
+                                margin-bottom: 0;
+                            }
+                        }
+                    }
+                }
+            }
+
+            .footer {
+                border-top: 1px solid #e5e7e8;
+
+                h4 {
+                    font-size: 17px;
+                    color: #282828;
+                    padding: 10px 20px;
+                    margin-bottom: 0;
+                    font-weight: 700;
+                    text-align: right;
+                }
+            }
+        }
+
+        .btn-add-to-cart {
+            @extend %btn-add-to-cart;
+            width: 100% !important;
+            height: 40px !important;
+            margin: 20px 0 !important;
+        }
+    }
+}
+
+
+
+
+
+
+
 .t-neutral .spinner__button {
     background: #222;
     color: $#fff;

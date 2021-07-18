@@ -1,8 +1,10 @@
-﻿using KontaktHome.Helpers;
+﻿using KontaktHome.DAL;
+using KontaktHome.Helpers;
 using KontaktHome.Models;
 using KontaktHome.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,18 +17,20 @@ namespace KontaktHome.Controllers
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
         private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly AppDbContext _context;
         public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager,
-            RoleManager<IdentityRole> roleManager)
+            RoleManager<IdentityRole> roleManager, AppDbContext context)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _roleManager = roleManager;
+            _context = context;
         }
         public IActionResult Login()
         {
             if (User.Identity.IsAuthenticated)
             {
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction(nameof(MyAccount));
             }
             return View();
         }
@@ -36,7 +40,7 @@ namespace KontaktHome.Controllers
         {
             if (!ModelState.IsValid) return View();
             AppUser user = await _userManager.FindByNameAsync(Login.UserName);
-            if (user==null)
+            if (user == null)
             {
                 ModelState.AddModelError("", "İstifadəçi adı və ya Şifrə yanlışdır!");
                 return View();
@@ -63,13 +67,13 @@ namespace KontaktHome.Controllers
                 ModelState.AddModelError("", "İstifadəçi adı və ya Şifrə yanlışdır!");
                 return View();
             }
-            if ((await _userManager.GetRolesAsync(user))[0]==Roles.Admin.ToString())
+            if ((await _userManager.GetRolesAsync(user))[0] == Roles.Admin.ToString())
             {
                 return RedirectToAction("Index", "Dashboard", new { area = "Admin" });
             }
 
-            return RedirectToAction("Index", "Home");
-        
+            return RedirectToAction(nameof(MyAccount));
+
         }
         public IActionResult Register()
         {
@@ -88,13 +92,22 @@ namespace KontaktHome.Controllers
             AppUser newUser = new AppUser
             {
                 Email = register.Email,
-                UserName = register.UserName
-
+                UserName = register.UserName,
+                
             };
-
             IdentityResult identityResult = await _userManager.CreateAsync(newUser, register.Password);
+         
             if (identityResult.Succeeded)
             {
+                Balans Balans = new Balans
+                {
+                    AppUserId = newUser.Id,
+                    Amount = 0
+
+                };
+                _context.Balans.Add(Balans);
+                await _context.SaveChangesAsync();
+
                 var code = await _userManager.GenerateEmailConfirmationTokenAsync(newUser);
                 var confirmationLink = Url.Action(nameof(ConfirmEmail), "Account", new { userName = newUser.UserName, code }, Request.Scheme);
                 var mailto = newUser.Email;
@@ -102,10 +115,12 @@ namespace KontaktHome.Controllers
                     $"</br><p>Qeydiyatı yalnız bir dəfə təsdiqləyə bilərsiz</p>";
                 var messageSubject = "Email Təsdiqləmə";
                 await Helper.SendMessageAsync(messageSubject, messageBody, newUser.Email);
-                await _userManager.AddToRoleAsync(newUser, Roles.Member.ToString());
+                await _userManager.AddToRoleAsync(newUser, Roles.Satıcı.ToString());
                 return RedirectToAction("VerifyEmail", "Account");
-               
+              
+
             }
+
             else
             {
                 foreach (IdentityError error in identityResult.Errors)
@@ -114,6 +129,7 @@ namespace KontaktHome.Controllers
                 }
                 return View();
             }
+        
         }
         public IActionResult VerifyEmail()
         {
@@ -145,7 +161,36 @@ namespace KontaktHome.Controllers
             await _signInManager.SignOutAsync();
             return RedirectToAction("Index", "Home");
         }
+        public IActionResult MyAccount()
+        {
+            string username = User.Identity.Name;
+            if (username == null) return RedirectToAction(nameof(Login));
+            var result = _context.AppUsers.FirstOrDefault(u => u.UserName == username);
+            AppUser appUser = _context.AppUsers.Where(u => u.Id == result.Id).Include(u => u.Balans).FirstOrDefault();
+            return View(appUser);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult MyAccount(AppUser balanss)
+        {
+            if (balanss == null) return NotFound();
+            string username = User.Identity.Name;
+            if (username == null) return RedirectToAction(nameof(Login));
+            var result = _context.AppUsers.FirstOrDefault(u => u.UserName == username);
+            AppUser appUser = _context.AppUsers.Where(u => u.Id == result.Id).Include(u => u.Balans).FirstOrDefault();
 
+            Balans oldbalans = _context.Balans.FirstOrDefault(u => u.AppUserId == result.Id);
+           
+            if (oldbalans != null)
+            {
+                oldbalans.Amount += balanss.Balans.Amount;
+                _context.Balans.Update(oldbalans);
+
+            }
+
+            _context.SaveChanges();
+            return RedirectToAction(nameof(MyAccount));
+        }
         #region CreateRoles
         //public async Task CreateRoles()
         //{

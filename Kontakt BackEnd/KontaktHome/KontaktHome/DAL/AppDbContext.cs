@@ -22,6 +22,8 @@ namespace KontaktHome.DAL
         public DbSet<ProductFeatures> ProductFeatures { get; set; }
         public DbSet<FeaturesDetail> FeaturesDetails { get; set; }
         public DbSet<CategoryFeatures> CategoryFeatures { get; set; }
+        public DbSet<AppUser> AppUsers { get; set; }
+        public DbSet<Balans> Balans { get; set; }
 
     }
 }

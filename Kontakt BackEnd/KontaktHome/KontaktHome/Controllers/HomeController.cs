@@ -26,6 +26,7 @@ namespace KontaktHome.Controllers
         {
             return View(_context.Sliders.ToList());
         }
+      
 
         public IActionResult Privacy()
         {

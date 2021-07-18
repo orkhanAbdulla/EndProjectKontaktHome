@@ -1,6 +1,8 @@
 ﻿@model Product
 @{
     ViewData["Title"] = "Detail";
+    int count = 1;
+
 }
 
 <main>
@@ -12,7 +14,7 @@
                         <img src="https://kontakt.az/wp-content/themes/kontakt7/ktn-assets/assets/check.png" alt="">
                         Məhsul mövcuddur
                     </p>
-                    <p>Məhsul kodu: <span>0026196</span></p>
+                    <p>Məhsul kodu: <span>@ViewBag.cod</span></p>
                 </div>
                 <div class="product-feedback">
                     <button class="feedback-action select-item" data-id="50244" data-mid="0026196" data-price="1099.99">
@@ -29,7 +31,7 @@
                 <div class="product-slider">
 
                     <div class="images">
-                        @for (int i = 0; i <Model.Images.Count; i++)
+                        @for (int i = 0; i < Model.Images.Count; i++)
                         {
                             <div class="item">
                                 <a>
@@ -48,7 +50,7 @@
                         </div>
                     </div>
                 </div>
-                <form action="" class="product-features">
+                <form class="product-features">
                     <div class="wrapper">
                         <div class="feature-container">
                             <h1 class="title">@Model.Name</h1>
@@ -58,17 +60,6 @@
                             </a>
                             <img class="undertitle_icon" src="https://kontakt.az/wp-content/uploads/2021/03/visaaz.png" style="height: 34.8px;">
                             <div class="feature">
-                                <div class="color">
-                                    <p>Rəng:</p>
-                                    <button type="button" class="c1" style="background-color: gray;"></button>
-                                    <button type="button" class="c1" style="background-color: #4fa59a;"></button>
-                                    <button type="button" class="c1 1" style="background-color: blue;"></button>
-                                </div>
-                                <div class="memory">
-                                    <p>Yaddaş:</p>
-                                    <button type="button" class="active" title="64GB">64GB</button>
-                                    <button type="button" class="" title="128GB">128GB</button>
-                                </div>
                                 <div class="labels">
                                     <a href="#" data-toggle="tooltip" data-placement="bottom" class="lbl-box-new" data-html="true" title="" data-original-title="<p>Nağd alışda endirim.</p>">
                                         <img src="https://kontakt.az/wp-content/themes/kontakt7/ktn-assets/assets/badges/gray-nagd.png" alt="">
@@ -93,22 +84,24 @@
                                         <small class="qiymeti  qiymeti_endirim">
                                             qiyməti
                                         </small>
-                                        <p class="p-price"><span class="nprice" id="price-751190">@Model.Price</span> <small class="azn_span">₼</small></p>
-                                        <div class="lbl-price-discount">
-                                            <div class="discount">
-                                                <p> -40 <small class="azn_span">₼</small></p>
-                                            </div>
-                                            <div class="discounted-price">
-                                                <p>nağd alışda 359.99 <small class="azn_span">₼</small></p>
-                                            </div>
-                                        </div>
+                                        @if (Model.Discount > 0)
+                                        {
+                                            <p class="endirimvar">
+                                                <span style="text-decoration: line-through; font-weight: normal; color:#282828; ">@Model.Price<small class="azn_span">₼</small></span><br><span class="nprice" id="price-327650">@(Model.Price-((Model.Price * Model.Discount) / 100))<small class="azn_span">₼</small></span>
+                                            </p>
+                                        }
+                                        else
+                                        {
+                                            <p class="p-price"><span class="nprice" id="price-751190">@Model.Price</span> <small class="azn_span">₼</small></p>
+                                        }
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="mop">
-                        <button type="button" class="btn-add-to-cart"> Nağd al </button>
+                        <button type="button" class="btn-add-to-cart" id="AddBasket">Səbətə at</button>
+                        <input type="hidden" id="ProductId" value="@Model.Id" />
                     </div>
                 </form>
             </div>
@@ -119,40 +112,85 @@
         <div class="container">
             <div class="nav">
                 <a> Xüsusiyyətlər</a>
-            </div> 
+            </div>
             <div class="tab-content">
-                    <div class="row">
-                        <div class="col-lg-4 pr-0">
-                            <ul class="features-review-tabs">
-                                @foreach (ProductFeatures pf in Model.ProductFeatures)
+                <div class="row">
+                    <div class="col-lg-4 pr-0">
+                        <ul class="features-review-tabs">
+                            @{
+                                foreach (ProductFeatures pf in Model.ProductFeatures)
                                 {
-                                    <li>
-                                        @pf.FeaturesDetail.Features.Name
-                                    </li>
-                                }
-                                @*<li class="gray-line">
-                                    İstehsalçı
-                                </li>*@
+                                    if (count % 2 == 0)
+                                    {
+                                        <li>
+                                            @pf.FeaturesDetail.Features.Name
+                                        </li>
+                                    }
+                                    else
+                                    {
+                                        <li class="gray-line">
+                                            @pf.FeaturesDetail.Features.Name
+                                        </li>
 
-                            </ul>
-                        </div>
-                        <div class="col-lg-8 pl-0">
-                            <ul class="features-review-tabs submenuItems_params">
-                                @foreach (ProductFeatures pf in Model.ProductFeatures)
-                                {
-                                <li class="gray-line">
-                                    @pf.FeaturesDetail.Description
-                                </li>
-
+                                    }
+                                    count++;
                                 }
-                                @*<li>
-                                    2021
-                                </li>*@
-                            </ul>
-                        </div>
+
+                            }
+
+
+                        </ul>
                     </div>
-            </div>          
+                    <div class="col-lg-8 pl-0">
+                        <ul class="features-review-tabs submenuItems_params">
+                            @{
+                                foreach (ProductFeatures pf in Model.ProductFeatures)
+                                {
+                                    if (count % 2 == 0)
+                                    {
+                                        <li>
+                                            @pf.FeaturesDetail.Description
+                                        </li>
+                                    }
+                                    else
+                                    {
+                                        <li class="gray-line">
+                                            @pf.FeaturesDetail.Description
+                                        </li>
+
+                                    }
+                                    count++;
+                                }
+
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 </main>
+@section Script{
+    <script>
+
+        $(document).ready(function () {
+            $(document).ready(function () {
+                $(document).on("click", "#AddBasket", function () {
+                    var productId = $(this).next().val();
+                    alertify.set('notifier', 'delay', 1);
+                    alertify.set('notifier', 'position', 'bottom-center');
+                    alertify.error('İcra edildi!');
+                    $.ajax({
+                        url: "/Products/AddBasket?id=" + productId,
+                        type: "Get",
+                        success: function (res) {
+                            $(".cart_count").empty();
+                            $(".cart_count").append(res);
+                        }
+                    });
+                });
+            })
+        })
+    </script>
+}
 
