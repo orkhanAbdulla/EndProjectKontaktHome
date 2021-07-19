@@ -1,0 +1,137 @@
+﻿@model List<SelectProductVM>
+@{
+    ViewData["Title"] = "Selection";
+}
+
+<main>
+    <section id="selections">
+        <div class="container">
+            <div class="row">
+                <div class="col-3">
+                    <div id="selections-aside">
+                        <div class="useful-info">
+                            <div class="info-header">
+                                <div class="icon">
+                                    <svg viewBox="-21 -21 682.67 682.67" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="m322.82 387.93 279.95-307.27 36.957 33.672-314.34 345.02-171.36-162.9 34.453-36.238zm297.49-178.87-38.988 42.93c5.6602 21.734 8.6758 44.523 8.6758 68.004 0 148.88-121.12 270-270 270s-270-121.12-270-270 121.12-270 270-270c68.969 0 131.97 26.008 179.75 68.711l33.707-37.113c-58.762-52.738-133.89-81.598-213.45-81.598-85.473 0-165.84 33.285-226.27 93.727-60.441 60.438-93.727 140.8-93.727 226.27s33.285 165.84 93.727 226.27c60.438 60.441 140.8 93.727 226.27 93.727s165.84-33.285 226.27-93.727c60.441-60.438 93.727-140.8 93.727-226.27 0-38.469-6.7617-75.891-19.688-110.93z"></path>
+                                    </svg>
+                                </div>
+                                <h5>Faydalı məlumat</h5>
+                            </div>
+                            <div class="info-body">
+                                <p>Seçilmişlər siyahınızı hər zaman əlçatan etmək üçün daxil olmağınızı, əgər hesabınız yoxdursa qeydiyyatdan keçməyinizi tövsiyyə edirik.</p>
+                            </div>
+                        </div>
+                        <div class="my-account">
+                            <button class="btn-feature active">
+                                Mənim hesabım <div class="icon">
+                                    <svg enable-background="new 0 0 240.823 240.823" version="1.1" viewBox="0 0 240.823 240.823" xml:space="preserve" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="m57.633 129.01l108.3 108.26c4.752 4.74 12.451 4.74 17.215 0 4.752-4.74 4.752-12.439 0-17.179l-99.707-99.671 99.695-99.671c4.752-4.74 4.752-12.439 0-17.191-4.752-4.74-12.463-4.74-17.215 0l-108.3 108.26c-4.679 4.691-4.679 12.511 0.012 17.191z"></path>
+                                    </svg>
+                                </div>
+                            </button>
+                            <div class="content">
+                                <a type="button" href="">Kabinetim</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-9">
+                    <div class="header">
+                        <h1>Seçilmişlər </h1>
+                    </div>
+                    <div class="cart-item-container">
+                        @foreach (SelectProductVM pro in Model)
+                        {
+                            <div class="cart-item-horizontal">
+                                <div class="cart-containet">
+                                    <div class="labels">
+                                        <div class="lbl-percentage">
+                                            <p>18 ay <span>Faizsiz</span></p>
+                                        </div>
+                                    </div>
+                                    <div class="item-image">
+                                        <img src="~/img/products/@pro.ImageUrl">
+                                    </div>
+                                    <div class="item-about">
+                                        <a asp-controller="Products" asp-action="Detail" asp-route-Id="@pro.Id">@pro.Name</a>
+                                        <div class="item-content">
+                                            <ul class="title">
+                                                @foreach (ProductFeatures proFeatures in pro.ProductFeatures)
+                                                {
+                                                    <li>
+                                                        @proFeatures.FeaturesDetail.Features.Name
+                                                    </li>
+
+                                                }
+                                            </ul>
+                                            <ul class="content">
+                                                @foreach (ProductFeatures proFeatures in pro.ProductFeatures)
+                                                {
+                                                    <li>
+                                                        @proFeatures.FeaturesDetail.Description
+                                                    </li>
+                                                }
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="actions">
+                                        <div class="remove">
+                                            <button class="watchlist_remove" id="watchlist_remove">
+                                                <img src="https://kontakt.az/wp-content/themes/kontakt7/ktn-assets/assets/close.png" alt="">
+                                                <img class="active" src="https://kontakt.az/wp-content/themes/kontakt7/ktn-assets/assets/close-active.png" alt="">
+                                            </button>
+                                            <input type="hidden" id="ProductId" value="@pro.Id" />
+                                        </div>
+                                        <div class="price-action">
+                                            <p>@pro.Price<span>₼</span></p>
+                                            <div class="action-buttons">
+                                                <button class="btn-add-to-cart" id="AddBasket">Səbətə at</button>
+                                                <input type="hidden" id="ProductId" value="@pro.Id" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+@section Script{
+    <script>
+        $(document).ready(function () {
+            $(document).ready(function () {
+                $(document).on("click", "#AddBasket", function () {
+                    var productId = $(this).next().val();
+                    alertify.set('notifier', 'delay', 1);
+                    alertify.set('notifier', 'position', 'bottom-center');
+                    alertify.error('İcra edildi!');
+                    $.ajax({
+                        url: "/Products/AddBasket?id=" + productId,
+                        type: "Get",
+                        success: function (res) {
+                            $(".cart_count").empty();
+                            $(".cart_count").append(res);
+                        }
+                    });
+                });
+            })
+        })
+            $(document).ready(function () {
+                $(document).on("click", "#watchlist_remove", function () {
+                    var cart_removeId = $(this).next().val();
+                    $.ajax({
+                        url: "/Products/RemoveSelect?id=" + cart_removeId,
+                        type: "Get",
+                        success: function (res) {
+                            $(".cart-item-container").empty();
+                            $(".cart-item-container").append(res);
+                        }
+                    });
+                });
+            })
+    </script>
+}

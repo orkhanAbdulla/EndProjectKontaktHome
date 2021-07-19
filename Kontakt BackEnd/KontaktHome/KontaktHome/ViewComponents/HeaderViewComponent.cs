@@ -28,6 +28,15 @@ namespace KontaktHome.ViewComponents
             {
                 ViewBag.BasketCount = 0;
             }
+            if (Request.Cookies["selection"] != null)
+            {
+                List<SelectionVM> selection = JsonConvert.DeserializeObject<List<SelectionVM>>(Request.Cookies["selection"]);
+                ViewBag.selectionCount = selection.Count;
+            }
+            else
+            {
+                ViewBag.selectionCount = 0;
+            }
             Bio model = _context.Bio.FirstOrDefault();
             return View(await Task.FromResult(model));
         }

@@ -5,6 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20210719120538_AddPropertySelectionToTableProduct.cs" />
+    <Compile Remove="Migrations\20210719120538_AddPropertySelectionToTableProduct.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Remove="Views\Shared\_BasketCartPartial.cshtml" />
   </ItemGroup>
 

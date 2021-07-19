@@ -40,7 +40,7 @@
                             </li>
 
                             <li>
-                                <a href="">
+                                <a asp-controller="Products" asp-action="Selection">
                                     <div class="icon">
                                         <img class="lazy loaded"
                                              data-src="https://kontakt.az/wp-content/themes/kontakt7/ktn-assets/assets/heart.png"
@@ -304,9 +304,9 @@
             </a>
         </li>
         <li>
-            <a href="#">
+            <a asp-controller="Products" asp-action="Selection">
                 <img class="lazy loaded" data-src="https://kontakt.az/wp-content/themes/kontakt7/ktn-assets/assets/tb-favorite.png" alt="" src="https://kontakt.az/wp-content/themes/kontakt7/ktn-assets/assets/tb-favorite.png" data-was-processed="true">
-                <span class="watchlist_count">0</span>
+                <span class="watchlist_count">@ViewBag.selectionCount</span>
                 <p>Seçilmişlər</p>
             </a>
         </li>

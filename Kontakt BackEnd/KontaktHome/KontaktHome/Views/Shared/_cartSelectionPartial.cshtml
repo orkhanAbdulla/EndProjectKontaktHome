@@ -1,0 +1,54 @@
+﻿@model List<SelectProductVM>
+@foreach (SelectProductVM pro in Model)
+{
+    <div class="cart-item-horizontal">
+        <div class="cart-containet">
+            <div class="labels">
+                <div class="lbl-percentage">
+                    <p>18 ay <span>Faizsiz</span></p>
+                </div>
+            </div>
+            <div class="item-image">
+                <img src="~/img/products/@pro.ImageUrl">
+            </div>
+            <div class="item-about">
+                <a asp-controller="Products" asp-action="Detail" asp-route-Id="@pro.Id">@pro.Name</a>
+                <div class="item-content">
+                    <ul class="title">
+                        @foreach (ProductFeatures proFeatures in pro.ProductFeatures)
+                        {
+                            <li>
+                                @proFeatures.FeaturesDetail.Features.Name
+                            </li>
+
+                        }
+                    </ul>
+                    <ul class="content">
+                        @foreach (ProductFeatures proFeatures in pro.ProductFeatures)
+                        {
+                            <li>
+                                @proFeatures.FeaturesDetail.Description
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+            <div class="actions">
+                <div class="remove">
+                    <button class="watchlist_remove" id="watchlist_remove">
+                        <img src="https://kontakt.az/wp-content/themes/kontakt7/ktn-assets/assets/close.png" alt="">
+                        <img class="active" src="https://kontakt.az/wp-content/themes/kontakt7/ktn-assets/assets/close-active.png" alt="">
+                    </button>
+                    <input type="hidden" id="ProductId" value="@pro.Id" />
+                </div>
+                <div class="price-action">
+                    <p>@pro.Price<span>₼</span></p>
+                    <div class="action-buttons">
+                        <button class="btn-add-to-cart" id="AddBasket">Səbətə at</button>
+                        <input type="hidden" id="ProductId" value="@pro.Id" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

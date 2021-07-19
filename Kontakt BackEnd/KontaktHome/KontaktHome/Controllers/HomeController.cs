@@ -24,7 +24,12 @@ namespace KontaktHome.Controllers
 
         public IActionResult Index()
         {
-            return View(_context.Sliders.ToList());
+            HomeVM homeVM = new HomeVM
+            {
+                Sliders = _context.Sliders.ToList(),
+                
+            };
+            return View(homeVM);
         }
       
 

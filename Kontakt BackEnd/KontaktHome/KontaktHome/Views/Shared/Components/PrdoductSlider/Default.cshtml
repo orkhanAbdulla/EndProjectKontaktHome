@@ -22,20 +22,26 @@
                                     <div class="lbl-cash-discount lbl-120-per lbl-percentage-grid-2021-360">
                                         <img src="https://kontakt.az/wp-content/uploads/2021/03/4_az.png">
                                     </div>
-                                    <div class="lbl-percentage lbl-percentage-grid lbl-percentage-grid-2021-xususi">
-                                        <p>Xüsusi təklif</p>
-                                    </div>
+                                    @if (pro.Discount > 0)
+                                    {
+                                        <div class="lbl-percentage lbl-percentage-grid lbl-percentage-grid-2021-xususi">
+                                            <p>Xüsusi təklif</p>
+                                        </div>
+                                    }
                                 </div>
                                 <div class="name">
                                     <a asp-controller="Products" asp-action="Detail" asp-route-Id="@pro.Id">
                                         @pro.Name
                                     </a>
+                                    <div class="lbl-2021 scale" style="background-color:#e3e3e3">
+                                        <p style="color: #000 !important; font-weight: 700 !important">0<small class="azn_span">M</small>.0%.18ay</p>
+                                    </div>
                                 </div>
                                 <div class="cart-footer">
                                     @if (pro.Discount > 0)
                                     {
                                         <p class="endirimvar" style="color: #ff003c" ;>
-                                            <span style="text-decoration: line-through; font-weight: normal; color: #282828">@pro.Price<small class="azn_span">₼</small></span><br><span class="nprice" id="price-86071">@(pro.Price-((pro.Price * pro.Discount) / 100)) <small class="azn_span">₼</small></span>
+                                            <span style="text-decoration: line-through; font-weight: normal; color: #282828;">@pro.Price<small class="azn_span">₼</small></span><br><span class="nprice" id="price-86071">@(pro.Price-((pro.Price * pro.Discount) / 100)) <small class="azn_span">₼</small></span>
                                         </p>
                                     }
                                     else

@@ -779,14 +779,25 @@
                                                href="https://kontakt.az/samsung-galaxy-s21-dual-sm-g991b-gray/">
                                                 @pro.Name
                                             </a>
-                                            <div class="lbl-2021 scale">
-                                                <p>nağd alışa<b style="padding-left:10px">-40<small class=" ‎azn_span">₼</small></b></p>
+                                            <div class="lbl-2021 scale" style="background-color:#e3e3e3">
+                                                <p style="color: #000 !important; font-weight: 700 !important">0<small class="azn_span">₼</small>.0%.18ay</p>
                                             </div>
                                         </div>
                                         <div class="cart-footer">
-                                            <p>
-                                                <span class="nprice" id="price-692028">@pro.Price</span> <small class=" ‎azn_span">₼</small>
-                                            </p>
+                                            @if (pro.Discount > 0)
+                                            {
+                                                <p class="endirimvar" style="font-size: 16px; color: #ff003c">
+                                                    <span style="text-decoration:line-through;font-weight:normal; color: #282828; text-decoration-color: #ff003c !important" >@pro.Price<small class="azn_span">₼</small></span>
+                                                    <br>
+                                                    <span class="nprice" id="price-869329">@(pro.Price-((pro.Price * pro.Discount) / 100))<small class="azn_span">₼</small></span>
+                                                </p>
+                                            }
+                                            else
+                                            {
+                                                <p>
+                                                    <span class="nprice" id="price-692028">@pro.Price</span> <small class=" ‎azn_span">₼</small>
+                                                </p>
+                                            }
                                             <button class="btn-add-to-cart" id="AddBasket">Səbətə at</button>
                                             <input type="hidden" id="ProductId" value="@pro.Id" />
                                         </div>

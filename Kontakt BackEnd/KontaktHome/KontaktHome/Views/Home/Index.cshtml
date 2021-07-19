@@ -1,4 +1,4 @@
-﻿@model List<Slider>
+﻿@model HomeVM
 @{
     ViewData["Title"] = "Home Page";
 }
@@ -21,7 +21,7 @@
                         <div class="col-xl-9 col-lg-12 img-slider pl-0">
                             <div class="main-slider swiper-container">
                                 <div class="index-image swiper-wrapper">
-                                    @foreach (Slider slide in Model)
+                                    @foreach (Slider slide in Model.Sliders)
                                     {
                                         <div class="item swiper-slide">
                                             <a href="">
@@ -260,31 +260,32 @@
                         <nav>
                             <div class="nav nav-tabs justify-content-end " id="nav-tab" role="tablist">
                                 <a style="border-top-left-radius: 13px !important;" class="nav-link active"
-                                   id="nav-categoty1" data-toggle="tab" href="#nav-categoty-1" role="tab"
+                                   id="nav-categoty#1" data-toggle="tab" href="#nav-categoty-1" role="tab"
                                    aria-controls="nav-categoty-1" aria-selected="true">Smartfonlar</a>
-                                <a class="nav-link" id="nav-categoty2" data-toggle="tab" href="#nav-categoty-2"
+                                <a class="nav-link" id="nav-categoty#2" data-toggle="tab" href="#nav-categoty-2"
                                    role="tab" aria-controls="nav-categoty-2" aria-selected="false">
                                     TV, audio
                                     video
                                 </a>
-                                <a class="nav-link" id="nav-categoty3" data-toggle="tab" href="#nav-categoty-3"
+                                <a class="nav-link" id="nav-categoty#3" data-toggle="tab" href="#nav-categoty-3"
                                    role="tab" aria-controls="nav-categoty-3" aria-selected="false">
                                     Kompüter və
                                     aksesuarlar
                                 </a>
-                                <a class="nav-link" id="nav-categoty4" data-toggle="tab" href="#nav-categoty-4"
+                                <a class="nav-link" id="nav-categoty#4" data-toggle="tab" href="#nav-categoty-4"
                                    role="tab" aria-controls="nav-categoty-4" aria-selected="false">
                                     Məişət
                                     texnikası
                                 </a>
-                                <a class="nav-link" id="nav-categoty5" data-toggle="tab" href="#nav-categoty-5"
-                                   role="tab" aria-controls="nav-categoty-5" aria-selected="false">Mebel</a>
+                                <a class="nav-link" id="nav-categoty#5" data-toggle="tab" href="#nav-categoty-5"
+                                   role="tab" aria-controls="nav-categoty-5" aria-selected="false">Mebel
+                                </a>
                             </div>
                         </nav>
                     </div>
                     <div class="tab-content" id="nav-tabContent">
                         <div class="tab-pane fade show active" id="nav-categoty-1" role="tabpanel"
-                             aria-labelledby="nav-categoty1">
+                             aria-labelledby="nav-categoty#1">
                             <div class="shop-items">
                                 <div class="shop-slider ">
                                     <div class="carouseldiv swiper-container">
@@ -827,7 +828,7 @@
                             </div>
                         </div>
                         <div class="tab-pane fade" id="nav-categoty-2" role="tabpanel"
-                             aria-labelledby="nav-categoty2">
+                             aria-labelledby="nav-categoty#2">
                             <div class="shop-items ">
                                 <div class="shop-slider row">
                                     <div class="carouseldiv swiper-container">
@@ -1373,7 +1374,7 @@
                             </div>
                         </div>
                         <div class="tab-pane fade" id="nav-categoty-3" role="tabpanel"
-                             aria-labelledby="nav-categoty3">
+                             aria-labelledby="nav-categoty#3">
                             <div class="shop-items ">
                                 <div class="shop-slider row">
                                     <div class="carouseldiv swiper-container">
@@ -1919,7 +1920,7 @@
                             </div>
                         </div>
                         <div class="tab-pane fade" id="nav-categoty-4" role="tabpanel"
-                             aria-labelledby="nav-categoty4">
+                             aria-labelledby="nav-categoty#4">
                             <div class="shop-items ">
                                 <div class="shop-slider row">
                                     <div class="carouseldiv swiper-container">
@@ -2465,7 +2466,7 @@
                             </div>
                         </div>
                         <div class="tab-pane fade" id="nav-categoty-5" role="tabpanel"
-                             aria-labelledby="nav-categoty5">
+                             aria-labelledby="nav-categoty#5">
                             <div class="shop-items ">
                                 <div class="shop-slider row">
                                     <div class="carouseldiv swiper-container">
@@ -3028,7 +3029,7 @@
                             </a>
                         </span>
                     </div>
-                 
+
                 </div>
                 @await Component.InvokeAsync("PrdoductSlider")
             </div>

@@ -279,7 +279,6 @@ namespace KontaktHome.Controllers
                         ImageUrl = DbProduct.Images[0].Image,
                         TotalPrice = totalPrice,
                         ItemsTotalPrice= itemsTotalPrice
-
                     });
 
                 }
@@ -330,7 +329,92 @@ namespace KontaktHome.Controllers
             }
             return View(basketProducts);
         }
-      
+
+        public async Task<IActionResult> AddSelect(int? id)
+        {
+            if (id == null) return NotFound();
+            Product product = await _context.Products.FindAsync(id);
+            if (product == null) return NotFound();
+            List<SelectionVM> selection;
+            if (Request.Cookies["selection"] != null)
+            {
+                selection = JsonConvert.DeserializeObject<List<SelectionVM>>(Request.Cookies["selection"]);
+            }
+            else
+            {
+                selection = new List<SelectionVM>();
+            }
+            SelectionVM ExistPro = selection.FirstOrDefault(x => x.Id == id);
+            if (ExistPro != null)
+            {
+                ExistPro.Count += 1;
+            }
+            else
+            {
+                selection.Add(new SelectionVM { Id = product.Id, Count = 1 });
+            }
+            Response.Cookies.Append("selection", JsonConvert.SerializeObject(selection));
+            return Json(selection.Count);
+
+        }
+        public IActionResult RemoveSelect(int? id)
+        {
+            if (id == null) return NotFound();
+            List<SelectionVM> selection = new List<SelectionVM>();
+            if (Request.Cookies["selection"] != null)
+            {
+                selection = JsonConvert.DeserializeObject<List<SelectionVM>>(Request.Cookies["selection"]);
+                SelectionVM ExistBasket = selection.FirstOrDefault(x => x.Id == id);
+                if (ExistBasket != null)
+                {
+                    selection.Remove(ExistBasket);
+                }
+                Response.Cookies.Append("selection", JsonConvert.SerializeObject(selection));
+            }
+            List<SelectProductVM> selectProductVMs = new List<SelectProductVM>();
+            foreach (SelectionVM pro in selection)
+            {
+                Product DbProduct = _context.Products.Include(x => x.Images).Include(x => x.ProductFeatures).ThenInclude(x => x.FeaturesDetail).ThenInclude(x => x.Features).FirstOrDefault(p => p.Id == pro.Id);
+                selectProductVMs.Add(new SelectProductVM
+                {
+                    Id = pro.Id,
+                    Count = pro.Count,
+                    Price = DbProduct.Price,
+                    Name = DbProduct.Name,
+                    ImageUrl = DbProduct.Images[0].Image,
+                    ProductFeatures = DbProduct.ProductFeatures.Take(3).ToList()
+
+                });
+
+            }
+
+            return PartialView("_cartSelectionPartial", selectProductVMs);
+
+        }
+        public IActionResult Selection()
+        {
+            List<SelectProductVM> selectProductVMs = new List<SelectProductVM>();
+            if (Request.Cookies["selection"] != null)
+            {
+                List<SelectionVM> selection = JsonConvert.DeserializeObject<List<SelectionVM>>(Request.Cookies["selection"]);
+                foreach (SelectionVM pro in selection)
+                {
+                    Product DbProduct = _context.Products.Include(x => x.Images).Include(x=>x.ProductFeatures).ThenInclude(x=>x.FeaturesDetail).ThenInclude(x=>x.Features).FirstOrDefault(p => p.Id == pro.Id);
+                    selectProductVMs.Add(new SelectProductVM
+                    {
+                        Id = pro.Id,
+                        Count = pro.Count,
+                        Price = DbProduct.Price,
+                        Name = DbProduct.Name,
+                        ImageUrl = DbProduct.Images[0].Image,
+                        ProductFeatures = DbProduct.ProductFeatures.Take(3).ToList()
+                        
+                    });
+
+                }
+            }
+            return View(selectProductVMs);
+        }
 
     }
 }
