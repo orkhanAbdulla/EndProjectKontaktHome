@@ -4430,4 +4430,49 @@ body {
 .t-neutral .spinner__input {
     background: #eee;
 }
+#checkout-thankyou {
+    padding-bottom: 150px;
+}
+
+    #checkout-thankyou .headline-return {
+        padding: 11px 0;
+    }
+
+    #checkout-thankyou .alert-success {
+        margin: 10px;
+        width: 100%;
+        color: #2fe06f;
+        background-color: #f3f4f5;
+        border-color: #4ad42c;
+        font-weight: bold;
+        border: 1px solid transparent;
+        border-radius: .25rem;
+        position: relative;
+        padding: .75rem 1.25rem;
+    }
+
+        #checkout-thankyou .alert-success p {
+            margin: 0;
+            padding: 0;
+        }
+
+    #checkout-thankyou .tableorders_tite {
+        margin-top: 30px;
+    }
+
+    #checkout-thankyou .tableorders {
+        width: 100%;
+    }
+
+        #checkout-thankyou .tableorders tr {
+            border: 1px solid #dbdbdb;
+        }
+
+            #checkout-thankyou .tableorders tr td {
+                padding: 10px;
+            }
+
+            #checkout-thankyou .tableorders tr img {
+                width: 80px;
+            }
 /*# sourceMappingURL=style.css.map */

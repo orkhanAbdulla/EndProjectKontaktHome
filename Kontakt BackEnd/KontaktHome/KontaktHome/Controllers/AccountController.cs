@@ -115,7 +115,7 @@ namespace KontaktHome.Controllers
                     $"</br><p>Qeydiyatı yalnız bir dəfə təsdiqləyə bilərsiz</p>";
                 var messageSubject = "Email Təsdiqləmə";
                 await Helper.SendMessageAsync(messageSubject, messageBody, newUser.Email);
-                await _userManager.AddToRoleAsync(newUser, Roles.Satıcı.ToString());
+                await _userManager.AddToRoleAsync(newUser, Roles.Müştəri.ToString());
                 return RedirectToAction("VerifyEmail", "Account");
               
 

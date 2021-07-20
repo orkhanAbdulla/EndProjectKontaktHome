@@ -10,7 +10,7 @@ namespace KontaktHome.Models
     {
         public int Id { get; set; }
         [Required]
-        public decimal Amount { get; set; }
+        public double Amount { get; set; }
         public AppUser AppUser { get; set; }
         public string AppUserId { get; set; }
     }

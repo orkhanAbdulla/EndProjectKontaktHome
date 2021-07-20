@@ -1,0 +1,39 @@
+﻿@model List<BasketProductVM>
+@{
+    ViewData["Title"] = "Thankyou";
+}
+
+<main>
+    <section id="checkout-thankyou">
+        <div class="container">
+            <div class="row">
+                <div class="headline-return ml-3">
+                    <h2>Sifariş</h2>
+                </div>
+                <div class="alert-success">
+                    <p class="alertthanks">
+                        Hörmətli müştəri, müraciətiniz qeydə alındı. Sifarişinizin rəsmiləşdirilməsi üçün sizinlə əlaqə saxlanılacaqdır. Yüklənmə nəzərə alınaraq sifarişiniz mümkün ən qısa vaxtda çatdırılacaqdır. Bizi seçdiyiniz üçün təşəkkür edirik!
+                    </p>
+                </div>
+                <div class="col-lg-12 tableorders_tite">
+                    <h5>Sifarişin detalları</h5>
+                </div>
+                <div class="col-lg-12">
+                    <table class="tableorders">
+                        <tbody>
+                            @foreach (BasketProductVM pro in Model)
+                            {
+                                <tr>
+                                    <td><img style="width:80px" src="~/img/products/@pro.ImageUrl"></td>
+                                    <td>@pro.Name</td>
+                                    <td>@pro.Price<small class="azn_span">M</small></td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+

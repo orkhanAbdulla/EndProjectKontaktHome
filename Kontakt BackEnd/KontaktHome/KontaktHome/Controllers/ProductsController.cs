@@ -329,7 +329,81 @@ namespace KontaktHome.Controllers
             }
             return View(basketProducts);
         }
+        public IActionResult Sell()
+        {
+            List<BasketProductVM> basketProducts = new List<BasketProductVM>();
+            string username = User.Identity.Name;
+            var result = _context.AppUsers.FirstOrDefault(u => u.UserName == username);
+            Balans balans = _context.Balans.FirstOrDefault(u => u.AppUserId == result.Id);
+           
+            if (Request.Cookies["basket"] != null)
+            {
+                double TotalPrice = 0;
+                List<BasketVM> basket = JsonConvert.DeserializeObject<List<BasketVM>>(Request.Cookies["basket"]);
+                foreach (BasketVM pro in basket)
+                {
+                    Product DbProduct = _context.Products.Include(x => x.Images).FirstOrDefault(p => p.Id == pro.Id);
+                    TotalPrice+=DbProduct.Price;
+                    DbProduct.Count -= pro.Count;
+                }
+                if (balans.Amount>= TotalPrice)
+                {
+                    balans.Amount -= TotalPrice;
+                }
+                else
+                {
+                    return RedirectToAction("MyAccount", "Account");
+                }
+               _context.Balans.Update(balans);
+                _context.SaveChanges();
+                return RedirectToAction(nameof(Thankyou));
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
+        }
+        public IActionResult Thankyou()
+        {
+            List<BasketProductVM> basketProducts = new List<BasketProductVM>();
+            string username = User.Identity.Name;
+            var result = _context.AppUsers.FirstOrDefault(u => u.UserName == username);
+            Balans balans = _context.Balans.FirstOrDefault(u => u.AppUserId == result.Id);
+            ViewBag.Balansim = balans.Amount;
 
+            if (Request.Cookies["basket"] != null)
+            {
+                List<BasketVM> basket = JsonConvert.DeserializeObject<List<BasketVM>>(Request.Cookies["basket"]);
+                double totalPrice = 0;
+                double itemsTotalPrice = 0;
+                foreach (BasketVM pro in basket)
+                {
+                    Product DbProduct = _context.Products.Include(x => x.Images).FirstOrDefault(p => p.Id == pro.Id);
+                    totalPrice = pro.Count * DbProduct.Price;
+                    itemsTotalPrice += totalPrice;
+                    ViewBag.ItemsTitalPrice = itemsTotalPrice;
+                    basketProducts.Add(new BasketProductVM
+                    {
+                        Id = pro.Id,
+                        Count = pro.Count,
+                        Price = DbProduct.Price,
+                        Name = DbProduct.Name,
+                        ImageUrl = DbProduct.Images[0].Image,
+                        TotalPrice = totalPrice,
+                        ItemsTotalPrice = itemsTotalPrice,
+
+                    });
+
+                }
+
+
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            return View(basketProducts);
+        }
         public async Task<IActionResult> AddSelect(int? id)
         {
             if (id == null) return NotFound();

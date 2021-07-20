@@ -44,7 +44,6 @@ namespace KontaktHome.Helpers
     {   
         Admin,
         Satıcı,
-        Operator,
         Müştəri
     }
 }

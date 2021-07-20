@@ -11,7 +11,7 @@
             </div>
             <div class="row checkout-row">
                 <div class="col-lg-9">
-                    <form asp-action="CheckOrder" id="checkout_form">
+                    <form  id="checkout_form">
                         <div class="checkout-accordion-menu checkout-contact-tab">
                             <button type="button" class="btn-accordion ">
                                 Əlaqə məlumatları
@@ -93,9 +93,9 @@
                                 </div>
                             </div>
                           
-                             <button type="submit" class="btn-add-to-cart btn-add-order btn-add-order-buttons">
+                             <a asp-action="Sell" class="btn btn-success" style="width: 100% !important; height: 40px !important; margin: 20px 0 !important">
                                 <i class="fa fa-spinner fa-spin" style="display:none"></i>Sifarişi tamamla
-                             </button>
+                             </a>
                                 
                            
                     </form>
@@ -140,10 +140,6 @@
                         <h4>Balansım: @ViewBag.Balansim<small class="azn_span"> ₼</small></h4>
                     </div>
                 </div>
-                <button type="button" class="btn-add-to-cart btn-order btn-add-order-buttons">
-                    <i class="fa fa-spinner fa-spin" style="display:none"></i>
-                    Sifarişi tamamla
-                </button>
             </div>
 
         </div>
