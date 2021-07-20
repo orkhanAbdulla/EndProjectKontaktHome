@@ -2,6 +2,7 @@
 @{
     ViewData["Title"] = "Detail";
     int count = 1;
+    int ccount = 1;
 
 }
 
@@ -147,7 +148,7 @@
                             @{
                                 foreach (ProductFeatures pf in Model.ProductFeatures)
                                 {
-                                    if (count % 2 == 0)
+                                    if (ccount % 2 == 0)
                                     {
                                         <li>
                                             @pf.FeaturesDetail.Description
@@ -160,7 +161,7 @@
                                         </li>
 
                                     }
-                                    count++;
+                                    ccount++;
                                 }
 
                             }

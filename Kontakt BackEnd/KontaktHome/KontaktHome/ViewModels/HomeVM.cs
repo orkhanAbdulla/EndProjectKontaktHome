@@ -10,6 +10,8 @@ namespace KontaktHome.ViewModels
     {
         public List<Slider> Sliders { get; set; }
         public List<Category> Category { get; set; }
+        public List<Product> Products { get; set; }
+
        
     }
 }

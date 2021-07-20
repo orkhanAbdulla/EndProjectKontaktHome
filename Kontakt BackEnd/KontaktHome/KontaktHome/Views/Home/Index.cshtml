@@ -1,6 +1,8 @@
 ﻿@model HomeVM
 @{
     ViewData["Title"] = "Home Page";
+    int count = 0;
+    int proCount = 0;
 }
 
 <main>
@@ -93,91 +95,36 @@
                                     </ul>
                                     <div class="swiper-container slider-price-drag-card">
                                         <div class="swiper-wrapper main-card">
-                                            <div class="swiper-slide daily-slider">
-                                                <article class="item">
-                                                    <div class="img-holder">
-                                                        <a href="">
-                                                            <img src="https://kontakt.az/wp-content/uploads/gallery-tum/0042616_4fc11b5b6fd25bf05388eacae8d85581_w.png">
+                                            @foreach (Product pro in Model.Products)
+                                            {
+                                                <div class="swiper-slide daily-slider">
+                                                    <article class="item">
+                                                        <div class="img-holder">
+                                                            <a asp-controller="Products" asp-action="Detail" asp-route-Id="@pro.Id">
+                                                                <img src="~/img/products/@pro.Images[0].Image">
+                                                            </a>
+                                                        </div>
+                                                        <a href="https://kontakt.az/adona-soft-3-yerlik-divan/">
+                                                            @pro.Name
                                                         </a>
-                                                    </div>
-                                                    <a href="https://kontakt.az/adona-soft-3-yerlik-divan/">
-                                                        Xəzər -
-                                                        Soft2 - 3 yerlik divan
-                                                    </a>
-                                                    <div class="price-box dailyofferslideprice">
-                                                        <p class="endirimvar">
-                                                            <span style="text-decoration: line-through;
+                                                        <div class="price-box dailyofferslideprice">
+                                                            <p class="endirimvar">
+                                                                <span style="text-decoration: line-through;
                                                                 text-decoration-color: #ff003c;">
-                                                                539.99 <small class=" ‎azn_span">₼</small>
-                                                            </span><br><span class="nprice" id="price-136237">
-                                                                379.99 <small class=" ‎azn_span">₼</small>
-                                                            </span>
-                                                        </p>
-                                                        <div class="cart-button">
-                                                            <button class="btn-add-to-cart" data-id="136237">
-                                                                Səbətə at
-                                                            </button>
+                                                                    @pro.Price<small class=" ‎azn_span">₼</small>
+                                                                </span><br><span class="nprice" id="price-136237">
+                                                    @(pro.Price-((pro.Price * pro.Discount) / 100))<small class=" ‎azn_span">₼</small></span>
+                                                            </p>
+                                                            <div class="cart-button">
+                                                                <button class="btn-add-to-cart" id="AddBasket">Səbətə at</button>
+                                                                <input type="hidden" id="ProductId" value="@pro.Id" />
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                </article>
-                                            </div>
-                                            <div class="swiper-slide daily-slider">
-                                                <article class="item">
-                                                    <div class="img-holder">
-                                                        <a href="#">
-                                                            <img src="https://kontakt.az/wp-content/uploads/gallery-tum/0063953_aab13bbfc5d4bc5dcbf6ce007983210d_w.jpg">
-                                                        </a>
-                                                    </div>
-                                                    <a href="https://kontakt.az/qaz-tuku-yorgan-ck/">
-                                                        Qaz tükü yorğan
-                                                        CK
-                                                    </a>
-                                                    <div class="price-box dailyofferslideprice">
-                                                        <p class="endirimvar">
-                                                            <span style="text-decoration: line-through;
-                                                                    text-decoration-color: #ff003c;">
-                                                                359.99
-                                                                <small class=" ‎azn_span">₼</small>
-                                                            </span><br><span class="nprice" id="price-746219">
-                                                                199.99 <small class=" ‎azn_span">₼</small>
-                                                            </span>
-                                                        </p>
-                                                        <div class="cart-button">
-                                                            <button class="btn-add-to-cart" data-id="746219">
-                                                                Səbətə at
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </article>
-                                            </div>
-                                            <div class="swiper-slide daily-slider">
-                                                <article class="item">
-                                                    <div class="img-holder">
-                                                        <a href="#">
-                                                            <img src="https://kontakt.az/wp-content/uploads/2018/10/815639-300x300.jpeg">
-                                                        </a>
-                                                    </div>
-                                                    <a href="https://kontakt.az/utu-panasonic-ni-m250tgtw/">
-                                                        Ütü
-                                                        Panasonic NI-M250TGTW
-                                                    </a>
-                                                    <div class="price-box dailyofferslideprice">
-                                                        <p class="endirimvar">
-                                                            <span style="text-decoration:line-through;font-weight:normal">
-                                                                59.99
-                                                                <small class=" ‎azn_span">₼</small>
-                                                            </span><br><span class="nprice" id="price-91381">
-                                                                33.99 <small class=" ‎azn_span">₼</small>
-                                                            </span>
-                                                        </p>
-                                                        <div class="cart-button">
-                                                            <button class="btn-add-to-cart" data-id="91381">
-                                                                Səbətə at
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </article>
-                                            </div>
+                                                    </article>
+                                                </div>
+                                            }
+
+
                                         </div>
                                         <div class="swiper-button-prev button"></div>
                                         <div class="swiper-button-next button"></div>
@@ -240,7 +187,7 @@
                         </li>
                     </ul>
                 </div>
-                @await Component.InvokeAsync("PrdoductSlider")
+                    @await Component.InvokeAsync("PrdoductSlider")
             </div>
         </div>
     </section>
@@ -259,33 +206,29 @@
                         </div>
                         <nav>
                             <div class="nav nav-tabs justify-content-end " id="nav-tab" role="tablist">
-                                <a style="border-top-left-radius: 13px !important;" class="nav-link active"
-                                   id="nav-categoty#1" data-toggle="tab" href="#nav-categoty-1" role="tab"
-                                   aria-controls="nav-categoty-1" aria-selected="true">Smartfonlar</a>
-                                <a class="nav-link" id="nav-categoty#2" data-toggle="tab" href="#nav-categoty-2"
-                                   role="tab" aria-controls="nav-categoty-2" aria-selected="false">
-                                    TV, audio
-                                    video
-                                </a>
-                                <a class="nav-link" id="nav-categoty#3" data-toggle="tab" href="#nav-categoty-3"
-                                   role="tab" aria-controls="nav-categoty-3" aria-selected="false">
-                                    Kompüter və
-                                    aksesuarlar
-                                </a>
-                                <a class="nav-link" id="nav-categoty#4" data-toggle="tab" href="#nav-categoty-4"
-                                   role="tab" aria-controls="nav-categoty-4" aria-selected="false">
-                                    Məişət
-                                    texnikası
-                                </a>
-                                <a class="nav-link" id="nav-categoty#5" data-toggle="tab" href="#nav-categoty-5"
-                                   role="tab" aria-controls="nav-categoty-5" aria-selected="false">Mebel
-                                </a>
+                                @foreach (Category ct in Model.Category)
+                                {
+                                    if (count == 0)
+                                    {
+                                        <a style="border-top-left-radius: 13px !important;" class="nav-link active"
+                                           id="nav-categoty#@ct.Id" data-toggle="tab" href="#nav-categoty-1" role="tab"
+                                           aria-controls="nav-categoty-@ct.Id" aria-selected="true">@ct.Name</a>
+                                    }
+                                    else
+                                    {
+                                        <a class="nav-link"
+                                           id="nav-categoty#@ct.Id" data-toggle="tab" href="#nav-categoty-1" role="tab"
+                                           aria-controls="nav-categoty-@ct.Id" aria-selected="true">@ct.Name</a>
+                                    }
+                                    count++;
+
+                                }
                             </div>
                         </nav>
                     </div>
                     <div class="tab-content" id="nav-tabContent">
                         <div class="tab-pane fade show active" id="nav-categoty-1" role="tabpanel"
-                             aria-labelledby="nav-categoty#1">
+                             aria-labelledby="nav-categoty1">
                             <div class="shop-items">
                                 <div class="shop-slider ">
                                     <div class="carouseldiv swiper-container">
@@ -819,7 +762,7 @@
                                         </div>
                                         <!-- <div class="swiper-pagination">
 
-                                        </div> -->
+                    </div> -->
                                     </div>
                                     <div class="all-offers">
                                         <a class="#" href="#">Bütün təklifləri gör</a>
@@ -828,7 +771,7 @@
                             </div>
                         </div>
                         <div class="tab-pane fade" id="nav-categoty-2" role="tabpanel"
-                             aria-labelledby="nav-categoty#2">
+                             aria-labelledby="nav-categoty2">
                             <div class="shop-items ">
                                 <div class="shop-slider row">
                                     <div class="carouseldiv swiper-container">
@@ -1365,7 +1308,7 @@
                                         </div>
                                         <!-- <div class="swiper-pagination">
 
-                                        </div> -->
+                    </div> -->
                                     </div>
                                     <div class="all-offers">
                                         <a class="#" href="#">Bütün təklifləri gör</a>
@@ -1374,7 +1317,7 @@
                             </div>
                         </div>
                         <div class="tab-pane fade" id="nav-categoty-3" role="tabpanel"
-                             aria-labelledby="nav-categoty#3">
+                             aria-labelledby="nav-categoty3">
                             <div class="shop-items ">
                                 <div class="shop-slider row">
                                     <div class="carouseldiv swiper-container">
@@ -1911,7 +1854,7 @@
                                         </div>
                                         <!-- <div class="swiper-pagination">
 
-                                        </div> -->
+                    </div> -->
                                     </div>
                                     <div class="all-offers">
                                         <a class="#" href="#">Bütün təklifləri gör</a>
@@ -1920,7 +1863,7 @@
                             </div>
                         </div>
                         <div class="tab-pane fade" id="nav-categoty-4" role="tabpanel"
-                             aria-labelledby="nav-categoty#4">
+                             aria-labelledby="nav-categoty4">
                             <div class="shop-items ">
                                 <div class="shop-slider row">
                                     <div class="carouseldiv swiper-container">
@@ -2457,7 +2400,7 @@
                                         </div>
                                         <!-- <div class="swiper-pagination">
 
-                                        </div> -->
+                    </div> -->
                                     </div>
                                     <div class="all-offers">
                                         <a class="#" href="#">Bütün təklifləri gör</a>
@@ -2466,7 +2409,7 @@
                             </div>
                         </div>
                         <div class="tab-pane fade" id="nav-categoty-5" role="tabpanel"
-                             aria-labelledby="nav-categoty#5">
+                             aria-labelledby="nav-categoty5">
                             <div class="shop-items ">
                                 <div class="shop-slider row">
                                     <div class="carouseldiv swiper-container">
@@ -3003,7 +2946,7 @@
                                         </div>
                                         <!-- <div class="swiper-pagination">
 
-                                        </div> -->
+                    </div> -->
                                     </div>
                                     <div class="all-offers">
                                         <a class="#" href="#">Bütün təklifləri gör</a>

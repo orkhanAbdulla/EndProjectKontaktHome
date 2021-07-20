@@ -19,7 +19,9 @@ namespace KontaktHome.ViewComponents
         public async Task<IViewComponentResult> InvokeAsync()
         {
             List<Product> model = _context.Products.Where(x => x.IsDeleted == false).Include(x => x.Images).Include(x => x.ProductFeatures).OrderByDescending(x => x.Id).Take(8).ToList();
-            
+            ViewBag.discount = _context.Products.Where(x => x.Discount > 0);
+
+
             return View(await Task.FromResult(model));
         }
     }

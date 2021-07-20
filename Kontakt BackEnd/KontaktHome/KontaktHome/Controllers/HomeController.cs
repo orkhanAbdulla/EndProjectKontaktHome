@@ -27,6 +27,8 @@ namespace KontaktHome.Controllers
             HomeVM homeVM = new HomeVM
             {
                 Sliders = _context.Sliders.ToList(),
+                Category = _context.Categories.Where(x => x.IsMain == true && x.IsDeleted == false).Take(5).ToList(),
+                Products = _context.Products.Where(x => x.IsDeleted == false&&x.Discount>0).Include(x=>x.Images).OrderByDescending(x => x.Id).Take(5).ToList()
                 
             };
             return View(homeVM);

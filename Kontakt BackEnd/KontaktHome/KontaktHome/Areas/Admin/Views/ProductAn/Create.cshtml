@@ -37,12 +37,6 @@
                         <input asp-for="@Model.Product.Discount" class="form-control" type="number" step=".1" min="1" max="100" placeholder="Endirim faizi">
                         <span class="text-danger" asp-validation-for="@Model.Product.Discount"></span>
                     </div>
-                    <div class="form-group form-group-float">
-                        <input asp-for="@Model.Product.CashPrice" class="form-control" placeholder="Nağd alış endirimi">
-                        <span class="text-danger" asp-validation-for="@Model.Product.CashPrice"></span>
-                    </div>
-
-
                     <div class="mb-3 my-3" id="Brand">
                         <p class="mb-2">
                             <select data-placeholder="Brend Seç" name="BrandId" id="BrandId" class="form-control select-access-value select2-hidden-accessible" data-fouc="" tabindex="-1" aria-hidden="true">

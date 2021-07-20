@@ -226,6 +226,22 @@ namespace KontaktHome.Areas.Admin.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index), new { categoryId });
         }
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null) return NotFound();
+            Product product = _context.Products.Include(x=>x.Images).FirstOrDefault(b => b.Id == id);
+            if (product == null) return NotFound();
+            if (!product.IsDeleted)
+            {
+                product.IsDeleted = true;
+            }
+            else
+            {
+                product.IsDeleted = false;
+            }
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
         public List<Brand> GetAllBrandswithCatId(int categoryId)
         {
             List<Brand> brands = new List<Brand>();
