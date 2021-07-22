@@ -48,10 +48,10 @@
                             </select>
                         </p>
                     </div>
-                    @foreach (string features in Model.Features)
+                    @foreach (Features features in Model.Features)
                     {
                         <div class="form-group form-group-float">
-                            <input required class="form-control" name="features[]" placeholder="@features">
+                            <input required class="form-control" name="features[]" placeholder="@features.Name">
                             <span class="text-danger" for="features[]"></span>
                         </div>
                     }

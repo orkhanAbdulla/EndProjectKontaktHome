@@ -33,8 +33,15 @@ using KontaktHome.ViewModels;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 4 "C:\Users\hp\Desktop\EndProjectKontaktHome\Kontakt BackEnd\KontaktHome\KontaktHome\Views\_ViewImports.cshtml"
+using KontaktHome.Helpers;
+
+#line default
+#line hidden
+#nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"cb68beb382fb940064ceddb18a71763926d6ae30", @"/Views/Products/Checkout.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"1b16daef187a07f9dff296d33a1bd8bde321a45d", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"9238582f1297a93261abc65bee48457e6e620f92", @"/Views/_ViewImports.cshtml")]
     public class Views_Products_Checkout : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<List<BasketProductVM>>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("value", "", global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
@@ -95,7 +102,7 @@ using KontaktHome.ViewModels;
             <div class=""row checkout-row"">
                 <div class=""col-lg-9"">
                     ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "cb68beb382fb940064ceddb18a71763926d6ae308319", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "cb68beb382fb940064ceddb18a71763926d6ae308535", async() => {
                 WriteLiteral(@"
                         <div class=""checkout-accordion-menu checkout-contact-tab"">
                             <button type=""button"" class=""btn-accordion "">
@@ -151,7 +158,7 @@ using KontaktHome.ViewModels;
                 BeginWriteAttribute("required", " required=\"", 2641, "\"", 2652, 0);
                 EndWriteAttribute();
                 WriteLiteral(" name=\"mobile_number_prefix\" class=\"number_prefix\">\r\n                                                            ");
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "cb68beb382fb940064ceddb18a71763926d6ae3012645", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "cb68beb382fb940064ceddb18a71763926d6ae3012861", async() => {
                     WriteLiteral("0XX");
                 }
                 );
@@ -167,7 +174,7 @@ using KontaktHome.ViewModels;
                 Write(__tagHelperExecutionContext.Output);
                 __tagHelperExecutionContext = __tagHelperScopeManager.End();
                 WriteLiteral("\r\n                                                            ");
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "cb68beb382fb940064ceddb18a71763926d6ae3013926", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "cb68beb382fb940064ceddb18a71763926d6ae3014142", async() => {
                     WriteLiteral("050");
                 }
                 );
@@ -183,7 +190,7 @@ using KontaktHome.ViewModels;
                 Write(__tagHelperExecutionContext.Output);
                 __tagHelperExecutionContext = __tagHelperScopeManager.End();
                 WriteLiteral("\r\n                                                            ");
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "cb68beb382fb940064ceddb18a71763926d6ae3015207", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "cb68beb382fb940064ceddb18a71763926d6ae3015423", async() => {
                     WriteLiteral("051");
                 }
                 );
@@ -199,7 +206,7 @@ using KontaktHome.ViewModels;
                 Write(__tagHelperExecutionContext.Output);
                 __tagHelperExecutionContext = __tagHelperScopeManager.End();
                 WriteLiteral("\r\n                                                            ");
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "cb68beb382fb940064ceddb18a71763926d6ae3016488", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "cb68beb382fb940064ceddb18a71763926d6ae3016704", async() => {
                     WriteLiteral("055");
                 }
                 );
@@ -215,7 +222,7 @@ using KontaktHome.ViewModels;
                 Write(__tagHelperExecutionContext.Output);
                 __tagHelperExecutionContext = __tagHelperScopeManager.End();
                 WriteLiteral("\r\n                                                            ");
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "cb68beb382fb940064ceddb18a71763926d6ae3017769", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "cb68beb382fb940064ceddb18a71763926d6ae3017985", async() => {
                     WriteLiteral("070");
                 }
                 );
@@ -231,7 +238,7 @@ using KontaktHome.ViewModels;
                 Write(__tagHelperExecutionContext.Output);
                 __tagHelperExecutionContext = __tagHelperScopeManager.End();
                 WriteLiteral("\r\n                                                            ");
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "cb68beb382fb940064ceddb18a71763926d6ae3019050", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "cb68beb382fb940064ceddb18a71763926d6ae3019266", async() => {
                     WriteLiteral("077");
                 }
                 );
@@ -247,7 +254,7 @@ using KontaktHome.ViewModels;
                 Write(__tagHelperExecutionContext.Output);
                 __tagHelperExecutionContext = __tagHelperScopeManager.End();
                 WriteLiteral("\r\n                                                            ");
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "cb68beb382fb940064ceddb18a71763926d6ae3020331", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "cb68beb382fb940064ceddb18a71763926d6ae3020547", async() => {
                     WriteLiteral("099");
                 }
                 );
@@ -323,7 +330,7 @@ using KontaktHome.ViewModels;
                             </div>
                           
                              ");
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "cb68beb382fb940064ceddb18a71763926d6ae3025613", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "cb68beb382fb940064ceddb18a71763926d6ae3025829", async() => {
                     WriteLiteral("\r\n                                <i class=\"fa fa-spinner fa-spin\" style=\"display:none\"></i>Sifarişi tamamla\r\n                             ");
                 }
                 );
@@ -375,7 +382,7 @@ using KontaktHome.ViewModels;
 #line hidden
 #nullable disable
             WriteLiteral("                                <div class=\"row prodrowcheckout\">\r\n                                    <div class=\"col-4\">\r\n                                        ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "cb68beb382fb940064ceddb18a71763926d6ae3029178", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "cb68beb382fb940064ceddb18a71763926d6ae3029394", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();

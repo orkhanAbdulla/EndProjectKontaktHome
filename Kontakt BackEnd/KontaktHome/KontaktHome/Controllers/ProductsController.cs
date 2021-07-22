@@ -41,15 +41,12 @@ namespace KontaktHome.Controllers
                 categoryProductVM.Category = category;
                 ViewBag.Id = categoryId;
             }
-           
-
-
-
             else if (brandId != null)
             {
                Brand brand = _context.Brands.Include(x=>x.Products).ThenInclude(x=>x.Images).FirstOrDefault(x => x.Id==brandId);
                 categoryProductVM.Products = brand.Products;
                 categoryProductVM.Brand = brand;
+                ViewBag.brandId = brandId;
             }
 
 
@@ -488,6 +485,44 @@ namespace KontaktHome.Controllers
                 }
             }
             return View(selectProductVMs);
+        }
+        public IActionResult Filter(int? categoryId, int? brandId,int? from, int? to)
+        {
+
+
+            CategoryProductVM categoryProductVM = new CategoryProductVM();
+            categoryProductVM.Products = new List<Product>();
+            categoryProductVM.Category = new Category();
+            categoryProductVM.Brand = new Brand();
+
+            if (categoryId != null)
+            {
+                IQueryable<CategoryBrand> categoryBrands = _context.CategoryBrands.Where(c => c.CategoryId == categoryId).Include(x => x.Brand).ThenInclude(x => x.Products).ThenInclude(x => x.Images);
+                foreach (CategoryBrand ctB in categoryBrands)
+                {
+                    //Products.AddRange(ctB.Brand.Products) ;
+                    categoryProductVM.Products.AddRange(ctB.Brand.Products);
+                }
+                Category category = _context.Categories.FirstOrDefault(c => c.Id == categoryId);
+                categoryProductVM.Category = category;
+                
+            }
+            else if (brandId != null)
+            {
+                Brand brand = _context.Brands.Include(x => x.Products).ThenInclude(x => x.Images).FirstOrDefault(x => x.Id == brandId);
+                categoryProductVM.Products = brand.Products;
+                categoryProductVM.Brand = brand;
+                
+            }
+            if (from==null && to==null)
+            {
+                return PartialView("_FilterProducts", categoryProductVM.Products.ToList());
+            }
+            return PartialView("_FilterProducts", categoryProductVM.Products.Where(c => c.Price >= from && c.Price <= to).ToList());
+            
+
+
+            
         }
 
     }

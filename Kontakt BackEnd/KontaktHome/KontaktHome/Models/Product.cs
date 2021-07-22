@@ -13,6 +13,7 @@ namespace KontaktHome.Models
         public int Id { get; set; }
         public string Code { get; set; }
         public bool IsDeleted { get; set; }
+        [Required]
         public string Name { get; set; }
         [Required]
         public double Price { get; set; }

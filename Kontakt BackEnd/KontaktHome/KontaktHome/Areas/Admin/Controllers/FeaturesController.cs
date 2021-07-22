@@ -1,5 +1,6 @@
 ﻿using KontaktHome.DAL;
 using KontaktHome.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
@@ -11,6 +12,7 @@ using System.Threading.Tasks;
 namespace KontaktHome.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     public class FeaturesController : Controller
     {
         private readonly AppDbContext _context;
@@ -74,17 +76,29 @@ namespace KontaktHome.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Delete(int? id, int? categoryId)
+        [ActionName("Delete")]
+        public async Task<IActionResult> DeleteFeatures(int? id)
         {
-            if (categoryId == null) return NotFound();
-            Category category = _context.Categories.FirstOrDefault(c => c.Id == categoryId);
-            if (category == null) return NotFound();
+            //if (categoryId == null) return NotFound();
             if (id == null) return NotFound();
-            Features features = _context.Features.FirstOrDefault(f => f.Id == id);
-            if (features == null) return NotFound();
-            _context.Features.Remove(features);
 
-            await _context.SaveChangesAsync();
+            int categoryId = 0;
+
+            var features = await _context.Features.Include(x => x.CategoryFeatures).FirstOrDefaultAsync(x => x.Id == id);
+            if (features == null)
+                return NotFound();
+
+            foreach (var item in features.CategoryFeatures)
+            {
+                if(id == item.FeaturesId)
+                {
+                    _context.CategoryFeatures.Remove(item);
+                    await _context.SaveChangesAsync();
+                    categoryId = item.CategoryId;
+                    break;
+                }
+            }
+
             return RedirectToAction(nameof(Index), new { categoryId });
 
         }

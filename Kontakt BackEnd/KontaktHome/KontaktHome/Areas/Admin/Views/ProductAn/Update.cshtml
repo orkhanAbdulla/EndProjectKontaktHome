@@ -33,14 +33,10 @@
                         <span class="text-danger" asp-validation-for="@Model.Product.Price"></span>
                     </div>
                     <div class="form-group form-group-float">
-                        <input asp-for="@Model.Product.Discount" class="form-control" type="number" step=".1" min="1" max="100" placeholder="Endirim faizi">
+                        <input asp-for="@Model.Product.Discount" class="form-control" type="number" step=".1" min="0" max="100" placeholder="Endirim faizi">
                         <span class="text-danger" asp-validation-for="@Model.Product.Discount"></span>
                     </div>
-                    <div class="form-group form-group-float">
-                        <input asp-for="@Model.Product.CashPrice" class="form-control" placeholder="Nağd alış endirimi">
-                        <span class="text-danger" asp-validation-for="@Model.Product.CashPrice"></span>
-                    </div>
-
+                  
 
                     <div class="mb-3 my-3" id="Brand">
                         <p class="mb-2">
@@ -53,10 +49,11 @@
                             </select>
                         </p>
                     </div>
-                    @foreach (string features in Model.Features)
+                    @foreach (Features features in Model.Features)
                     {
-                        <div class="form-group form-group-float">
-                            <input required class="form-control" name="features[]" placeholder="@features">
+                        <div class="form-group ">
+                            <label style="margin-right: 550px !important;">@features.Name</label>
+                            <input required class="form-control" name="features[]" value="@features.ProductDetails.FirstOrDefault().Description" placeholder="@features.Name">
                             <span class="text-danger" for="features[]"></span>
                         </div>
                     }

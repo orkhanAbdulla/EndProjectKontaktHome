@@ -33,8 +33,15 @@ using KontaktHome.ViewModels;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 4 "C:\Users\hp\Desktop\EndProjectKontaktHome\Kontakt BackEnd\KontaktHome\KontaktHome\Views\_ViewImports.cshtml"
+using KontaktHome.Helpers;
+
+#line default
+#line hidden
+#nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"9ea24d349358dbf54e18563c2e221b7f20c283cc", @"/Views/Shared/Components/Sidebar/Default.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"1b16daef187a07f9dff296d33a1bd8bde321a45d", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"9238582f1297a93261abc65bee48457e6e620f92", @"/Views/_ViewImports.cshtml")]
     public class Views_Shared_Components_Sidebar_Default : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<List<Category>>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("asp-controller", "Products", global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
@@ -82,7 +89,7 @@ using KontaktHome.ViewModels;
 #line hidden
 #nullable disable
             WriteLiteral("        <li>\r\n            ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "9ea24d349358dbf54e18563c2e221b7f20c283cc4833", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "9ea24d349358dbf54e18563c2e221b7f20c283cc5049", async() => {
                 WriteLiteral("\r\n                <div class=\"icon\">\r\n                    <img style=\"width:22px;max-height:30px\" class=\"lazy loaded\"\r\n                         data-src=\"https://kontakt.az/wp-content/uploads/2021/03/telefon_planshet.png\"");
                 BeginWriteAttribute("src", "\r\n                         src=\"", 454, "\"", 511, 2);
                 WriteAttributeValue("", 486, "/img/Categories/", 486, 16, true);
@@ -148,7 +155,7 @@ WriteAttributeValue("", 502, ct.Image, 502, 9, false);
 #line hidden
 #nullable disable
             WriteLiteral("                        <li>\r\n                            ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "9ea24d349358dbf54e18563c2e221b7f20c283cc9211", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "9ea24d349358dbf54e18563c2e221b7f20c283cc9427", async() => {
                 WriteLiteral("\r\n                                <span>");
 #nullable restore
 #line 27 "C:\Users\hp\Desktop\EndProjectKontaktHome\Kontakt BackEnd\KontaktHome\KontaktHome\Views\Shared\Components\Sidebar\Default.cshtml"
@@ -200,9 +207,9 @@ WriteAttributeValue("", 502, ct.Image, 502, 9, false);
 #line hidden
 #nullable disable
             WriteLiteral("                                            <li>\r\n                                                ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "9ea24d349358dbf54e18563c2e221b7f20c283cc12780", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "9ea24d349358dbf54e18563c2e221b7f20c283cc12996", async() => {
                 WriteLiteral("\r\n                                                    <div class=\"photo\">\r\n                                                        ");
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "9ea24d349358dbf54e18563c2e221b7f20c283cc13169", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "9ea24d349358dbf54e18563c2e221b7f20c283cc13385", async() => {
                 }
                 );
                 __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();

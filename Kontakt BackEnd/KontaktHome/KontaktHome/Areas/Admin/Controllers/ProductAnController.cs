@@ -2,6 +2,7 @@
 using KontaktHome.Extensions;
 using KontaktHome.Models;
 using KontaktHome.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -15,6 +16,7 @@ using System.Threading.Tasks;
 namespace KontaktHome.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     public class ProductAnController : Controller
     {
         private readonly AppDbContext _context;
@@ -53,7 +55,7 @@ namespace KontaktHome.Areas.Admin.Controllers
             AdminProductVM productVM = new AdminProductVM();
             foreach (CategoryFeatures cf in category.CategoryFeatures)
             {
-                productVM.Features.Add(cf.Features.Name);
+                productVM.Features.Add(cf.Features);
             }
 
             return View(productVM);
@@ -68,7 +70,7 @@ namespace KontaktHome.Areas.Admin.Controllers
             AdminProductVM dbProductVM = new AdminProductVM();
             foreach (CategoryFeatures cf in category.CategoryFeatures)
             {
-                productVM.Features.Add(cf.Features.Name);
+                productVM.Features.Add(cf.Features);
             }
             ViewBag.Brands = GetAllBrandswithCatId((int)categoryId);
             if (!ModelState.IsValid) return View(dbProductVM);
@@ -141,7 +143,9 @@ namespace KontaktHome.Areas.Admin.Controllers
         public IActionResult Update(int? id)
         {
             if (id == null) return NotFound();
-            Product product = _context.Products.Include(c=>c.Brand).ThenInclude(x=>x.CategoryBrands).Include(x => x.ProductFeatures).ThenInclude(x => x.FeaturesDetail).ThenInclude(x => x.Features).FirstOrDefault(c => c.Id == id);
+            Product product = _context.Products.Include(c=>c.Brand).ThenInclude(x=>x.CategoryBrands).Include(x => x.ProductFeatures).
+                ThenInclude(x => x.FeaturesDetail).ThenInclude(x => x.Features).ThenInclude(x => x.ProductDetails).
+                FirstOrDefault(c => c.Id == id);
             if (id == null) return NotFound();
             int categoryId = product.Brand.CategoryBrands[0].CategoryId;
             ViewBag.Brands = GetAllBrandswithCatId(categoryId);
@@ -151,7 +155,7 @@ namespace KontaktHome.Areas.Admin.Controllers
             productVM.Product = product;
             foreach (ProductFeatures pf in product.ProductFeatures)
             {
-                productVM.Features.Add(pf.FeaturesDetail.Features.Name);
+                productVM.Features.Add(pf.FeaturesDetail.Features);
                
             }
 
@@ -162,14 +166,16 @@ namespace KontaktHome.Areas.Admin.Controllers
         public async Task<IActionResult> Update(int? id, AdminProductVM productVM, int? BrandId, string[] features)
         {
             if (id == null) return NotFound();
-            Product product = _context.Products.Include(c => c.Brand).ThenInclude(x => x.CategoryBrands).Include(x => x.ProductFeatures).ThenInclude(x => x.FeaturesDetail).ThenInclude(x => x.Features).FirstOrDefault(c => c.Id == id);
+            Product product = _context.Products.Include(c => c.Brand).ThenInclude(x => x.CategoryBrands).
+                Include(x => x.ProductFeatures).ThenInclude(x => x.FeaturesDetail).
+                ThenInclude(x => x.Features).ThenInclude(x => x.ProductDetails).FirstOrDefault(c => c.Id == id);
             if (id == null) return NotFound();
             int categoryId = product.Brand.CategoryBrands[0].CategoryId;
             AdminProductVM dbProductVM = new AdminProductVM();
-            productVM.Product = product;
+            dbProductVM.Product = product;
             foreach (ProductFeatures pf in product.ProductFeatures)
             {
-                productVM.Features.Add(pf.FeaturesDetail.Features.Name);
+                dbProductVM.Features.Add(pf.FeaturesDetail.Features);
             }
             ViewBag.Brands = GetAllBrandswithCatId((int)categoryId);
             if (!ModelState.IsValid) return View(dbProductVM);
@@ -177,6 +183,10 @@ namespace KontaktHome.Areas.Admin.Controllers
             {
                 ModelState.AddModelError("", "Lütfən brend seçin");
                 return View(dbProductVM);
+            }
+            if (productVM.Product.Discount == null)
+            {
+                productVM.Product.Discount = 0;
             }
             if (productVM.Product.Photos != null)
             {
@@ -198,13 +208,10 @@ namespace KontaktHome.Areas.Admin.Controllers
                     ProductImage image = new ProductImage { Image = fileName, ProductId = productVM.Product.Id };
                     images.Add(image);
                 }
-                productVM.Product.Images = images;
+               product.Images = images;
             }
            
-            if (productVM.Product.Discount == null)
-            {
-                productVM.Product.Discount = 0;
-            }
+            
             
             ViewBag.CategoryId = categoryId;
 
@@ -215,12 +222,10 @@ namespace KontaktHome.Areas.Admin.Controllers
                 product.ProductFeatures[count].FeaturesDetail.Description = feature;
                 count++;
             }
-            product.ProductFeatures = productFeatures;
             productVM.Product.BrandId = (int)BrandId;
-            productVM.Product.Count = product.Count;
-            productVM.Product.Discount = product.Discount;
-            productVM.Product.Price = product.Price;
-            productVM.Product.CashPrice = product.CashPrice;
+            product.Count = productVM.Product.Count;
+            product.Discount = productVM.Product.Discount;
+            product.Price = productVM.Product.Price;
             await _context.SaveChangesAsync();
             productVM.Product.Code = "A8B1C4" + productVM.Product.Id;
             await _context.SaveChangesAsync();

@@ -142,10 +142,19 @@
                             <li>
                                 @if (User.Identity.IsAuthenticated)
                                 {
-                                  
-                                    <a asp-controller="Account" asp-action="MyAccount" id="id_my_profile">
-                                        <i class="fa fa-user" style="color: white;padding: 10px 5px 15px 5px;font-size: 31px;"></i><span>Hesabım</span>
-                                    </a>
+
+                                    @if (User.IsInRole(Roles.Admin.ToString()))
+                                    {
+                                        <a asp-area="Admin" asp-controller="Dashboard" asp-action="Index" id="id_my_profile">
+                                            <i class="fa fa-user" style="color: white;padding: 10px 5px 15px 5px;font-size: 31px;"></i><span>Admin Panel</span>
+                                        </a>
+                                    }
+                                    else
+                                    {
+                                        <a asp-controller="Account" asp-action="MyAccount" id="id_my_profile">
+                                            <i class="fa fa-user" style="color: white;padding: 10px 5px 15px 5px;font-size: 31px;"></i><span>Hesabım</span>
+                                        </a>
+                                    }
                                 }
                                 else
                                 {
@@ -229,10 +238,19 @@
                             <li>
                                 @if (User.Identity.IsAuthenticated)
                                 {
+                                    @if (User.IsInRole(Roles.Admin.ToString()))
+                                    {
+                                        <a asp-area="Admin" asp-controller="Dashboard" asp-action="Index" id="id_my_profile">
+                                            <i class="fa fa-user" style="color: white;padding: 10px 5px 15px 5px;font-size: 31px;"></i><span>Admin Panel</span>
+                                        </a>
+                                    }
+                                    else
+                                    {
+                                        <a asp-controller="Account" asp-action="MyAccount" id="id_my_profile">
+                                            <i class="fa fa-user" style="color: white;padding: 10px 5px 15px 5px;font-size: 31px;"></i><span>Hesabım</span>
+                                        </a>
+                                    }
 
-                                    <a asp-controller="Account" asp-action="MyAccount" id="id_my_profile">
-                                        <i class="fa fa-user" style="color: white;padding: 10px 5px 15px 5px;font-size: 31px;"></i><span>Hesabım</span>
-                                    </a>
                                 }
                                 else
                                 {

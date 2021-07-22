@@ -72,7 +72,7 @@ namespace KontaktHome.Controllers
                 return RedirectToAction("Index", "Dashboard", new { area = "Admin" });
             }
 
-            return RedirectToAction(nameof(MyAccount));
+            return RedirectToAction("Index","Home");
 
         }
         public IActionResult Register()

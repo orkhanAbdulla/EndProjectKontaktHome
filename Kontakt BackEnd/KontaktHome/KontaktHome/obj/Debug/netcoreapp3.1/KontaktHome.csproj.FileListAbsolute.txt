@@ -195,3 +195,4 @@ C:\Users\hp\Desktop\EndProjectKontaktHome\Kontakt BackEnd\KontaktHome\KontaktHom
 C:\Users\hp\Desktop\EndProjectKontaktHome\Kontakt BackEnd\KontaktHome\KontaktHome\obj\Debug\netcoreapp3.1\Razor\Views\Products\Selection.cshtml.g.cs
 C:\Users\hp\Desktop\EndProjectKontaktHome\Kontakt BackEnd\KontaktHome\KontaktHome\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_cartSelectionPartial.cshtml.g.cs
 C:\Users\hp\Desktop\EndProjectKontaktHome\Kontakt BackEnd\KontaktHome\KontaktHome\obj\Debug\netcoreapp3.1\Razor\Views\Products\Thankyou.cshtml.g.cs
+C:\Users\hp\Desktop\EndProjectKontaktHome\Kontakt BackEnd\KontaktHome\KontaktHome\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_FilterProducts.cshtml.g.cs
